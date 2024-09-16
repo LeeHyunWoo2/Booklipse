@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.librarylyh.mapper.BookListMapper">
+    <!--  검색 조건을 위한 공통 SQL 정의  -->
+    <sql id="searchConditions">
+        <!--  검색 조건들을 동적으로 추가  -->
+        <if test="searchQuery != null and searchQuery != ''">
+            <![CDATA[ AND b.book LIKE '%'||#{searchQuery} ||'%' ]]>
+        </if>
+        <if test="category_id != null and category_id != ''">
+            <![CDATA[ AND c.category_id LIKE CONCAT(#{category_id}, '%') ]]>
+        </if>
+        <if test="rentalAvailable != null and rentalAvailable != ''">
+            <![CDATA[ AND b.rental_available = #{rentalAvailable} ]]>
+        </if>
+        <if test="publicationDateFilter != null">
+            <choose>
+                <when test="publicationDateFilter == '3months'">
+                    <![CDATA[ AND b.publication_date >= ADD_MONTHS(SYSDATE, -3) ]]>
+                </when>
+                <when test="publicationDateFilter == '6months'">
+                    <![CDATA[ AND b.publication_date >= ADD_MONTHS(SYSDATE, -6) ]]>
+                </when>
+                <when test="publicationDateFilter == '1year'">
+                    <![CDATA[ AND b.publication_date >= ADD_MONTHS(SYSDATE, -12) ]]>
+                </when>
+            </choose>
+        </if>
+    </sql>
+    <!--  책 목록 조회 (검색 및 페이징 포함)  -->
+    <select id="getListWithFiltersAndPaging" parameterType="map" resultType="kr.co.librarylyh.domain.BookListVO">
+        <![CDATA[ SELECT * FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY ]]>
+        <!-- sort 기준대로 정렬해서 순번을 메기고 그 순서대로 결과를 전부 가져온다. (페이징) -->
+        <!--  정렬 기준이 사용자가 선택한 경우  -->
+        <if test="sort != null and sort != ''">
+            <![CDATA[ ${sort} ]]>
+        </if>
+        <!--  기본 정렬 기준: 최신순  -->
+        <if test="sort == null or sort == ''">
+            <![CDATA[ b.publication_date DESC ]]>
+        </if>
+        <![CDATA[ ) AS rnum, b.isbn13, b.book, b.author, b.publisher, b.publication_date AS publicationDate, b.price, b.average_rating AS averageRating, b.review_count, b.b_count, b.photo FROM book_tbl b ]]>
+        <!--  카테고리 필터가 있는 경우에만 JOIN 추가  -->
+        <if test="category_id != null and category_id != ''">
+            <![CDATA[ LEFT JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 LEFT JOIN category_tbl c ON bc.category_id = c.category_id ]]>
+        </if>
+        <![CDATA[ WHERE 1=1 ]]>
+        <!--  공통 검색 조건을 포함  -->
+        <include refid="searchConditions"/>
+        <![CDATA[ GROUP BY b.isbn13, b.book, b.author, b.publisher, b.publication_date, b.price, b.average_rating, b.review_count, b.b_count, b.photo ) a WHERE rnum BETWEEN #{startRow} AND #{endRow} ]]>
+    </select>
+    <!--  총 책 수 조회  -->
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        <![CDATA[ SELECT COUNT(DISTINCT b.isbn13) FROM book_tbl b ]]>
+        <if test="category_id != null and category_id != ''">
+            <![CDATA[ LEFT JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 LEFT JOIN category_tbl c ON bc.category_id = c.category_id ]]>
+        </if>
+        <![CDATA[ WHERE 1=1 ]]>
+        <!--  공통 검색 조건을 포함  -->
+        <include refid="searchConditions"/>
+    </select>
+    <!--  책 추가  -->
+    <insert id="insert">
+        <![CDATA[ INSERT INTO book_tbl (isbn13, book, book_description, author, publisher, photo, weight, book_size, rental_available, price, page_count, b_count, average_rating, star_1, star_2, star_3, star_4, star_5, review_count, publication_date) VALUES (#{isbn13}, #{book}, #{bookDescription, jdbcType=CLOB}, #{author}, #{publisher}, #{photo}, #{weight}, #{bookSize}, #{rentalAvailable}, #{price}, #{pageCount}, #{b_count}, #{averageRating}, #{star_1}, #{star_2}, #{star_3}, #{star_4}, #{star_5}, #{review_count}, #{publicationDate}) ]]>
+    </insert>
+    <!--  책 조회  -->
+    <select id="read" parameterType="long" resultType="kr.co.librarylyh.domain.BookListVO">
+        <![CDATA[ SELECT b.isbn13, b.book, b.author, b.publisher, b.publication_date AS publicationDate, b.price, b.average_rating AS averageRating, b.review_count, b.b_count, b.photo, b.book_description AS bookDescription, b.page_count AS pageCount, b.weight, b.book_size AS bookSize, b.star_1, b.star_2, b.star_3, b.star_4, b.star_5, c.category_id, c.category_name, c.category_level, c.parent_id FROM book_tbl b LEFT JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 LEFT JOIN category_tbl c ON bc.category_id = c.category_id WHERE b.isbn13 = #{isbn13} ]]>
+    </select>
+    <!--  책 수정  -->
+    <update id="update">
+        <![CDATA[ UPDATE book_tbl SET book = #{book}, book_description = #{bookDescription, jdbcType=CLOB}, price = #{price}, b_count = #{b_count}, average_rating = #{averageRating}, rental_available = #{rentalAvailable}, page_count = #{pageCount}, weight = #{weight}, book_size = #{bookSize}, star_1 = #{star_1}, star_2 = #{star_2}, star_3 = #{star_3}, star_4 = #{star_4}, star_5 = #{star_5}, review_count = #{review_count} WHERE isbn13 = #{isbn13} ]]>
+    </update>
+    <!--  책 삭제  -->
+    <delete id="delete">
+        <![CDATA[ DELETE FROM book_tbl WHERE isbn13 = #{isbn13} ]]>
+    </delete>
+    <!--  자동검색 기능용 제목검색쿼리  -->
+    <select id="searchTitles" parameterType="string" resultType="string">SELECT title FROM books WHERE LOWER(title) LIKE
+        CONCAT('%', LOWER(#{query}), '%') ORDER BY title ASC LIMIT 5
+    </select>
+</mapper>
