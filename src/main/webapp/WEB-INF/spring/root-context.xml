@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring
+		https://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:annotation-config/>
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+
+	<!--	jdbclog4j2 용으로 교체
+			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>	-->
+
+
+		<!-- log4jdbc용으로 콘솔에 표 형식 으로 출력-->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>
+
+		<property name="username" value="library"/>
+		<property name="password" value="6673"/>
+		</bean>
+
+		<!-- 커넥션 풀 설정 HikariCP configuration -->
+		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+			<constructor-arg ref="hikariConfig" />
+		</bean>
+
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"/>
+		</bean>
+		<!-- mybatis는 pstmt를 사용하지 않고 인터페이스 + xml로 매핑한다. -->
+
+
+		<mybatis-spring:scan base-package="kr.co.librarylyh.mapper"/>
+	<!-- mybatis에서 자동으로 처리할 패키지 명시  -->
+
+	<context:component-scan base-package="kr.co.librarylyh"/>
+
+
+
+</beans>
