@@ -9,108 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.1">
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/CategoryController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/PageDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/Paging.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/log4j2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/log4jdbc.log4j2.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/root.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListControllerTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListRestControllerTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/catalina.policy" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/catalina.policy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/catalina.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/catalina.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/jaspic-providers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/jaspic-providers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/jaspic-providers.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/jaspic-providers.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/logging.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/logging.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/server.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/tomcat-users.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/tomcat-users.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/tomcat-users.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/tomcat-users.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/controller/conf/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/240729008894FnE0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24072909086LXBHs.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24072926794K23dv.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24072938009qE9MA.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24072942760FiQUc.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24073040864tLYtp.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/240731099279EgfP.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/afile/previewThumbnail/24080154810iJAvH.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/css/common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/css/layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/excel-btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/first-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/last-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/layout.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/left-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/menu-scrap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/mgf-glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/mo_01.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/mo_01_rol.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/mo_02.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/mo_02_rol.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/btn_berger.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/gnb_arrow_d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/gnb_arrow_r.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/header_flag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/icon_basket.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/icon_info_modify.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/icon_login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/icon_mem_join.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/icon_more.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/lnb_arrow_d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_blog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_ch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_fb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_insta.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/logo_yt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/new_24jan/nl_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/open.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/right-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/search-arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/sp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/sp_m.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/common/img/common/wa_240513.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/import.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/library_use.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/member.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/myutil.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/sub.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/sub2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/sub3.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/sub4.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/css/uc_common.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/img/main/fixed_top_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/img/main/ic_lang.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/img/main/ic_main_arrow_b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/img/main/mgf-glass_b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/img/main/revise_logo_main.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/js/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/js/layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/templete/nl/js/sub.js" beforeDir="false" />
-    </list>
+    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -623,7 +522,7 @@
       <workItem from="1726454869621" duration="8000" />
       <workItem from="1726455690721" duration="17698000" />
       <workItem from="1726496481422" duration="2977000" />
-      <workItem from="1726499478584" duration="322000" />
+      <workItem from="1726499478584" duration="636000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -649,7 +548,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726456169029</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1.0.1">
+      <option name="closed" value="true" />
+      <created>1726500108568</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1726500108568</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
