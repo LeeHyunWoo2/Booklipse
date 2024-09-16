@@ -78,6 +78,21 @@ function loadPage(pageNum, sortOption = `b.publication_date ${currentSortOrder}`
     });
 }
 
+    const radioButtons = document.querySelectorAll('input[name="tabs"]'); // 'selectradio' 이름의 모든 라디오 버튼 선택
+    const listContainer = document.querySelector('.list_wrap'); // 리스트가 렌더링되는 컨테이너
+
+    radioButtons.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.value === 'list') {
+                listContainer.classList.remove('grid-view'); // 바둑판형 스타일 제거
+                renderBookList(bookList); // 리스트형 렌더링 함수 호출
+            } else {
+                listContainer.classList.add('grid-view'); // 바둑판형 스타일 적용
+                renderBookGrid(bookList); // 바둑판형 렌더링 함수 호출
+            }
+        });
+    });
+
 function renderBookList(bookList) {
     const listBox = $('.list_wrap');
     listBox.empty();
@@ -111,7 +126,30 @@ function renderBookList(bookList) {
         listBox.append(bookItem);
     });
 }
-
+// 새로운 바둑판형 렌더링 함수
+function renderBookGrid(bookList) {
+    const listBox = $('.list_wrap');
+    listBox.empty();
+    bookList.forEach(function (book) {
+        let publicationDate = formatPublicationDate(book.publicationDate);
+        const bookItem = `
+            <div class="grid-item">
+                <div class="card border border-dark mb-3">
+                    <span class="img position-absolute border border-dark">
+                        <img src="${book.photo}" class="img-fluid rounded-start" alt="${book.book}">
+                    </span>
+                    <div class="card-body">
+                        <p class="booktitle">${book.book}</p>
+                        <p class="card-sub-text">${book.author}</p>
+                        <p class="card-sub-text">${book.publisher}</p>
+                        <p class="card-sub-text">${publicationDate}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        listBox.append(bookItem);
+    });
+}
 function renderPaging(pageData) {
     const pagingBox = $('.pagination');
     pagingBox.empty();

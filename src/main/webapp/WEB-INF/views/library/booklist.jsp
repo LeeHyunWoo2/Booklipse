@@ -106,53 +106,229 @@
         color: #FFFFFF !important;
         border-color: #dc3545 !important;
     }
-
-
     /* 기본적으로 숨긴 상태로 시작 */
     .back_to_top {
         position: fixed;
         bottom: -100px; /* 화면 아래로 숨김 */
         right: 5vh;
-        width: 5vh;
+        width: 15vh;
         height: 5vh;
-        opacity: 1;
+        opacity: 0.9;
         transition: bottom 0.2s ease-in-out, opacity 0.2s ease-in-out; /* 애니메이션 효과 */
         z-index: 9999;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
     }
 
     .back_to_top.on {
         bottom: 5vh; /* 화면 아래쪽에서 위로 올라옴 */
     }
 
-    .back_to_top svg {
-        width: 5vh; /* SVG 아이콘의 너비 */
-        height: 5vh; /* SVG 아이콘의 높이 */
-    }
-
-    .back_to_top svg circle {
-        fill: #4f4f4f;
-    }
-
-    .back_to_top svg .stroke {
-        stroke: #FFFFFF;
-    }
 
     .list-container {
         min-height: 100vh;
     }
     .grid-view {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 최소 너비 200px, 최대 크기 1fr */
-      gap: 16px; /* 아이템 간의 간격 */
+      grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+      gap: 16px; /* 카드 간의 간격 */
     }
+
     .grid-view .card {
-      width: auto; /* 그리드 아이템의 너비를 자동으로 조정 */
-      height: auto; /* 높이를 자동으로 조정 */
-      margin: 0; /* 마진 제거 */
+      width: 100%; /* 카드의 너비를 그리드 셀에 맞게 조정 */
+      height: auto; /* 카드 높이 자동 조정 */
+      margin-bottom: 20px; /* 카드 하단 간격 */
+    }
+
+    .card-deck .card {
+      margin-bottom: 1.5rem; /* 카드 하단 여백 */
+    }
+
+    /* From Uiverse.io by vinodjangid07 */
+    .top_button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgb(20, 20, 20);
+      border: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.13);
+      cursor: pointer;
+      transition-duration: 0.3s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .svgIcon {
+      width: 20px;
+      transition-duration: 0.3s;
+    }
+
+    .svgIcon path {
+      fill: white;
+    }
+
+    .top_button:hover {
+      width: 140px;
+      border-radius: 50px;
+      transition-duration: 0.3s;
+      background-color: rgb(0, 0, 0);
+      align-items: center;
+    }
+
+    .top_button:hover .svgIcon {
+      /* width: 20px; */
+      transition-duration: 0.3s;
+      transform: translateY(-200%);
+    }
+
+    .top_button::before {
+      position: absolute;
+      bottom: -20px;
+      content: "Back to Top";
+      color: white;
+      /* transition-duration: .3s; */
+      font-size: 0px;
+    }
+
+    .top_button:hover::before {
+      font-size: 15px;
+      opacity: 1;
+      bottom: unset;
+      /* transform: translateY(-30px); */
+      transition-duration: 0.3s;
+    }
+
+    /*보기라디오박스*/
+
+    .tabs {
+      display: flex;
+      position: relative;
+      background-color: #fff;
+      box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+      padding: 0.75rem;
+      border-radius: 99px;
+    }
+
+    .tabs * {
+      z-index: 2;
+    }
+
+    .container input[type="radio"] {
+      display: none;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      width: 80px;
+      font-size: 1rem;
+      color: black;
+      font-weight: 500;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: color 0.15s ease-in;
     }
 
 
+    .container input[type="radio"]:checked + label {
+      color: #185ee0;
+    }
+
+    .container input[type="radio"]:checked + label > .notification {
+      background-color: #185ee0;
+      color: #fff;
+      margin: 0px;
+    }
+
+    .container input[id="radio-1"]:checked ~ .glider {
+      transform: translateX(0);
+    }
+
+    .container input[id="radio-2"]:checked ~ .glider {
+      transform: translateX(100%);
+    }
+
+    .container input[id="radio-3"]:checked ~ .glider {
+      transform: translateX(200%);
+    }
+
+    .glider {
+      position: absolute;
+      display: flex;
+      height: 37px;
+      width: 80px;
+      background-color: #e6eef9;
+      z-index: 1;
+      border-radius: 99px;
+      transition: 0.25s ease-out;
+      margin-top: -3px;
+    }
+
+    @media (max-width: 700px) {
+
+      .tabs {
+        transform: scale(0.6);
+      }
+    }
+    .bi{
+      font-size: 28px;
+      color: black;
+    }
+    /* From Uiverse.io by vinodjangid07 */
+    .setting-btn {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background-color: rgb(129, 110, 216);
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0px 0px 0px 2px rgb(212, 209, 255);
+    }
+    .bar {
+      width: 50%;
+      height: 2px;
+      background-color: rgb(229, 229, 229);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-radius: 2px;
+    }
+    .bar::before {
+      content: "";
+      width: 2px;
+      height: 2px;
+      background-color: rgb(126, 117, 255);
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: all 0.3s;
+      box-shadow: 0px 0px 5px white;
+    }
+    .bar1::before {
+      transform: translateX(-4px);
+    }
+    .bar2::before {
+      transform: translateX(4px);
+    }
+    .setting-btn:hover .bar1::before {
+      transform: translateX(4px);
+    }
+    .setting-btn:hover .bar2::before {
+      transform: translateX(-4px);
+    }
 
 </style>
 <head>
@@ -163,6 +339,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/resources/styles/courses_styles.css">
     <link rel="stylesheet" type="text/css" href="/resources/styles/courses_responsive.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" rel="stylesheet">
     <jsp:include page="includes/header.jsp"/>
 </head>
 <body>
@@ -191,10 +368,34 @@
             <h1>도서목록</h1>
         </div>
     </div>
-    <button id="toggleGridViewButton" class="btn btn-secondary" onclick="toggleGridView()">바둑판 보기</button>
+    <button id="toggleGridViewButton" class="btn btn-secondary" onclick="toggleGridView()">썸네일 형식</button>
+
+    <div class="back_to_top">
+        <button class="top_button">
+            <svg class="svgIcon" viewBox="0 0 384 512">
+                <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <input type="radio" id="radio-1" name="tabs" value="list" checked="">
+            <label class="tab" for="radio-1"><i class="bi bi-list-ul"></i></label>
+            <input type="radio" id="radio-2" name="tabs">
+            <label class="tab" for="radio-2"><i class="bi bi-grid"></i></label>
+            <span class="glider"></span>
+        </div>
+    </div>
+
 
     <div class="position-static" style="z-index: 1030;">
         <nav class="navbar navbar-light bg-light">
+            <button class="setting-btn">
+                <span class="bar bar1"></span>
+                <span class="bar bar2"></span>
+                <span class="bar bar1"></span>
+            </button>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -243,10 +444,6 @@
                         <li class="dropdown-item" style="cursor: pointer;" onclick="changeItemsPerPage(50)">50개씩 보기</li>
                     </ul>
                 </div>
-
-
-
-
 
                 <!-- 모달 창 -->
                 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="advancedSearchLabel"
@@ -341,6 +538,7 @@
         </div>
     </div>
 
+    <!--
     <div class="back_to_top">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="ico_top">
             <g fill="none" fill-rule="evenodd">
@@ -353,7 +551,9 @@
                 </g>
             </g>
         </svg>
-    </div>
+    </div> -->
+
+
 
     <script type="text/javascript">
         $(document).ready(
