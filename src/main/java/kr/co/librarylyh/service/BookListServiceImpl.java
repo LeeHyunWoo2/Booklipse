@@ -3,6 +3,7 @@ package kr.co.librarylyh.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import kr.co.librarylyh.domain.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,12 @@ public class BookListServiceImpl implements BookListService {
 		log.info("책 조회: " + isbn13);
 		return mapper.read(isbn13);
 	}
+
+	@Override
+	public List<CategoryVO> getCategoriesByISBN(long isbn13) {
+		return mapper.readCategoriesByISBN(isbn13);  // 카테고리 정보 가져오기
+	}
+
 
 	@Override
 	public boolean modify(BookListVO bookList) {

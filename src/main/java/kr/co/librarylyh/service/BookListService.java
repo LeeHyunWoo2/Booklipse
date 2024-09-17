@@ -3,6 +3,7 @@ package kr.co.librarylyh.service;
 import java.util.List;
 import java.util.Map;
 import kr.co.librarylyh.domain.BookListVO;
+import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.Paging;
 
 public interface BookListService {
@@ -11,6 +12,8 @@ public interface BookListService {
 	public void add(BookListVO bookList);
 
 	public BookListVO get(long isbn13);
+
+	public List<CategoryVO> getCategoriesByISBN(long isbn13);
 
 	public boolean modify(BookListVO bookList);
 

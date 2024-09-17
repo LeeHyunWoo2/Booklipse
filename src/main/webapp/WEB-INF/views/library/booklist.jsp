@@ -206,11 +206,13 @@
     /*보기라디오박스*/
 
     .tabs {
-      display: flex;
+      display: inline-flex;
+      max-height: 54px;
       position: relative;
       background-color: #fff;
       box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
       padding: 0.75rem;
+      margin: 5px;
       border-radius: 99px;
     }
 
@@ -218,7 +220,7 @@
       z-index: 2;
     }
 
-    .container input[type="radio"] {
+    .view-container input[type="radio"] {
       display: none;
     }
 
@@ -237,25 +239,25 @@
     }
 
 
-    .container input[type="radio"]:checked + label {
+    .view-container input[type="radio"]:checked + label {
       color: #185ee0;
     }
 
-    .container input[type="radio"]:checked + label > .notification {
+    .view-container input[type="radio"]:checked + label > .notification {
       background-color: #185ee0;
       color: #fff;
       margin: 0px;
     }
 
-    .container input[id="radio-1"]:checked ~ .glider {
+    .view-container input[id="radio-1"]:checked ~ .glider {
       transform: translateX(0);
     }
 
-    .container input[id="radio-2"]:checked ~ .glider {
+    .view-container input[id="radio-2"]:checked ~ .glider {
       transform: translateX(100%);
     }
 
-    .container input[id="radio-3"]:checked ~ .glider {
+    .view-container input[id="radio-3"]:checked ~ .glider {
       transform: translateX(200%);
     }
 
@@ -271,12 +273,7 @@
       margin-top: -3px;
     }
 
-    @media (max-width: 700px) {
 
-      .tabs {
-        transform: scale(0.6);
-      }
-    }
     .bi{
       font-size: 28px;
       color: black;
@@ -286,6 +283,7 @@
       width: 45px;
       height: 45px;
       display: flex;
+      margin-right: 13%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -368,7 +366,6 @@
             <h1>도서목록</h1>
         </div>
     </div>
-    <button id="toggleGridViewButton" class="btn btn-secondary" onclick="toggleGridView()">썸네일 형식</button>
 
     <div class="back_to_top">
         <button class="top_button">
@@ -378,27 +375,18 @@
         </button>
     </div>
 
-    <div class="container">
-        <div class="tabs">
-            <input type="radio" id="radio-1" name="tabs" value="list" checked="">
-            <label class="tab" for="radio-1"><i class="bi bi-list-ul"></i></label>
-            <input type="radio" id="radio-2" name="tabs">
-            <label class="tab" for="radio-2"><i class="bi bi-grid"></i></label>
-            <span class="glider"></span>
-        </div>
-    </div>
-
 
     <div class="position-static" style="z-index: 1030;">
         <nav class="navbar navbar-light bg-light">
-            <button class="setting-btn">
+            <%--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>--%>
+            <button class="setting-btn" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" style="outline: none;" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="bar bar1"></span>
                 <span class="bar bar2"></span>
                 <span class="bar bar1"></span>
-            </button>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
-                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
             </button>
             <form class="form-inline mt-1 mb-1" onsubmit="handleFormSubmit(event)">
                 <button id="toggleButton" type="button" class="btn btn-outline-danger mr-2 my-sm-2 toggle-mode"
@@ -414,8 +402,18 @@
                         title="검색을 시작합니다.">검색
                 </button>
             </form>
-            <button id="sortButton" class="btn btn-info" onclick="toggleSortOrder()" style="min-width: 90px">최신순
+                <div class="view-container">
+                    <div class="tabs">
+                        <input type="radio" id="radio-1" name="tabs" value="list" checked="">
+                        <label class="tab" for="radio-1"><i class="bi bi-list-ul"></i></label>
+                        <input type="radio" id="radio-2" name="tabs">
+                        <label class="tab" for="radio-2"><i class="bi bi-grid"></i></label>
+                        <span class="glider"></span>
+                    </div>
+
+            <button id="sortButton" class="btn btn-info" onclick="toggleSortOrder()" style="min-width: 90px; margin-bottom: 5%;">최신순
             </button>
+                </div>
         </nav>
         <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="bg-light p-5" style="min-height: 300px">
@@ -533,27 +531,11 @@
         <ul class="pagination justify-content-center mt-5 mb-5">
         </ul>
     </nav>
+
     <div class="list-container">
         <div id="list_wrap" class="list_wrap">
         </div>
     </div>
-
-    <!--
-    <div class="back_to_top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" class="ico_top">
-            <g fill="none" fill-rule="evenodd">
-                <g transform="translate(-1318 -4124) translate(1318 4124)">
-                    <circle cx="25" cy="25" r="25"></circle>
-                    <g stroke-width="1.5" class="stroke">
-                        <path d="M8.467 16.933L0 8.467 8.467 0M.085 8.467L19.918 8.534"
-                              transform="rotate(90 9.5 24)"></path>
-                    </g>
-                </g>
-            </g>
-        </svg>
-    </div> -->
-
-
 
     <script type="text/javascript">
         $(document).ready(
@@ -757,14 +739,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             module.ScrollTopButtonView();
         });
-
-        function toggleGridView() {
-          const listBox = document.getElementById('list_wrap');
-          listBox.classList.toggle('grid-view'); // grid-view 클래스를 추가하거나 제거
-          const buttonText = listBox.classList.contains('grid-view') ? '리스트 보기' : '바둑판 보기';
-          document.getElementById('toggleGridViewButton').innerText = buttonText; // 버튼 텍스트 변경
-        }
-
     </script>
 
 

@@ -1,14 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 24. 9. 10.
-  Time: 오후 3:51
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>책 상세 정보</title>
+    <title>책 상세정보</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Course Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
     <!-- 브레드크럼 표시 부분 -->
@@ -16,6 +16,27 @@
 
     <!-- 책 상세 정보를 표시할 영역 -->
     <div id="category-content"></div>
+
+    <h1><c:out value="${bookDetail.book}" /></h1>
+    <p>photo: <c:out value="${bookDetail.photo}"/></p>
+    <p>Author: <c:out value="${bookDetail.author}" /></p>
+    <p>Publisher: <c:out value="${bookDetail.publisher}" /></p>
+    <p>Publication Date: <c:out value="${bookDetail.publicationDateString}" /></p>
+    <p>Description: <c:out value="${bookDetail.bookDescription}" /></p>
+    <p>Page Count: <c:out value="${bookDetail.pageCount}" /></p>
+    <p>Weight: <c:out value="${bookDetail.weight}" /></p>
+    <p>Size: <c:out value="${bookDetail.bookSize}" /></p>
+    <p>Average Rating: <fmt:formatNumber value="${bookDetail.averageRating}" minFractionDigits="1" /></p>
+    <p>Review Count: <c:out value="${bookDetail.review_count}" /></p>
+    <p>rentalAvailable: <c:out value="${bookDetail.rentalAvailable}" /></p>
+
+    <div>
+        <p>Star 1: <c:out value="${bookDetail.star_1}" /></p>
+        <p>Star 2: <c:out value="${bookDetail.star_2}" /></p>
+        <p>Star 3: <c:out value="${bookDetail.star_3}" /></p>
+        <p>Star 4: <c:out value="${bookDetail.star_4}" /></p>
+        <p>Star 5: <c:out value="${bookDetail.star_5}" /></p>
+    </div>
 </body>
 <script>
 
@@ -48,6 +69,14 @@
     });
   }
 
+  // 페이지 로딩 시 카테고리 ID를 사용하여 브레드크럼을 로드
+  $(document).ready(function () {
+    const category = $('#bookDetail').data('category-id'); // 책 상세 데이터에서 카테고리 ID 가져오기
+    loadCategoryPath(category);
+  });
+
+
+/*
   // 카테고리 이동 함수
   function navigateToCategory(category) {
     // AJAX 요청을 통해 카테고리에 해당하는 데이터를 불러옵니다.
@@ -81,12 +110,6 @@
     });
   }
 
-  // 페이지 로딩 시 카테고리 ID를 사용하여 브레드크럼을 로드
-  $(document).ready(function () {
-    const category = $('#bookDetail').data('category-id'); // 책 상세 데이터에서 카테고리 ID 가져오기
-    loadCategoryPath(category);
-  });
-
   // 카테고리 경로 로드 함수
   function loadCategoryPath(category) {
     $.ajax({
@@ -101,10 +124,8 @@
       }
     });
   }
-
-
+*/
 
 </script>
-
 
 </html>

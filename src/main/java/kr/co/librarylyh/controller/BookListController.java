@@ -1,6 +1,7 @@
 package kr.co.librarylyh.controller;
 
 import kr.co.librarylyh.domain.BookListVO;
+import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
@@ -58,7 +59,12 @@ public class BookListController {
 	public String read(@PathVariable("isbn13") Long isbn13, Model model) {
 		BookListVO bookDetail = service.get(isbn13);
 		model.addAttribute("bookDetail", bookDetail);
-		return "library/read"; // 책 상세 보기 뷰로 이동
+		List<CategoryVO> categories = service.getCategoriesByISBN(isbn13);
+		model.addAttribute("categories", categories);
+
+
+
+		return "library/bookDetail"; // 책 상세 보기 뷰로 이동
 	}
 
 }

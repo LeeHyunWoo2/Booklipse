@@ -56,16 +56,10 @@ public class BookListRestController {
     return new ResponseEntity<>(pageDTO, HttpStatus.OK);
   }
 
-
-  // 책 상세 조회
-  @GetMapping(value = "/{isbn13}", produces = { MediaType.APPLICATION_JSON_VALUE })
-  public ResponseEntity<BookListVO> getBook(@PathVariable("isbn13") Long isbn13) {
-
-    BookListVO book = service.get(isbn13);
-
-    return book != null
-        ? new ResponseEntity<>(book, HttpStatus.OK)
-        : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  @GetMapping("/{isbn13}")
+  public ResponseEntity<BookListVO> getBookInfo(@PathVariable("isbn13") long isbn13) {
+    BookListVO bookDetail = service.get(isbn13);
+    return ResponseEntity.ok(bookDetail);
   }
 
   // 책 추가 (모달을 통해 처리)

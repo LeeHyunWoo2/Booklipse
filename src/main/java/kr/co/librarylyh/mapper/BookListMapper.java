@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.librarylyh.domain.BookListVO;
+import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.Paging;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +14,8 @@ public interface BookListMapper {
 	public void insert(BookListVO bookList);
 
 	public BookListVO read(long isbn13);
+
+	public List<CategoryVO> readCategoriesByISBN(long isbn13);
 
 	public int update(BookListVO bookList);
 

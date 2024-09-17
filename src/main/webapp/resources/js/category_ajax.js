@@ -126,8 +126,9 @@ $(document).ready(function () {
         loadCategories();
         updateMenuTitle('카테고리');
         updateCategoryInURL('');
-        loadBooksByCategory('');
+        resetBookFilters();
     }
+
 
     function updateCategoryInURL(category_id) {
         const currentUrlParams = new URLSearchParams(window.location.search);
@@ -138,11 +139,11 @@ $(document).ready(function () {
             updateURLParam('category', category_id, false);
         }
 
-        updateURLParam('category', category_id); // `category`로 통일
+        updateURLParam('category', category_id);
     }
 
     function loadBooksByCategory(category_id) {
-        loadPage(1, undefined, '', category_id); // `loadPage`에서 `category`를 사용하도록 수정
+        loadPage(1, undefined, '', category_id);
     }
 
     function updateMenuTitle(newTitle) {

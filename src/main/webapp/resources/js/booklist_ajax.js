@@ -1,9 +1,10 @@
 let currentSortOrder = 'DESC';
 let currentCategoryId = ''; // 현재 선택된 카테고리 ID를 저장하는 변수
 let currentAmount = 10; // 현재 출력 개수를 저장할 전역 변수, 초기값 10
+let currentSearchQuery = '';
 
 $(document).ready(function() {
-    loadPage(1, `b.publication_date ${currentSortOrder}`, '', currentCategoryId, currentAmount);
+    loadPage(1, `b.publication_date ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
 });
 
 
@@ -78,8 +79,8 @@ function loadPage(pageNum, sortOption = `b.publication_date ${currentSortOrder}`
     });
 }
 
-    const radioButtons = document.querySelectorAll('input[name="tabs"]'); // 'selectradio' 이름의 모든 라디오 버튼 선택
-    const listContainer = document.querySelector('.list_wrap'); // 리스트가 렌더링되는 컨테이너
+    const radioButtons = document.querySelectorAll('input[name="tabs"]');
+    const listContainer = document.querySelector('.list_wrap');
 
     radioButtons.forEach(function(radio) {
         radio.addEventListener('change', function() {
@@ -126,7 +127,7 @@ function renderBookList(bookList) {
         listBox.append(bookItem);
     });
 }
-// 새로운 바둑판형 렌더링 함수
+// 바둑판형 렌더링 함수
 function renderBookGrid(bookList) {
     const listBox = $('.list_wrap');
     listBox.empty();
@@ -206,6 +207,27 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
         if (currentCategory !== paramValue) {
             window.history.pushState({ category_id: paramValue }, '', newUrl);
         }
+    }
+
+    window.resetBookFilters = resetBookFilters;
+
+    function resetBookFilters() {
+
+        // 기타 필터 초기화 로직
+        currentSortOrder = 'DESC';
+        currentAmount = 10;
+        currentSearchQuery ='';
+        currentCategoryId = '';
+        document.getElementById('sortButton').innerText = '최신순';
+        document.getElementById('itemsPerPageButton').textContent = '10개씩 보기';
+        document.getElementById('searchInput').value = '';
+
+        // URL 파라미터 초기화
+        updateURLParam('rentalAvailable', '');
+        updateURLParam('publicationDateFilter', '');
+        updateURLParam('searchQuery', '', true);
+
+        loadPage(1); // 기본 페이지 로드
     }
 
 }
