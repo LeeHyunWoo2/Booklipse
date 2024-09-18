@@ -9,14 +9,14 @@
         <![CDATA[
         WITH CategoryPath AS (
             SELECT
-                category_id,
-                category_name,
-                parent_id
+                categoryId,
+                categoryName,
+                parentId
             FROM
                 category_tbl
-            START WITH category_id = #{categoryId}
-            CONNECT BY PRIOR parent_id = category_id
-            ORDER SIBLINGS BY category_id
+            START WITH categoryId = #{categoryId}
+            CONNECT BY PRIOR parentId = categoryId
+            ORDER SIBLINGS BY categoryId
         )
         SELECT * FROM CategoryPath
         ORDER BY LEVEL DESC
@@ -27,29 +27,15 @@
     <select id="getAllCategories" resultType="kr.co.librarylyh.domain.CategoryVO">
         <![CDATA[
         SELECT
-            category_id,
-            category_name,
-            parent_id
+            categoryId,
+            categoryName,
+            parentId
         FROM
             category_tbl
-        ORDER BY category_id
+        ORDER BY categoryId
         ]]>
     </select>
 
-    <!-- 특정 카테고리의 자식 카테고리 조회 -->
-    <select id="getSubCategories" parameterType="string" resultType="kr.co.librarylyh.domain.CategoryVO">
-        <![CDATA[
-    SELECT
-        category_id,
-        category_name,
-        parent_id
-    FROM
-        category_tbl
-    WHERE
-        parent_id = #{parentId}
-    ORDER BY category_id
-    ]]>
-    </select>
 
 
 </mapper>

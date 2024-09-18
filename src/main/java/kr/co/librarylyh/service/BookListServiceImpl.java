@@ -1,6 +1,5 @@
 package kr.co.librarylyh.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import kr.co.librarylyh.domain.CategoryVO;
@@ -21,7 +20,7 @@ public class BookListServiceImpl implements BookListService {
 	private BookListMapper mapper;
 
 	public void updateAvailable (BookListVO bookList){
-		if(bookList.getB_count() <= 0){
+		if(bookList.getBookCount() <= 0){
 			bookList.setRentalAvailable("N");
 		} else {
 			bookList.setRentalAvailable("Y");
@@ -79,6 +78,14 @@ public class BookListServiceImpl implements BookListService {
 	public int getTotal(Map<String, Object> searchParams) {
 		log.info("총 책 수 조회: " + searchParams);
 		return mapper.getTotalCount(searchParams);
+	}
+
+	@Override
+	public List<BookListVO> searchTitles(String query) {
+		log.info("검색어: {}", query);
+		List<BookListVO>result = mapper.searchTitles(query);
+		log.info("검색 결과: {}", result);
+		return result;
 	}
 
 }

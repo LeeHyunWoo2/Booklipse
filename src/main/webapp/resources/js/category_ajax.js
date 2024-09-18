@@ -1,10 +1,20 @@
 $(document).ready(function () {
+
+    function saveCategoryDataToSessionStorage(categoryData) {
+        sessionStorage.setItem('categoryData', JSON.stringify(categoryData));
+    }
+
+    function getCategoryDataFromSessionStorage() {
+        const data = sessionStorage.getItem('categoryData');
+        return data ? JSON.parse(data) : null;
+    }
+
     // popstate 이벤트 리스너 추가
     window.addEventListener('popstate', function (event) {
         if (event.state) {
-            const category_id = event.state.category_id ;
-            updateCategoryUI(category_id); // UI를 카테고리에 맞게 업데이트
-            loadBooksByCategory(category_id); // 비동기 요청으로 데이터를 다시 로드
+            const categoryId = event.state.categoryId ;
+            updateCategoryUI(categoryId); // UI를 카테고리에 맞게 업데이트
+            loadBooksByCategory(categoryId); // 비동기 요청으로 데이터를 다시 로드
         }
     });
     // 초기화 및 카테고리 로드
@@ -15,17 +25,26 @@ $(document).ready(function () {
     };
 
     function loadCategories() {
-        $.ajax({
-            url: '/categories/list',
-            type: 'GET',
-            dataType: 'json',
-            success: function (categories) {
-                buildCategoryDropdown(categories);
-            },
-            error: function (xhr, status, error) {
-                console.error('카테고리 데이터를 가져오는데 실패했습니다:', error);
-            }
-        });
+        const categoryData = getCategoryDataFromSessionStorage();
+
+        if (categoryData) {
+            buildCategoryDropdown(categoryData);
+            console.log('세션 저장소에서 카테고리 데이터를 가져옴.');
+        } else {
+            $.ajax({
+                url: '/categories/list',
+                type: 'GET',
+                dataType: 'json',
+                success: function(categories) {
+                    saveCategoryDataToSessionStorage(categories); // 데이터 저장
+                    buildCategoryDropdown(categories);
+                    console.log('서버에서 카테고리 데이터를 가져옴')
+                },
+                error: function(xhr, status, error) {
+                    console.error('카테고리 데이터를 가져오는데 실패했습니다:', error);
+                }
+            });
+        }
     }
 
     function buildCategoryDropdown(categories) {
@@ -34,17 +53,17 @@ $(document).ready(function () {
 
         const categoryMap = {};
         categories.forEach(category => {
-            categoryMap[category.category_id ] = category;
+            categoryMap[category.categoryId ] = category;
             category.children = [];
         });
 
         categories.forEach(category => {
-            if (category.parent_id && categoryMap[category.parent_id]) {
-                categoryMap[category.parent_id].children.push(category);
+            if (category.parentId && categoryMap[category.parentId]) {
+                categoryMap[category.parentId].children.push(category);
             }
         });
 
-        const topCategories = categories.filter(category => category.category_name === '국내도서');
+        const topCategories = categories.filter(category => category.categoryName === '국내도서');
 
         if (topCategories.length > 0) {
             const domesticCategory = topCategories[0];
@@ -62,13 +81,13 @@ $(document).ready(function () {
         item.className = 'dropdown-item';
 
         const link = document.createElement('div');
-        link.textContent = category.category_name;
+        link.textContent = category.categoryName;
         link.style.cursor = 'pointer';
         link.onclick = function () {
             clearSubCategoryMenus(level + 1);
             createSubCategoryMenu(category, level + 1);
-            updateCategoryInURL(category.category_id);
-            loadBooksByCategory(category.category_id);
+            updateCategoryInURL(category.categoryId);
+            loadBooksByCategory(category.categoryId);
         };
 
         item.appendChild(link);
@@ -88,14 +107,14 @@ $(document).ready(function () {
             const subMenuButton = document.createElement('button');
             subMenuButton.type = 'button';
             subMenuButton.className = 'btn btn-secondary';
-            subMenuButton.textContent = category.category_name;
+            subMenuButton.textContent = category.categoryName;
             subMenuContainer.appendChild(subMenuButton);
         } else {
             const subMenuButton = document.createElement('button');
             subMenuButton.type = 'button';
             subMenuButton.className = 'btn btn-secondary dropdown-toggle';
             subMenuButton.setAttribute('data-toggle', 'dropdown');
-            subMenuButton.textContent = category.category_name;
+            subMenuButton.textContent = category.categoryName;
             subMenuContainer.appendChild(subMenuButton);
 
             const subMenuList = document.createElement('ul');
@@ -130,27 +149,27 @@ $(document).ready(function () {
     }
 
 
-    function updateCategoryInURL(category_id) {
+    function updateCategoryInURL(categoryId) {
         const currentUrlParams = new URLSearchParams(window.location.search);
         const currentCategory = currentUrlParams.get('category');
 
-        if (currentCategory !== category_id){
+        if (currentCategory !== categoryId){
             // 상태를 기록하는 경우에만 pushState 호출
-            updateURLParam('category', category_id, false);
+            updateURLParam('category', categoryId, false);
         }
 
-        updateURLParam('category', category_id);
+        updateURLParam('category', categoryId);
     }
 
-    function loadBooksByCategory(category_id) {
-        loadPage(1, undefined, '', category_id);
+    function loadBooksByCategory(categoryId) {
+        loadPage(1, undefined, '', categoryId);
     }
 
     function updateMenuTitle(newTitle) {
         const menuButton = document.getElementById('dropdownMenuButton');
         menuButton.textContent = newTitle;
     }
-    function updateCategoryUI(category_id){
+    function updateCategoryUI(categoryId){
         // 현재 URI의 카테고리에 맞게 UI 업데이트하는 로직 만들 예정
         // (뒤로가기 앞으로가기에도 리스트가 갱신되어 보이게끔)
         // 캐싱 구현은 아직 잘 모르겠으니 그냥 popstate 로 서버에 재요청 하는 방식을 쓸듯

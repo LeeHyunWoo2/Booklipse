@@ -4,35 +4,35 @@ let currentAmount = 10; // 현재 출력 개수를 저장할 전역 변수, 초�
 let currentSearchQuery = '';
 
 $(document).ready(function() {
-    loadPage(1, `b.publication_date ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
+    loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
 });
 
 
 function changeItemsPerPage(value) {
     currentAmount = value; // 선택한 출력 개수를 전역 변수에 저장
     document.getElementById('itemsPerPageButton').textContent = `${value}개씩 보기`; // 드롭다운 버튼의 텍스트 업데이트
-    loadPage(1, `b.publication_date ${currentSortOrder}`, '', currentCategoryId, currentAmount); // 페이지 로드
+    loadPage(1, `b.publicationDate ${currentSortOrder}`, '', currentCategoryId, currentAmount); // 페이지 로드
 }
 
 
 function toggleSortOrder() {
     currentSortOrder = (currentSortOrder === 'DESC') ? 'ASC' : 'DESC';
     document.getElementById('sortButton').innerText = (currentSortOrder === 'DESC') ? '최신순' : '오래된순';
-    const sortOption = `b.publication_date ${currentSortOrder}`;
+    const sortOption = `b.publicationDate ${currentSortOrder}`;
     loadPage(1, sortOption, '', currentCategoryId);
 }
 
-function loadPage(pageNum, sortOption = `b.publication_date ${currentSortOrder}`, searchQuery = '', category_id = currentCategoryId, amount = currentAmount) {
+function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`, searchQuery = '', categoryId = currentCategoryId, amount = currentAmount) {
     const searchParams = new URLSearchParams(window.location.search);
 
     const rentalAvailable = $("input[name='rentalAvailable']").is(":checked") ? 'Y' : '';
     const publicationDateFilter = $("select[name='publicationDateFilter']").val() || '';
 
-    currentCategoryId = category_id;
+    currentCategoryId = categoryId;
 
     if (rentalAvailable) updateURLParam('rentalAvailable', rentalAvailable, false);
     if (publicationDateFilter) updateURLParam('publicationDateFilter', publicationDateFilter, false);
-    if (category_id) updateURLParam('category', category_id, false); // URL에는 'category'로 표시
+    if (categoryId) updateURLParam('category', categoryId, false); // URL에는 'category'로 표시
 
     // 검색어와 페이지 번호를 URL에 반영
     if (searchQuery !== '') {
@@ -61,7 +61,7 @@ function loadPage(pageNum, sortOption = `b.publication_date ${currentSortOrder}`
             amount: amount,
             rentalAvailable: rentalAvailable,
             publicationDateFilter: publicationDateFilter,
-            category_id: category_id,
+            categoryId: categoryId,
             searchQuery: searchQuery,
             sort: sortOption
         },
@@ -106,7 +106,7 @@ function renderBookList(bookList) {
         }
         const formattedDate = `${publicationDate.getFullYear()}-${String(publicationDate.getMonth() + 1).padStart(2, '0')}-${String(publicationDate.getDate()).padStart(2, '0')}`;
         const bookItem = `
-            <div class="card border border-dark mb-3">
+            <div class="listcard border border-dark mb-3" data-isbn="${book.isbn13}">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <span class="img position-absolute border border-dark">
@@ -114,11 +114,11 @@ function renderBookList(bookList) {
                         </span>
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body">
+                        <div class="listcard-body">
                             <p class="booktitle">${book.book}</p>
-                            <p class="card-sub-text">${book.author}</p>
-                            <p class="card-sub-text">${book.publisher}</p>
-                            <p class="card-sub-text">${formattedDate}</p>
+                            <p class="listcard-sub-text">${book.author}</p>
+                            <p class="listcard-sub-text">${book.publisher}</p>
+                            <p class="listcard-sub-text">${formattedDate}</p>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,14 @@ function renderBookList(bookList) {
         `;
         listBox.append(bookItem);
     });
+    $('.listcard').on('click', function (){
+        const isbn = $(this).data('isbn');
+            window.location.href = `/library/read/${isbn}`;
+    })
 }
+
+
+
 // 바둑판형 렌더링 함수
 function renderBookGrid(bookList) {
     const listBox = $('.list_wrap');
@@ -135,21 +142,24 @@ function renderBookGrid(bookList) {
         let publicationDate = formatPublicationDate(book.publicationDate);
         const bookItem = `
             <div class="grid-item">
-                <div class="card border border-dark mb-3">
+                <div class="gridcard border border-dark mb-3" data-isbn="${book.isbn13}">
                     <span class="img position-absolute border border-dark">
                         <img src="${book.photo}" class="img-fluid rounded-start" alt="${book.book}">
                     </span>
-                    <div class="card-body">
+                    <div class="gridcard-body">
                         <p class="booktitle">${book.book}</p>
-                        <p class="card-sub-text">${book.author}</p>
-                        <p class="card-sub-text">${book.publisher}</p>
-                        <p class="card-sub-text">${publicationDate}</p>
+                        <p class="gridcard-sub-text">${book.author}</p>
+                        <p class="gridcard-sub-text">${book.publisher}</p>
+                        <p class="gridcard-sub-text">${publicationDate}</p>
                     </div>
                 </div>
             </div>
         `;
         listBox.append(bookItem);
     });
+    $('.gridcard').on('click', function (){
+            window.location.href = `/library/read/${isbn}`;
+    })
 }
 function renderPaging(pageData) {
     const pagingBox = $('.pagination');
@@ -202,10 +212,10 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
         window.history.replaceState({ path: newUrl }, '', newUrl);
     } else {
         const currentState = window.history.state || {};
-        const currentCategory = currentState.category_id;
+        const currentCategory = currentState.categoryId;
 
         if (currentCategory !== paramValue) {
-            window.history.pushState({ category_id: paramValue }, '', newUrl);
+            window.history.pushState({ categoryId: paramValue }, '', newUrl);
         }
     }
 

@@ -40,14 +40,14 @@ public class BookListMapperTests {
     testBook.setPageCount(300);
     testBook.setWeight("100kg");
     testBook.setBookSize("100M");
-    testBook.setB_count(5);
+    testBook.setBookCount(5);
     testBook.setAverageRating(4.5);
-    testBook.setStar_5("50%");
-    testBook.setStar_4("20%");
-    testBook.setStar_3("15%");
-    testBook.setStar_2("10%");
-    testBook.setStar_1("5%");
-    testBook.setReview_count(185);
+    testBook.setStar5Count("50%");
+    testBook.setStar4Count("20%");
+    testBook.setStar3Count("15%");
+    testBook.setStar2Count("10%");
+    testBook.setStar1Count("5%");
+    testBook.setReviewCount(185);
     testBook.setPublicationDate(LocalDate.parse("2000-02-02"));
   }
 

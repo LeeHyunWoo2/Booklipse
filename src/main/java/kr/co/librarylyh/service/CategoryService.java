@@ -10,5 +10,5 @@ public interface CategoryService {
   // 모든 카테고리 목록을 가져오는 메서드
   List<CategoryVO> getAllCategories();
 
-  List<CategoryVO> getSubCategories(CategoryVO category);
+
 }

@@ -24,4 +24,5 @@ public interface BookListService {
 
 	public int getTotal(Map<String, Object> searchParams);
 
+	public List<BookListVO> searchTitles(String query);
 }

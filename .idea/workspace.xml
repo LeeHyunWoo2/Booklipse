@@ -16,23 +16,35 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/CategoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/CategoryMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookinfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +73,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
@@ -138,7 +155,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/진짜제발마지막/books_categories.csv",
+    "last_opened_file_path": "D:/진짜진짜제발마지막/cleaned_file.csv",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -151,7 +168,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.24082074",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "inlay.hints",
+    "settings.editor.selected.configurable": "com.intellij.liquibase.common.gui.settings.db.DiffChangesConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -554,7 +571,8 @@
       <workItem from="1726571126627" duration="324000" />
       <workItem from="1726571459922" duration="286000" />
       <workItem from="1726571756121" duration="262000" />
-      <workItem from="1726572028957" duration="18734000" />
+      <workItem from="1726572028957" duration="19051000" />
+      <workItem from="1726619120558" duration="48561000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -596,7 +614,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726500292059</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1.0.1">
+      <option name="closed" value="true" />
+      <created>1726591259883</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726591259883</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +670,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="1.0.1" />
                       </list>
                     </value>
                   </entry>

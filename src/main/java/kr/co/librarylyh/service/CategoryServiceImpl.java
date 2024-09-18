@@ -28,9 +28,5 @@ public class CategoryServiceImpl implements CategoryService {
     return categoryMapper.getAllCategories();
   }
 
-  @Override
-  public List<CategoryVO> getSubCategories(CategoryVO category) {
-    log.info("카테 getSubCategories" + category);
-    return categoryMapper.getSubCategories(category);
-  }
+
 }

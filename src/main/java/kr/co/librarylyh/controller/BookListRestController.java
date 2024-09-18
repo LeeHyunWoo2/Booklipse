@@ -1,6 +1,8 @@
 package kr.co.librarylyh.controller;
 
+import java.util.stream.Collectors;
 import kr.co.librarylyh.domain.BookListVO;
+import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.PageDTO;
 import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
@@ -28,11 +30,11 @@ public class BookListRestController {
   public ResponseEntity<PageDTO> getBookList(
       @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
       @RequestParam(value = "amount", defaultValue = "10") int amount,
-      @RequestParam(value = "category_id", required = false) String category_id,
+      @RequestParam(value = "categoryId", required = false) String categoryId,
       @RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
       @RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
       @RequestParam(value = "searchQuery", required = false) String searchQuery,
-      @RequestParam(value = "sort", defaultValue = "b.publication_date DESC") String sort) { // 정렬 옵션 추가
+      @RequestParam(value = "sort", defaultValue = "b.publicationDate DESC") String sort) { // 정렬 옵션 추가
 
 
     // 페이징 객체 생성
@@ -40,7 +42,7 @@ public class BookListRestController {
 
     // 검색 조건들을 맵으로 전달
     Map<String, Object> searchParams = new HashMap<>();
-    searchParams.put("category_id", category_id);
+    searchParams.put("categoryId", categoryId);
     searchParams.put("rentalAvailable", rentalAvailable);
     searchParams.put("publicationDateFilter", publicationDateFilter);
     searchParams.put("searchQuery", searchQuery);
@@ -56,11 +58,31 @@ public class BookListRestController {
     return new ResponseEntity<>(pageDTO, HttpStatus.OK);
   }
 
-  @GetMapping("/{isbn13}")
-  public ResponseEntity<BookListVO> getBookInfo(@PathVariable("isbn13") long isbn13) {
-    BookListVO bookDetail = service.get(isbn13);
-    return ResponseEntity.ok(bookDetail);
+  @GetMapping(value = "/searchTitles", produces = { MediaType.APPLICATION_JSON_VALUE })
+  public List<BookListVO> searchTitles(@RequestParam("query")String query){
+    log.info("AJAX 요청 - 검색어: {}", query);
+    List<BookListVO>result = service.searchTitles(query);
+    log.info("AJAX 응답 - 검색 결과: {}", result);
+    return result;
   }
+
+  // 책의 카테고리 ID 목록 제공
+  @GetMapping(value = "/getBookCategoryIds", produces = { MediaType.APPLICATION_JSON_VALUE })
+  public ResponseEntity<List<String>> getBookCategoryIds(@RequestParam("isbn13") Long isbn13) {
+    try {
+      // 책의 카테고리 ID 목록을 가져오기
+      List<String> categoryIds = service.getCategoriesByISBN(isbn13)
+          .stream()
+          .map(CategoryVO::getCategoryId) // CategoryVO에서 ID만 추출
+          .collect(Collectors.toList());
+
+      // 카테고리 ID 목록을 클라이언트에 전달
+      return ResponseEntity.ok(categoryIds);
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
 
   // 책 추가 (모달을 통해 처리)
   @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })

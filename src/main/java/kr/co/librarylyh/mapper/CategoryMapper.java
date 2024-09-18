@@ -13,5 +13,4 @@ public interface CategoryMapper {
   // 모든 카테고리 목록 조회
   List<CategoryVO> getAllCategories();
 
-  List<CategoryVO> getSubCategories(CategoryVO category);
 }

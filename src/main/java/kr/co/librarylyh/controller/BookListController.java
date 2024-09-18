@@ -29,7 +29,7 @@ public class BookListController {
 	public String booklist(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "amount", defaultValue = "10") int amount,
-			@RequestParam(value = "category_id", required = false) String category_id,
+			@RequestParam(value = "categoryId", required = false) String categoryId,
 			@RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
 			@RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
 			Model model) {
@@ -38,8 +38,8 @@ public class BookListController {
 		Map<String, Object> searchParams = new HashMap<>();
 
 		// 필터 조건이 있을 경우에만 searchParams에 추가 (필터 설정 안할때 URL 난장판되길래 만듦)
-		if (category_id != null && !category_id.isEmpty()) {
-			searchParams.put("category_id", category_id);
+		if (categoryId != null && !categoryId.isEmpty()) {
+			searchParams.put("categoryId", categoryId);
 		}
 		if (rentalAvailable != null && !rentalAvailable.isEmpty()) {
 			searchParams.put("rentalAvailable", rentalAvailable);
@@ -59,11 +59,6 @@ public class BookListController {
 	public String read(@PathVariable("isbn13") Long isbn13, Model model) {
 		BookListVO bookDetail = service.get(isbn13);
 		model.addAttribute("bookDetail", bookDetail);
-		List<CategoryVO> categories = service.getCategoriesByISBN(isbn13);
-		model.addAttribute("categories", categories);
-
-
-
 		return "library/bookDetail"; // 책 상세 보기 뷰로 이동
 	}
 
