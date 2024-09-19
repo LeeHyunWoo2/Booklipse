@@ -10,6 +10,16 @@
   font-weight: 500; /* 일반 글씨 */
   font-style: normal;
 }
+.breadcrumb-btn {
+  background: none;
+  border: none;
+  color: #0D6EFD;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.breadcrumb-btn:hover {
+  text-decoration: none;
+}
 
 
 </style>
@@ -17,7 +27,7 @@
     <title>책 상세정보</title>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <jsp:include page="includes/header.jsp"/>
+    <jsp:include page="../includes/header.jsp"/>
 </head>
 <body class="bookDetail">
 <div id="bookDetail" data-isbn13="${bookDetail.isbn13}">
@@ -111,10 +121,12 @@
         const categoryName = categoryData.find(cat => cat.categoryId === id)?.categoryName || id;
 
 
-        breadcrumbHtml += `<li class="breadcrumb-item"><a href="#" onclick="loadBooksByCategory('
-        categoryId')">`+categoryName+`</a></li>`;
-
-    });
+        breadcrumbHtml += '<li class="breadcrumb-item">' +
+            '<button class="breadcrumb-btn" onclick="changeCategoryAndLoadPage(\'' + id + '\'); return false;">' +
+            categoryName +
+            '</button>' +
+            '</li>';
+      });
       breadcrumbHtml += '</ol>'; // 하나의 경로가 끝날 때마다 <ol> 닫기
   });
     $('.breadcrumb_container').html(breadcrumbHtml); // 부트스트랩 브레드크럼 요소에 동적으로 생성된 HTML 추가
@@ -123,6 +135,8 @@
   function backtolist() {
     history.back();
   }
+
+
 
   // document ready 내부에 AJAX 호출
   $(document).ready(function() {
@@ -145,5 +159,6 @@
 
 
 </script>
-<jsp:include page="includes/footer.jsp"/>
+<jsp:include page="../includes/footer.jsp"/>
+<script src="/resources/js/booklist_ajax.js"></script>
 </html>

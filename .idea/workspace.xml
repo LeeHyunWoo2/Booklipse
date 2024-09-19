@@ -9,42 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.1">
+    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.2">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/CategoryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/CategoryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/includes/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/CategoryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="1.0.1" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,6 +68,9 @@
     &quot;accountId&quot;: &quot;d7a73c42-7cbf-43ec-8d7f-84c909c78c6b&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -114,7 +89,6 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
@@ -151,11 +125,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ShowUsagesActions.previewPropertyKey": "true",
     "Smart Tomcat.Library.executor": "Run",
-    "database.data.extractors.current.export.id": "SQL-Insert-Multirow.sql.groovy",
+    "database.data.extractors.current.export.id": "SQL-Insert-Statements.sql.groovy",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/진짜진짜제발마지막/cleaned_file.csv",
+    "last_opened_file_path": "D:/DB",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -168,7 +142,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.24082074",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.intellij.liquibase.common.gui.settings.db.DiffChangesConfigurable",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -184,6 +158,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workspace\Library\Library\src\main\webapp\WEB-INF\views" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -572,7 +551,11 @@
       <workItem from="1726571459922" duration="286000" />
       <workItem from="1726571756121" duration="262000" />
       <workItem from="1726572028957" duration="19051000" />
-      <workItem from="1726619120558" duration="48561000" />
+      <workItem from="1726619120558" duration="48979000" />
+      <workItem from="1726697613095" duration="665000" />
+      <workItem from="1726705106521" duration="21934000" />
+      <workItem from="1726727592257" duration="9104000" />
+      <workItem from="1726740003448" duration="21992000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -622,7 +605,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726591259883</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1.0.2">
+      <option name="closed" value="true" />
+      <created>1726674281017</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726674281017</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -685,7 +676,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.0.0" />
     <MESSAGE value="1.0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.1" />
+    <MESSAGE value="1.0.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
