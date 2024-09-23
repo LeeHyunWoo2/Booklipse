@@ -1,14 +1,12 @@
 package kr.co.librarylyh.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
 
 import java.util.List;
 
 
 @Data
-public class PageDTO {
+public class ListPageDTO {
 	private int startPage;
 	private int endPage;
 	private boolean prev, next;
@@ -17,7 +15,7 @@ public class PageDTO {
 	private List<BookListVO> list;
 	private int finalPage;
 
-	public PageDTO(Paging pge, int total, List<BookListVO> list) {
+	public ListPageDTO(Paging pge, int total, List<BookListVO> list) {
 		this.total = total;
 		this.pge = pge;
 		this.list = list;

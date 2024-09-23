@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="kr.co.librarylyh.service.BookListServiceTests" time="0.013" tests="3" errors="3" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="MS949"/>
+    <property name="java.class.path" value="D:\workspace\Library\Library\target\test-classes;D:\workspace\Library\Library\target\classes;C:\Users\user\.m2\repository\org\springframework\spring-context\5.0.7.RELEASE\spring-context-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-aop\5.0.7.RELEASE\spring-aop-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-beans\5.0.7.RELEASE\spring-beans-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-core\5.0.7.RELEASE\spring-core-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-jcl\5.0.7.RELEASE\spring-jcl-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-expression\5.0.7.RELEASE\spring-expression-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-webmvc\5.0.7.RELEASE\spring-webmvc-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-web\5.0.7.RELEASE\spring-web-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.4\jackson-databind-2.9.4.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.4\jackson-core-2.9.4.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-xml\2.9.6\jackson-dataformat-xml-2.9.6.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\module\jackson-module-jaxb-annotations\2.9.6\jackson-module-jaxb-annotations-2.9.6.jar;C:\Users\user\.m2\repository\org\codehaus\woodstox\stax2-api\3.1.4\stax2-api-3.1.4.jar;C:\Users\user\.m2\repository\com\fasterxml\woodstox\woodstox-core\5.0.3\woodstox-core-5.0.3.jar;C:\Users\user\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\user\.m2\repository\org\springframework\spring-test\5.0.7.RELEASE\spring-test-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\user\.m2\repository\com\oracle\database\jdbc\ojdbc8\23.2.0.0\ojdbc8-23.2.0.0.jar;C:\Users\user\.m2\repository\com\zaxxer\HikariCP\2.7.9\HikariCP-2.7.9.jar;C:\Users\user\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\user\.m2\repository\org\mybatis\mybatis\3.4.6\mybatis-3.4.6.jar;C:\Users\user\.m2\repository\org\mybatis\mybatis-spring\1.3.3\mybatis-spring-1.3.3.jar;C:\Users\user\.m2\repository\org\springframework\spring-tx\5.0.7.RELEASE\spring-tx-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-jdbc\5.0.7.RELEASE\spring-jdbc-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\bgee\log4jdbc-log4j2\log4jdbc-log4j2-jdbc4\1.16\log4jdbc-log4j2-jdbc4-1.16.jar;C:\Users\user\.m2\repository\org\aspectj\aspectjrt\1.9.0\aspectjrt-1.9.0.jar;C:\Users\user\.m2\repository\org\aspectj\aspectjweaver\1.9.0\aspectjweaver-1.9.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-api\2.18.0\log4j-api-2.18.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-core\2.18.0\log4j-core-2.18.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-slf4j-impl\2.18.0\log4j-slf4j-impl-2.18.0.jar;C:\Users\user\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\user\.m2\repository\net\coobird\thumbnailator\0.4.8\thumbnailator-0.4.8.jar;C:\Users\user\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\user\.m2\repository\javax\servlet\jsp\jsp-api\2.1\jsp-api-2.1.jar;C:\Users\user\.m2\repository\javax\servlet\jstl\1.2\jstl-1.2.jar;C:\Users\user\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\user\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\user\.m2\repository\org\quartz-scheduler\quartz\2.3.0\quartz-2.3.0.jar;C:\Users\user\.m2\repository\com\mchange\c3p0\0.9.5.2\c3p0-0.9.5.2.jar;C:\Users\user\.m2\repository\com\mchange\mchange-commons-java\0.2.11\mchange-commons-java-0.2.11.jar;C:\Users\user\.m2\repository\com\zaxxer\HikariCP-java6\2.3.13\HikariCP-java6-2.3.13.jar;C:\Users\user\.m2\repository\org\quartz-scheduler\quartz-jobs\2.3.0\quartz-jobs-2.3.0.jar;C:\Users\user\.m2\repository\commons-fileupload\commons-fileupload\1.3.3\commons-fileupload-1.3.3.jar;C:\Users\user\.m2\repository\commons-io\commons-io\2.2\commons-io-2.2.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Asia/Seoul"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="KR"/>
+    <property name="sun.boot.library.path" value="D:\JDK\temurin-11.0.24\bin"/>
+    <property name="sun.java.command" value="C:\Users\user\AppData\Local\Temp\surefire16523614096664670160\surefirebooter-20240923174604044_3.jar C:\Users\user\AppData\Local\Temp\surefire16523614096664670160 2024-09-23T17-46-03_207-jvmRun1 surefire-20240923174604044_1tmp surefire_0-20240923174604044_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\workspace\Library\Library\target\test-classes;D:\workspace\Library\Library\target\classes;C:\Users\user\.m2\repository\org\springframework\spring-context\5.0.7.RELEASE\spring-context-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-aop\5.0.7.RELEASE\spring-aop-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-beans\5.0.7.RELEASE\spring-beans-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-core\5.0.7.RELEASE\spring-core-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-jcl\5.0.7.RELEASE\spring-jcl-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-expression\5.0.7.RELEASE\spring-expression-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-webmvc\5.0.7.RELEASE\spring-webmvc-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-web\5.0.7.RELEASE\spring-web-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.4\jackson-databind-2.9.4.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.4\jackson-core-2.9.4.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-xml\2.9.6\jackson-dataformat-xml-2.9.6.jar;C:\Users\user\.m2\repository\com\fasterxml\jackson\module\jackson-module-jaxb-annotations\2.9.6\jackson-module-jaxb-annotations-2.9.6.jar;C:\Users\user\.m2\repository\org\codehaus\woodstox\stax2-api\3.1.4\stax2-api-3.1.4.jar;C:\Users\user\.m2\repository\com\fasterxml\woodstox\woodstox-core\5.0.3\woodstox-core-5.0.3.jar;C:\Users\user\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\user\.m2\repository\org\springframework\spring-test\5.0.7.RELEASE\spring-test-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\user\.m2\repository\com\oracle\database\jdbc\ojdbc8\23.2.0.0\ojdbc8-23.2.0.0.jar;C:\Users\user\.m2\repository\com\zaxxer\HikariCP\2.7.9\HikariCP-2.7.9.jar;C:\Users\user\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\user\.m2\repository\org\mybatis\mybatis\3.4.6\mybatis-3.4.6.jar;C:\Users\user\.m2\repository\org\mybatis\mybatis-spring\1.3.3\mybatis-spring-1.3.3.jar;C:\Users\user\.m2\repository\org\springframework\spring-tx\5.0.7.RELEASE\spring-tx-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\springframework\spring-jdbc\5.0.7.RELEASE\spring-jdbc-5.0.7.RELEASE.jar;C:\Users\user\.m2\repository\org\bgee\log4jdbc-log4j2\log4jdbc-log4j2-jdbc4\1.16\log4jdbc-log4j2-jdbc4-1.16.jar;C:\Users\user\.m2\repository\org\aspectj\aspectjrt\1.9.0\aspectjrt-1.9.0.jar;C:\Users\user\.m2\repository\org\aspectj\aspectjweaver\1.9.0\aspectjweaver-1.9.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-api\2.18.0\log4j-api-2.18.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-core\2.18.0\log4j-core-2.18.0.jar;C:\Users\user\.m2\repository\org\apache\logging\log4j\log4j-slf4j-impl\2.18.0\log4j-slf4j-impl-2.18.0.jar;C:\Users\user\.m2\repository\javax\inject\javax.inject\1\javax.inject-1.jar;C:\Users\user\.m2\repository\net\coobird\thumbnailator\0.4.8\thumbnailator-0.4.8.jar;C:\Users\user\.m2\repository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;C:\Users\user\.m2\repository\javax\servlet\jsp\jsp-api\2.1\jsp-api-2.1.jar;C:\Users\user\.m2\repository\javax\servlet\jstl\1.2\jstl-1.2.jar;C:\Users\user\.m2\repository\junit\junit\4.12\junit-4.12.jar;C:\Users\user\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\user\.m2\repository\org\quartz-scheduler\quartz\2.3.0\quartz-2.3.0.jar;C:\Users\user\.m2\repository\com\mchange\c3p0\0.9.5.2\c3p0-0.9.5.2.jar;C:\Users\user\.m2\repository\com\mchange\mchange-commons-java\0.2.11\mchange-commons-java-0.2.11.jar;C:\Users\user\.m2\repository\com\zaxxer\HikariCP-java6\2.3.13\HikariCP-java6-2.3.13.jar;C:\Users\user\.m2\repository\org\quartz-scheduler\quartz-jobs\2.3.0\quartz-jobs-2.3.0.jar;C:\Users\user\.m2\repository\commons-fileupload\commons-fileupload\1.3.3\commons-fileupload-1.3.3.jar;C:\Users\user\.m2\repository\commons-io\commons-io\2.2\commons-io-2.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\user"/>
+    <property name="user.language" value="ko"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2024-07-16"/>
+    <property name="java.home" value="D:\JDK\temurin-11.0.24"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\workspace\Library\Library"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\user\AppData\Local\Temp\surefire16523614096664670160\surefirebooter-20240923174604044_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.24+8"/>
+    <property name="user.name" value="user"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="MS949"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-11.0.24+8"/>
+    <property name="localRepository" value="C:\Users\user\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\user\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.2.1"/>
+    <property name="com.zaxxer.hikari.pool_number" value="3"/>
+    <property name="java.version" value="11.0.24"/>
+    <property name="user.dir" value="D:\workspace\Library\Library"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="D:\JDK\temurin-11.0.24\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\OracleXE\app\oracle\product\11.2.0\server\bin;;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files (x86)\NAT Service;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Bandizip\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-17\bin\;D:\Gradle\bin;C:\ProgramData\chocolatey\bin;E:\Program Files\nodejs\;E:\Program Files\nodejs;C:\Users\user\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\user\AppData\Local\Programs\Python\Python312\;E:\Program Files\IntelliJ IDEA 2024.1.4\bin;C:\Users\user\AppData\Local\JetBrains\Toolbox\scripts;E:\Program Files\IntelliJ IDEA 2024.2.1\bin;C:\Users\user\AppData\Roaming\npm;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="11.0.24+8"/>
+    <property name="java.specification.maintenance.version" value="2"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="55.0"/>
+  </properties>
+  <testcase name="testAddBook" classname="kr.co.librarylyh.service.BookListServiceTests" time="0.0">
+    <error message="class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader &apos;app&apos;; java.lang.String is in module java.base of loader &apos;bootstrap&apos;)" type="java.lang.ClassCastException"><![CDATA[java.lang.ClassCastException: class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap')
+	at kr.co.librarylyh.aop.DataValidationAspect.validateSecurity(DataValidationAspect.java:21)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:626)
+	at org.springframework.aop.aspectj.AspectJMethodBeforeAdvice.before(AspectJMethodBeforeAdvice.java:44)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:51)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at kr.co.librarylyh.service.BookListServiceImpl$$EnhancerBySpringCGLIB$$1242f742.add(<generated>)
+	at kr.co.librarylyh.service.BookListServiceTests.testAddBook(BookListServiceTests.java:58)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73)
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]></error>
+    <system-out><![CDATA[ DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner(<init>139) - SpringJUnit4ClassRunner constructor called with [class kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.BootstrapUtils(createCacheAwareContextLoaderDelegate97) - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+ DEBUG org.springframework.test.context.BootstrapUtils(createBootstrapContext80) - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+ DEBUG org.springframework.test.context.BootstrapUtils(resolveTestContextBootstrapper133) - Instantiating TestContextBootstrapper for test class [kr.co.librarylyh.service.BookListServiceTests] from class [org.springframework.test.context.support.DefaultTestContextBootstrapper]
+ DEBUG org.springframework.test.context.support.AbstractDelegatingSmartContextLoader(delegateProcessing95) - Delegating to GenericXmlContextLoader to process context configuration [ContextConfigurationAttributes@39f68aec declaringClass = 'kr.co.librarylyh.service.BookListServiceTests', classes = '{}', locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', inheritLocations = true, initializers = '{}', inheritInitializers = true, name = [null], contextLoaderClass = 'org.springframework.test.context.ContextLoader'].
+ DEBUG org.springframework.test.context.support.ActiveProfilesUtils(resolveActiveProfiles79) - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.support.DefaultTestContextBootstrapper(getTestExecutionListeners125) - @TestExecutionListeners is not present for class [kr.co.librarylyh.service.BookListServiceTests]: using defaults.
+ INFO  org.springframework.test.context.support.DefaultTestContextBootstrapper(getDefaultTestExecutionListenerClassNames248) - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+ INFO  org.springframework.test.context.support.DefaultTestContextBootstrapper(getTestExecutionListeners177) - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@65ff4b8c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@b81938d, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@278cb145, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2aa0feb2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@351c6341, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@32069394]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestClass142) - Before test class: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null].
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener(prepareTestInstance81) - Performing dependency injection for test context [[DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@bea5941, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]]].
+ DEBUG org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate(loadContext130) - Retrieved ApplicationContext from cache with key [[MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
+ DEBUG org.springframework.test.context.cache(logStatistics290) - Spring test ApplicationContext cache statistics: [DefaultContextCache@a5e8260 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 13, missCount = 3]
+ DEBUG org.springframework.beans.factory.annotation.InjectionMetadata(inject89) - Processing injected element of bean 'kr.co.librarylyh.service.BookListServiceTests': AutowiredFieldElement for private kr.co.librarylyh.service.BookListService kr.co.librarylyh.service.BookListServiceTests.bookListService
+ DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory(doGetBean254) - Returning cached instance of singleton bean 'bookListServiceImpl'
+ DEBUG org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor(registerDependentBeans530) - Autowiring by type from bean name 'kr.co.librarylyh.service.BookListServiceTests' to bean named 'bookListServiceImpl'
+ DEBUG org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator(buildAdvisors531) - Creating implicit proxy for bean 'kr.co.librarylyh.service.BookListServiceTests' with 0 common interceptors and 5 specific interceptors
+ DEBUG org.springframework.aop.framework.CglibAopProxy(getProxy161) - Creating CGLIB proxy: target source is SingletonTargetSource for target object [kr.co.librarylyh.service.BookListServiceTests@bea5941]
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: public void kr.co.librarylyh.service.BookListServiceTests.setUp()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: public void kr.co.librarylyh.service.BookListServiceTests.testAddBook()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: public void kr.co.librarylyh.service.BookListServiceTests.testRemoveBook()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: public void kr.co.librarylyh.service.BookListServiceTests.testModifyBook()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept825) - Found 'equals' method: public boolean java.lang.Object.equals(java.lang.Object)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: public java.lang.String java.lang.Object.toString()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept830) - Found 'hashCode' method: public native int java.lang.Object.hashCode()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept861) - Unable to apply any optimizations to advised method: protected native java.lang.Object java.lang.Object.clone() throws java.lang.CloneNotSupportedException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract int org.springframework.aop.framework.Advised.indexOf(org.springframework.aop.Advisor)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract int org.springframework.aop.framework.Advised.indexOf(org.aopalliance.aop.Advice)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.isFrozen()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.setExposeProxy(boolean)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.isExposeProxy()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.isProxyTargetClass()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.setPreFiltered(boolean)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract org.springframework.aop.TargetSource org.springframework.aop.framework.Advised.getTargetSource()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract org.springframework.aop.Advisor[] org.springframework.aop.framework.Advised.getAdvisors()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.setTargetSource(org.springframework.aop.TargetSource)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.replaceAdvisor(org.springframework.aop.Advisor,org.springframework.aop.Advisor) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.removeAdvisor(int) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.removeAdvisor(org.springframework.aop.Advisor)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.isInterfaceProxied(java.lang.Class)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.addAdvice(org.aopalliance.aop.Advice) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.addAdvice(int,org.aopalliance.aop.Advice) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.addAdvisor(int,org.springframework.aop.Advisor) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract void org.springframework.aop.framework.Advised.addAdvisor(org.springframework.aop.Advisor) throws org.springframework.aop.framework.AopConfigException
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.isPreFiltered()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract boolean org.springframework.aop.framework.Advised.removeAdvice(org.aopalliance.aop.Advice)
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract java.lang.Class[] org.springframework.aop.framework.Advised.getProxiedInterfaces()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract java.lang.String org.springframework.aop.framework.Advised.toProxyConfigString()
+ DEBUG org.springframework.aop.framework.CglibAopProxy(accept819) - Method is declared on Advised interface: public abstract java.lang.Class org.springframework.aop.TargetClassAware.getTargetClass()
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - Before test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@bea5941, testMethod = testAddBook@BookListServiceTests, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+ INFO  kr.co.librarylyh.service.BookListServiceTests(testAddBook57) - 책 추가 테스트 시작
+ DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory(doGetBean254) - Returning cached instance of singleton bean 'dataValidationAspect'
+ DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory(doGetBean254) - Returning cached instance of singleton bean 'exceptionHandlingAspect'
+ ERROR kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog143) - 예외 발생: [ClassCastException]
+위치 : [kr.co.librarylyh.service.BookListServiceImpl.add].
+인자 값: [BookListVO(isbn13=1234567890123, book=테스트 책 제목, author=테스트 저자, publisher=테스트 출판사, photo=test_photo.jpg, rentalAvailable=Y, price=10000, bookCount=5, bookDescription=테스트 책의 설명, weight=100kg, bookSize=100M, pageCount=300, averageRating=4.5, star5Count=50%, star4Count=20%, star3Count=15%, star2Count=10%, star1Count=5%, reviewCount=185, categories=null, publicationDate=2000-02-02)
+].
+ 예외 메시지: [class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap')]
+
+ INFO  kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog144) - 해결방안 : 잘못된 타입 변환이 발생했습니다. 객체 타입을 올바르게 변환했는지 확인하세요.
+
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - After test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@bea5941, testMethod = testAddBook@BookListServiceTests, testException = java.lang.ClassCastException: class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap'), mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+]]></system-out>
+  </testcase>
+  <testcase name="testRemoveBook" classname="kr.co.librarylyh.service.BookListServiceTests" time="0.0">
+    <error message="class java.lang.Long cannot be cast to class java.lang.String (java.lang.Long and java.lang.String are in module java.base of loader &apos;bootstrap&apos;)" type="java.lang.ClassCastException"><![CDATA[java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.String (java.lang.Long and java.lang.String are in module java.base of loader 'bootstrap')
+	at kr.co.librarylyh.aop.DataValidationAspect.validateSecurity(DataValidationAspect.java:21)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:626)
+	at org.springframework.aop.aspectj.AspectJMethodBeforeAdvice.before(AspectJMethodBeforeAdvice.java:44)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:51)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at kr.co.librarylyh.service.BookListServiceImpl$$EnhancerBySpringCGLIB$$1242f742.remove(<generated>)
+	at kr.co.librarylyh.service.BookListServiceTests.testRemoveBook(BookListServiceTests.java:79)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73)
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]></error>
+    <system-out><![CDATA[ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener(prepareTestInstance81) - Performing dependency injection for test context [[DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@4ac0ed65, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]]].
+ DEBUG org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate(loadContext130) - Retrieved ApplicationContext from cache with key [[MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
+ DEBUG org.springframework.test.context.cache(logStatistics290) - Spring test ApplicationContext cache statistics: [DefaultContextCache@a5e8260 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 14, missCount = 3]
+ DEBUG org.springframework.beans.factory.annotation.InjectionMetadata(inject89) - Processing injected element of bean 'kr.co.librarylyh.service.BookListServiceTests': AutowiredFieldElement for private kr.co.librarylyh.service.BookListService kr.co.librarylyh.service.BookListServiceTests.bookListService
+ DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory(doGetBean254) - Returning cached instance of singleton bean 'bookListServiceImpl'
+ DEBUG org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator(buildAdvisors531) - Creating implicit proxy for bean 'kr.co.librarylyh.service.BookListServiceTests' with 0 common interceptors and 5 specific interceptors
+ DEBUG org.springframework.aop.framework.CglibAopProxy(getProxy161) - Creating CGLIB proxy: target source is SingletonTargetSource for target object [kr.co.librarylyh.service.BookListServiceTests@4ac0ed65]
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - Before test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@4ac0ed65, testMethod = testRemoveBook@BookListServiceTests, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+ INFO  kr.co.librarylyh.service.BookListServiceTests(testRemoveBook78) - 책 삭제 테스트 시작
+ ERROR kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog143) - 예외 발생: [ClassCastException]
+위치 : [kr.co.librarylyh.service.BookListServiceImpl.remove].
+인자 값: [1234567890123
+].
+ 예외 메시지: [class java.lang.Long cannot be cast to class java.lang.String (java.lang.Long and java.lang.String are in module java.base of loader 'bootstrap')]
+
+ INFO  kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog144) - 해결방안 : 잘못된 타입 변환이 발생했습니다. 객체 타입을 올바르게 변환했는지 확인하세요.
+
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - After test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@4ac0ed65, testMethod = testRemoveBook@BookListServiceTests, testException = java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.String (java.lang.Long and java.lang.String are in module java.base of loader 'bootstrap'), mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+]]></system-out>
+  </testcase>
+  <testcase name="testModifyBook" classname="kr.co.librarylyh.service.BookListServiceTests" time="0.001">
+    <error message="class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader &apos;app&apos;; java.lang.String is in module java.base of loader &apos;bootstrap&apos;)" type="java.lang.ClassCastException"><![CDATA[java.lang.ClassCastException: class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap')
+	at kr.co.librarylyh.aop.DataValidationAspect.validateSecurity(DataValidationAspect.java:21)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:626)
+	at org.springframework.aop.aspectj.AspectJMethodBeforeAdvice.before(AspectJMethodBeforeAdvice.java:44)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:51)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:62)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:174)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at kr.co.librarylyh.service.BookListServiceImpl$$EnhancerBySpringCGLIB$$1242f742.modify(<generated>)
+	at kr.co.librarylyh.service.BookListServiceTests.testModifyBook(BookListServiceTests.java:69)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:73)
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:83)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+]]></error>
+    <system-out><![CDATA[ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource70) - Retrieved @ProfileValueSourceConfiguration [null] for test class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.annotation.ProfileValueUtils(retrieveProfileValueSource83) - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [kr.co.librarylyh.service.BookListServiceTests]
+ DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener(prepareTestInstance81) - Performing dependency injection for test context [[DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@729d6ee2, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]]].
+ DEBUG org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate(loadContext130) - Retrieved ApplicationContext from cache with key [[MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]
+ DEBUG org.springframework.test.context.cache(logStatistics290) - Spring test ApplicationContext cache statistics: [DefaultContextCache@a5e8260 size = 2, maxSize = 32, parentContextCount = 0, hitCount = 15, missCount = 3]
+ DEBUG org.springframework.beans.factory.annotation.InjectionMetadata(inject89) - Processing injected element of bean 'kr.co.librarylyh.service.BookListServiceTests': AutowiredFieldElement for private kr.co.librarylyh.service.BookListService kr.co.librarylyh.service.BookListServiceTests.bookListService
+ DEBUG org.springframework.beans.factory.support.DefaultListableBeanFactory(doGetBean254) - Returning cached instance of singleton bean 'bookListServiceImpl'
+ DEBUG org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator(buildAdvisors531) - Creating implicit proxy for bean 'kr.co.librarylyh.service.BookListServiceTests' with 0 common interceptors and 5 specific interceptors
+ DEBUG org.springframework.aop.framework.CglibAopProxy(getProxy161) - Creating CGLIB proxy: target source is SingletonTargetSource for target object [kr.co.librarylyh.service.BookListServiceTests@729d6ee2]
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - Before test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@729d6ee2, testMethod = testModifyBook@BookListServiceTests, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+ INFO  kr.co.librarylyh.service.BookListServiceTests(testModifyBook67) - 책 수정 테스트 시작
+ ERROR kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog143) - 예외 발생: [ClassCastException]
+위치 : [kr.co.librarylyh.service.BookListServiceImpl.modify].
+인자 값: [BookListVO(isbn13=1234567890123, book=수정된 책 제목, author=테스트 저자, publisher=테스트 출판사, photo=test_photo.jpg, rentalAvailable=Y, price=10000, bookCount=5, bookDescription=테스트 책의 설명, weight=100kg, bookSize=100M, pageCount=300, averageRating=4.5, star5Count=50%, star4Count=20%, star3Count=15%, star2Count=10%, star1Count=5%, reviewCount=185, categories=null, publicationDate=2000-02-02)
+].
+ 예외 메시지: [class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap')]
+
+ INFO  kr.co.librarylyh.aop.ExceptionHandlingAspect(sendFormattedLog144) - 해결방안 : 잘못된 타입 변환이 발생했습니다. 객체 타입을 올바르게 변환했는지 확인하세요.
+
+ DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener(beforeOrAfterTestMethod107) - After test method: context [DefaultTestContext@70421a08 testClass = BookListServiceTests, testInstance = kr.co.librarylyh.service.BookListServiceTests@729d6ee2, testMethod = testModifyBook@BookListServiceTests, testException = java.lang.ClassCastException: class kr.co.librarylyh.domain.BookListVO cannot be cast to class java.lang.String (kr.co.librarylyh.domain.BookListVO is in unnamed module of loader 'app'; java.lang.String is in module java.base of loader 'bootstrap'), mergedContextConfiguration = [MergedContextConfiguration@5dba3fdc testClass = BookListServiceTests, locations = '{file:src/main/webapp/WEB-INF/spring/root-context.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextCustomizers = set[[empty]], contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null], method annotated with @DirtiesContext [false] with mode [null].
+]]></system-out>
+  </testcase>
+</testsuite>

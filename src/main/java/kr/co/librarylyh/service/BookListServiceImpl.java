@@ -30,14 +30,14 @@ public class BookListServiceImpl implements BookListService {
 	@Transactional
 	@Override
 	public void add(BookListVO bookList) {
-		log.info("책 추가: " + bookList);
+		// log.info("책 추가: " + bookList);
 		updateAvailable(bookList);
 		mapper.insert(bookList);
 	}
 
 	@Override
 	public BookListVO get(long isbn13) {
-		log.info("책 조회: " + isbn13);
+		// log.info("책 조회: " + isbn13);
 		return mapper.read(isbn13);
 	}
 
@@ -49,20 +49,20 @@ public class BookListServiceImpl implements BookListService {
 
 	@Override
 	public boolean modify(BookListVO bookList) {
-		log.info("책 수정: " + bookList);
+		// log.info("책 수정: " + bookList);
 		updateAvailable(bookList);
 		return mapper.update(bookList) == 1;
 	}
 
 	@Override
 	public boolean remove(long isbn13) {
-		log.info("책 삭제: " + isbn13);
+		// log.info("책 삭제: " + isbn13);
 		return mapper.delete(isbn13) == 1;
 	}
 
 	@Override
 	public List<BookListVO> getListWithFiltersAndPaging(Paging pge, Map<String, Object> searchParams) {
-		log.info("필터 및 페이징 조건으로 책 리스트 조회: " + searchParams);
+		// log.info("필터 및 페이징 조건으로 책 리스트 조회: " + searchParams);
 
 		// 페이징 정보 추가
 		searchParams.put("pageNum", pge.getPageNum());
@@ -76,15 +76,15 @@ public class BookListServiceImpl implements BookListService {
 
 	@Override
 	public int getTotal(Map<String, Object> searchParams) {
-		log.info("총 책 수 조회: " + searchParams);
+		// log.info("총 책 수 조회: " + searchParams);
 		return mapper.getTotalCount(searchParams);
 	}
 
 	@Override
 	public List<BookListVO> searchTitles(String query) {
-		log.info("검색어: {}", query);
+		// log.info("검색어: {}", query);
 		List<BookListVO>result = mapper.searchTitles(query);
-		log.info("검색 결과: {}", result);
+		// log.info("검색 결과: {}", result);
 		return result;
 	}
 

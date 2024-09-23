@@ -1,14 +1,9 @@
 package kr.co.librarylyh.domain;
 
+import lombok.Data;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@ToString
+@Data
 public class Paging {
 
 	private int pageNum;

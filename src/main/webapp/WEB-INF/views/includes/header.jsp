@@ -30,7 +30,12 @@
 					<img src="/resources/images/book_log.png">
 					<span>Booklipse</span>
 				</div>
+				<div style="margin-left: 20%;">
+				<jsp:include page="../includes/developHelper.jsp"/>
+				</div>
 			</div>
+
+
 
 			<!-- Main Navigation -->
 			<nav class="main_nav_container">
@@ -98,3 +103,4 @@
 	</div>
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</div>

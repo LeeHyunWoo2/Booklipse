@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,54 +16,81 @@
   .home2 {
     width: 100%;
     height: 50vh;
-
   }
 
   /* 리스트형 스타일 */
   .list_wrap {
     min-height: 100vh;
+    text-align: center;
   }
 
-  .list_wrap .listcard {
-    background: rgb(255, 255, 255);
-    cursor: pointer;
+  .listcard {
     width: 975px;
-    height: 219px;
-    margin: 0 auto;
+    height: 30vh;
+    padding: 0.4em;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    cursor: pointer;
   }
-
+  .content-wrapper {
+    display: flex;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+  }
   .listcard:hover {
     background-color: #f3f3f3;
   }
 
-  .listcard .img-fluid {
-    max-height: 215px;
+  .listcard-image {
+    width: 215px; /* 이미지 너비 조정 */
+    height: 28vh; /* 이미지 높이 조정 */
+    border-radius: 3px;
   }
 
   .listcard-body {
-    padding: 10px; /* 카드 내부 패딩 조절 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 공간을 고르게 분배 */
+    height: 28vh; /* 전체 높이 고정 */
+    padding: 1.4vh;
+  }
+  .listcard-content {
+    display: flex;
+    flex-direction: column;
   }
 
   .booktitle {
-    margin-top: 35px;
-    font-size: 22px;
+    height: 8vh;
+    font-size: 22px; /* 제목 크기 */
     font-weight: bold;
-    color: #4f4f4f;
-    margin-bottom: 22px;
+    color: #3a3a3a;
+    margin-bottom: 10px; /* 제목과 나머지 정보 사이의 간격 */
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
   }
 
-  .listcard-sub-text {
-    font-size: 12px;
-    font-weight: 500;
+  .info-line {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .info-line span {
+    font-size: 15px; /* 정보 텍스트 크기 */
+    width: 48%;
+    margin-bottom: 10px;
     color: #626262;
-    margin-top: -12px;
   }
-
-
 
   /* 그리드형 스타일 */
   .grid_wrap {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 16px;
     justify-content: space-between; /* 항목들 사이의 간격을 균등하게 배치 */
@@ -119,10 +146,15 @@
   }
 
   .gridcard .gridcard__title {
+    height: 8vh;
     color: #000;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: solid 1px #000000;
+    padding-bottom: 85px;
+    margin-top: -10px;
   }
 
   .gridcard .gridcard__text {
@@ -131,7 +163,6 @@
     line-height: 1.5;
     margin-top: 5px;
   }
-
 
   .modal {
     display: none; /* 기본적으로 숨김 */
@@ -150,7 +181,7 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 70%; /* 모달 창 크기 */
+    width: 90%;
   }
 
   button {
@@ -210,10 +241,6 @@
     bottom: 5vh; /* 화면 아래쪽에서 위로 올라옴 */
   }
 
-
-
-
-  /* From Uiverse.io by vinodjangid07 */
   .top_button {
     width: 50px;
     height: 50px;
@@ -600,7 +627,7 @@
             </div>
         </nav>
         <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="bg-light p-5" style="min-height: 300px">
+            <div class="bg-light p-5" style="min-height: 100px">
                 <div class="btn-group" role="group">
                     <button id="dropdownMenuButton" type="button"
                             class="btn btn-secondary dropdown-toggle"
@@ -696,18 +723,10 @@
                                             <label><input type="radio" name="minRating" value="5"> 5</label>
                                         </div>
                                     </div>
-                                    <!-- 대여 가능 여부 -->
                                     <div class="form-group">
                                         <label for="rentalAvailable">대여 가능 여부</label>
                                         <input type="checkbox" id="rentalAvailable"
                                                name="rentalAvailable" value="Y">
-                                    </div>
-                                    <!-- 구매 가능 여부 -->
-                                    <div class="form-group">
-                                        <label for="purchaseAvailable">구매 가능 여부</label>
-                                        <input type="checkbox" id="purchaseAvailable"
-                                               name="purchaseAvailable"
-                                               value="Y">
                                     </div>
                                 </form>
                             </div>
@@ -737,28 +756,44 @@
         <div id="grid_wrap" class="grid_wrap">
         </div>
 
-
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-5 mb-5">
+        </ul>
+    </nav>
 
     <script type="text/javascript">
       $(document).ready(
           function () {
+            // 모달 열기 함수
+            function openModal(modalId) {
+              const modal = document.getElementById(modalId);
+              if (modal) {
+                modal.style.display = 'block';
+              }
+            }
 
-            document.addEventListener('DOMContentLoaded', function () {
-              // 공통적인 모달 열기 핸들러
-              document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
-                button.addEventListener('click', function () {
-                  const targetModalId = this.getAttribute('data-target');
-                  document.querySelector(targetModalId).style.display = 'block'; // 모달 표시
-                });
+            // 모달 닫기 함수
+            function closeModal(modalId) {
+              const modal = document.getElementById(modalId);
+              if (modal) {
+                modal.style.display = 'none';
+              }
+            }
+
+            // 모달 열기 이벤트 설정
+            document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
+              const targetModalId = button.getAttribute('data-target');
+              button.addEventListener('click', function () {
+                openModal(targetModalId); // 모달 열기
               });
+            });
 
-              // 공통적인 모달 닫기 핸들러
-              document.querySelectorAll('.modal .close').forEach(function (closeButton) {
-                closeButton.addEventListener('click', function () {
-                  this.closest('.modal').style.display = 'none'; // 모달 숨기기
-                });
+            // 모달 닫기 이벤트 설정
+            document.querySelectorAll('.modal .close').forEach(function (closeButton) {
+              const modalId = closeButton.closest('.modal').id;
+              closeButton.addEventListener('click', function () {
+                closeModal(modalId); // 모달 닫기
               });
-
             });
 
             // 고급 검색 실행
@@ -783,6 +818,7 @@
 
       let isPageMode = false;
       let maxPage = 1;
+
 
       function toggleFunction() {
         $('#toggleButton').tooltip('hide');

@@ -18,13 +18,13 @@ public class CategoryServiceImpl implements CategoryService {
 
   @Override
   public List<CategoryVO> getCategoryPath(String category) {
-    log.info("카테 getCategoryPath" + category);
+    // log.info("카테 getCategoryPath" + category);
     return categoryMapper.getCategoryPath(category);
   }
 
   @Override
   public List<CategoryVO> getAllCategories() {
-    log.info("카테 getAllCategories" + categoryMapper.getAllCategories());
+    // log.info("카테 getAllCategories" + categoryMapper.getAllCategories());
     return categoryMapper.getAllCategories();
   }
 

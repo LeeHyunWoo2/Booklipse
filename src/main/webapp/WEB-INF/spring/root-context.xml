@@ -47,8 +47,6 @@
 		<mybatis-spring:scan base-package="kr.co.librarylyh.mapper"/>
 	<!-- mybatis에서 자동으로 처리할 패키지 명시  -->
 
-	<context:component-scan base-package="kr.co.librarylyh"/>
-
-
+	<context:component-scan base-package="kr.co.librarylyh.aop, kr.co.librarylyh.domain, kr.co.librarylyh.service, kr.co.librarylyh.mapper"/>
 
 </beans>

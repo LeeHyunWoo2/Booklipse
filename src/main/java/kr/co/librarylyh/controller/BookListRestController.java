@@ -3,7 +3,7 @@ package kr.co.librarylyh.controller;
 import java.util.stream.Collectors;
 import kr.co.librarylyh.domain.BookListVO;
 import kr.co.librarylyh.domain.CategoryVO;
-import kr.co.librarylyh.domain.PageDTO;
+import kr.co.librarylyh.domain.ListPageDTO;
 import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class BookListRestController {
 
   // 책 목록 조회 (페이징 및 필터 적용)
   @GetMapping(value = "/booklist", produces = { MediaType.APPLICATION_JSON_VALUE })
-  public ResponseEntity<PageDTO> getBookList(
+  public ResponseEntity<ListPageDTO> getBookList(
       @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
       @RequestParam(value = "amount", defaultValue = "10") int amount,
       @RequestParam(value = "categoryId", required = false) String categoryId,
@@ -53,9 +53,9 @@ public class BookListRestController {
     int total = service.getTotal(searchParams);
 
     // 페이지 정보 객체 생성
-    PageDTO pageDTO = new PageDTO(pge, total, list);
+    ListPageDTO listPageDTO = new ListPageDTO(pge, total, list);
 
-    return new ResponseEntity<>(pageDTO, HttpStatus.OK);
+    return new ResponseEntity<>(listPageDTO, HttpStatus.OK);
   }
 
   @GetMapping(value = "/searchTitles", produces = { MediaType.APPLICATION_JSON_VALUE })

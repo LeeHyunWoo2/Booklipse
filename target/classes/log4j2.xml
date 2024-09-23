@@ -16,7 +16,7 @@
 		<Logger name="kr.co.librarylyh" level="INFO" additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>
-		<Logger name="org.springframework" level="DEBUG"
+		<Logger name="org.springframework" level="INFO"
 			additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>

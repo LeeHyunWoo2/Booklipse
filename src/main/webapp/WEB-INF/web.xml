@@ -22,6 +22,7 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
 		<multipart-config>
 			<location>D:\\upload\\tmp</location> <!--  업로드되는 파일을 저장할 공간 -->
 			<max-file-size>20971520</max-file-size>	<!--  1MB * 20 -> 업로드되는 파일 최대크기 -->
@@ -29,7 +30,6 @@
 			<file-size-threshold>20971520</file-size-threshold> <!--  20MB -> 특정 사이즈 메모리  -->
 		</multipart-config>
 		<!--  <multipart-config> 설정은 특정 사이즈 메모리, 업로드되는 파일을 저장할 공간, 업로드되는 파일 최대크기, 한번에 올릴수 있는 최대 크기 지정할 수 있다. -->
-	
 	</servlet>
 		
 	<servlet-mapping>
@@ -40,6 +40,7 @@
 	<filter>	<!--  Post방식의 한글 깨짐 처리용 -->
 		<filter-name>encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -50,5 +51,38 @@
 		<filter-name>encoding</filter-name>
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
-	
+
+	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+
+	<!-- 500번대 오류 처리 -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+
+	<!-- 예외를 처리하는 오류 페이지 -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/views/error-page.jsp</location>
+	</error-page>
+
 </web-app>

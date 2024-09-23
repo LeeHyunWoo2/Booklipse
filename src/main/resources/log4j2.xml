@@ -10,13 +10,13 @@
 
 	<!-- Logger 설정 -->
 	<Loggers>
-		<Root level="INFO">
+		<Root level="WARN">
 			<AppenderRef ref="console" />
 		</Root>
 		<Logger name="kr.co.librarylyh" level="INFO" additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>
-		<Logger name="org.springframework" level="DEBUG"
+		<Logger name="org.springframework" level="INFO"
 			additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>

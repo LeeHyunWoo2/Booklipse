@@ -14,9 +14,10 @@ create table book_tbl
     photo            varchar2(250) NOT NULL,
     publicationDate date,
     reviewCount     number(6),
-    averageRating   number(2, 1),
+    averageRating   number(3, 1),
     bookCount          number(10)
 );
+
 
 create table book_detail_tbl
 (

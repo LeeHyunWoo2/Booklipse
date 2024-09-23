@@ -4,9 +4,20 @@ let currentAmount = 10; // 현재 출력 개수를 저장할 전역 변수, 초�
 let currentSearchQuery = '';
 
 $(document).ready(function() {
-  loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
+  const params = new URLSearchParams(window.location.search);
+  currentCategoryId = params.get('category'); // URL에서 카테고리 추출
+
   document.getElementById('itemsPerPageButton').textContent = currentAmount + '개씩 보기';
   updateDropdownText();
+
+  // URL에 카테고리가 써있냐 아니냐에 따라 로드를 다르게함 (브레드크럼으로 이동하는 상황 때문에 추가함
+  // 중복된 로직처럼 보이지만, 비동기방식과 동기방식 두가지를 모두 가능하게 하려면 당장은 이 방법뿐이라고 생각함
+  if (currentCategoryId) {
+    loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
+  } else {
+    // 카테고리 필터가 없는 경우 기본 목록 불러오기
+    loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, '', currentAmount);
+  }
 });
 
 document.getElementById('itemsPerPageMenu').addEventListener('click', changeItemsPerPageButton);
@@ -162,26 +173,58 @@ function renderBookList(bookList) {
   console.log('bookList:', bookList);
   bookList.forEach(function (book, index) {
     const formattedDate = formatDate(book.publicationDate);
- const bookItem = `
-            <div class="listcard border border-dark mb-3" data-isbn="${book.isbn13}">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <span class="img position-absolute border border-dark">
-                            <img src="${book.photo}" class="img-fluid rounded-start" alt="${book.book}">
-                        </span>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="listcard-body">
-                            <p class="booktitle">(${index + 1}) ${book.book}</p>
-                            <p class="listcard-sub-text">${book.author}</p>
-                            <p class="listcard-sub-text">${book.publisher}</p>
-                            <p class="listcard-sub-text">${formattedDate}</p>
-                        </div>
-                    </div>
-                </div>
+    const rentalStatus = book.rentalAvailable === 'Y' ? '가능' : '불가능'; // Y 또는 N에 따라 텍스트 설정
+    const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red'; // 색상 설정
+    const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);'; // 대여 가능 여부에 따른 흑백 처리
+
+    const bookItem = `
+       <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
+        <div class="row g-0">
+          <div class="col-md-4">
+              <img src="${book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
+          </div>
+          <div class="col-md-8">
+            <div class="listcard-body">
+              <p class="booktitle">(${index + 1}) ${book.book}</p>
+              <div class="info-line">
+                <span class="author">${book.author}</span>
+                <span class="publisher">${book.publisher}</span>
+                <span class="publicationDate">발행일 : ${formattedDate}</span>
+                <span class="rentalAvailable">대여 가능 여부: <span style="color: ${rentalColor};">${rentalStatus}</span></span>
+              </div>
+              <div class="info-line">
+                <span class="price">정가 : ${book.price}</span>
+                <span class="bookCount">재고 수 : ${book.bookCount}</span>
+                <span class="reviewCount">리뷰 수 : ${book.reviewCount}</span>
+                <span class="averageRating">평점 : ${book.averageRating}</span>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
         `;
     listBox.append(bookItem);
+  });
+  $('.listcard').each(function() { // 리스트 생성 후 대여 못하는거 판별
+    const rentalAvailable = $(this).data('able');
+
+    if (rentalAvailable === 'N') {
+      // listcard에 마우스를 올리면 listcard-image의 필터 제거
+      $(this).on('mouseenter', function() {
+        $(this).find('.listcard-image').css('filter', 'none');
+      });
+      // listcard에서 마우스를 떼면 다시 흑백 처리
+      $(this).on('mouseleave', function() {
+        $(this).find('.listcard-image').css('filter', 'grayscale(100%)');
+      });
+
+  /*  $(this).find('.listcard-image').on('mouseenter', function() {
+        $(this).css('filter', 'none');
+      });
+      $(this).find('.listcard-image').on('mouseleave', function() {
+        $(this).css('filter', 'grayscale(100%)');
+      });*/
+    }
   });
 
   $('.listcard').on('click', function () {
@@ -206,7 +249,7 @@ function renderBookGrid(bookList) {
                         <p class="gridcard__title">(${index + 1}) ${book.book}</p>
                         <p class="gridcard__text">${book.author}</p>
                         <p class="gridcard__text">${book.publisher}</p>
-                        <p class="gridcard__text">${formattedDate}</p>
+                        <p class="gridcard__text">발행일 : ${formattedDate}</p>
                     </div>
                 </div>
             </div>
@@ -305,7 +348,9 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
   }
 
 }
-function changeCategoryAndLoadPage(newCategoryId) {
-  currentCategoryId = newCategoryId;
+
+window.onload = function (){
+  const params = new URLSearchParams(window.location.search);
+  currentCategoryId = params.get('category');
   loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
 }
