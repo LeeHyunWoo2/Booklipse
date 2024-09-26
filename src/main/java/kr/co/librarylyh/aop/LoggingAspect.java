@@ -50,7 +50,7 @@ public class LoggingAspect {
   // 메서드가 정상 종료된 후에 로그 기록
   @AfterReturning(pointcut = "execution(* kr.co.librarylyh.service.*.*(..)) || execution(* kr.co.librarylyh.controller.*.*(..)) || execution(* kr.co.librarylyh.mapper.*.*(..))", returning = "result")
   public void logAfterReturning(JoinPoint joinPoint, Object result) {
-    String message = "메서드 정상 종료: " + joinPoint.getSignature().getName() + "\n"
+    String message = "메서드 종료: " + joinPoint.getSignature().getName() + "\n"
         + "결과 값: " + result;
     processLog(message);
     log.info(message);

@@ -77,13 +77,36 @@
   </select>
 
   <!-- 책 추가 -->
-  <insert id="insert">
-    <![CDATA[ INSERT INTO book_tbl (isbn13, book, bookDescription, author, publisher, photo, weight, bookSize,
-    rentalAvailable, price, pageCount, bookCount, averageRating, star1Count, star2Count, star3Count, star4Count, star5Count, reviewCount, publicationDate)
-    VALUES (#{isbn13}, #{book}, #{bookDescription, jdbcType=CLOB}, #{author}, #{publisher}, #{photo}, #{weight}, #{bookSize}, #{rentalAvailable},
-     #{price}, #{pageCount}, #{bookCount}, #{averageRating}, #{star1Count}, #{star2Count}, #{star3Count}, #{star4Count}, #{star5Count}, #{reviewCount}, #{publicationDate}) ]]>
-    <!-- 새로운 책을 book_tbl 테이블에 추가 -->
+  <insert id="insertBook">
+    <![CDATA[
+    INSERT INTO book_tbl
+    (isbn13, book, author, publisher, price, rentalAvailable, photo, publicationDate, reviewCount, averageRating, bookCount)
+    VALUES (#{isbn13, jdbcType=NUMERIC}, #{book}, #{author}, #{publisher}, #{price, jdbcType=NUMERIC}, #{rentalAvailable}, #{photo}, #{publicationDate}, #{reviewCount, jdbcType=NUMERIC}, #{averageRating, jdbcType=NUMERIC}, #{bookCount, jdbcType=NUMERIC})
+  ]]>
   </insert>
+  <!-- 책 상세 정보 추가 -->
+  <insert id="insertBookDetail">
+    <![CDATA[
+    INSERT INTO book_detail_tbl
+    (isbn13, bookDescription, pageCount, weight, bookSize, star1Count, star2Count, star3Count, star4Count, star5Count)
+    VALUES (#{isbn13, jdbcType=NUMERIC}, #{bookDescription, jdbcType=CLOB}, #{pageCount, jdbcType=NUMERIC}, #{weight, jdbcType=VARCHAR}, #{bookSize, jdbcType=VARCHAR}, #{star1Count, jdbcType=CHAR}, #{star2Count, jdbcType=CHAR}, #{star3Count, jdbcType=CHAR}, #{star4Count, jdbcType=CHAR}, #{star5Count, jdbcType=CHAR})
+  ]]>
+  </insert>
+  <!-- 책과 카테고리를 book_category_tbl에 여러 개 저장 -->
+  <insert id="insertBookCategories">
+    <![CDATA[
+    INSERT INTO book_category_tbl (isbn13, categoryId)
+    VALUES
+  ]]>
+    <foreach collection="categoryIds" item="categoryId" separator=",">
+      <![CDATA[
+      (#{isbn13, jdbcType=NUMERIC}, #{categoryId})
+    ]]>
+    </foreach>
+  </insert>
+
+
+
 
   <!-- 책 조회 (카테고리 정보는 따로) -->
   <select id="read" parameterType="long" resultType="kr.co.librarylyh.domain.BookListVO">
@@ -99,9 +122,9 @@
 
   <!-- 책 수정 -->
   <update id="update">
-    <![CDATA[ UPDATE book_tbl SET book = #{book}, bookDescription = #{bookDescription, jdbcType=CLOB}, price = #{price}, bookCount = #{bookCount},
-    averageRating = #{averageRating}, rentalAvailable = #{rentalAvailable}, pageCount = #{pageCount}, weight = #{weight}, bookSize = #{bookSize},
-    star1Count = #{star1Count}, star2Count = #{star2Count}, star3Count = #{star3Count}, star4Count = #{star4Count}, star5Count = #{star5Count}, reviewCount = #{reviewCount} WHERE isbn13 = #{isbn13} ]]>
+    <![CDATA[ UPDATE book_tbl SET book = #{book}, bookDescription = #{bookDescription, jdbcType=CLOB}, price = #{price, jdbcType=NUMERIC}, bookCount = #{bookCount, jdbcType=NUMERIC},
+    averageRating = #{averageRating, jdbcType=NUMERIC}, rentalAvailable = #{rentalAvailable}, pageCount = #{pageCount, jdbcType=NUMERIC}, weight = #{weight, jdbcType=VARCHAR}, bookSize = #{bookSize, jdbcType=VARCHAR},
+    star1Count = #{star1Count, jdbcType=CHAR}, star2Count = #{star2Count, jdbcType=CHAR}, star3Count = #{star3Count, jdbcType=CHAR}, star4Count = #{star4Count, jdbcType=CHAR}, star5Count = #{star5Count, jdbcType=CHAR}, reviewCount = #{reviewCount, jdbcType=NUMERIC} WHERE isbn13 = #{isbn13, jdbcType=NUMERIC} ]]>
     <!-- 책 정보를 수정 -->
   </update>
 
@@ -111,10 +134,17 @@
     <!-- 책을 삭제 -->
   </delete>
 
-  <!-- 자동검색 기능용 제목검색 쿼리 -->
+  <!-- 자동검색 기능용 제목검색 -->
   <select id="searchTitles" parameterType="string" resultType="kr.co.librarylyh.domain.BookListVO">
     <![CDATA[ SELECT book, author FROM book_tbl WHERE LOWER(book) LIKE '%' || LOWER(#{query}) || '%' AND ROWNUM <= 5 ORDER BY book ASC ]]>
     <!-- 책 제목을 검색하고, 최대 5개의 결과를 출력 -->
+  </select>
+
+  <!-- ISBN 중복 확인 -->
+  <select id="checkIsbnExists" resultType="int">
+    SELECT COUNT(*)
+    FROM book_tbl
+    WHERE isbn13 = #{isbn13, jdbcType=NUMERIC}
   </select>
 
 </mapper>

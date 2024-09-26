@@ -1,6 +1,9 @@
 package kr.co.librarylyh.mapper;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import kr.co.librarylyh.domain.BookListVO;
+import kr.co.librarylyh.domain.CategoryVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +24,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 public class BookListMapperTests {
 
-  @Autowired
+
   private BookListMapper mapper;
 
   private BookListVO testBook;
@@ -49,12 +52,24 @@ public class BookListMapperTests {
     testBook.setStar1Count("5%");
     testBook.setReviewCount(185);
     testBook.setPublicationDate(LocalDate.parse("2000-02-02"));
+    List<CategoryVO> categoryList = Arrays.asList(
+        new CategoryVO("1001"),
+        new CategoryVO("1002"),
+        new CategoryVO("1003")
+    );
+    testBook.setCategories(categoryList);
   }
+  // CategoryVO 리스트에서 categoryId만 추출하여 String 리스트로 변환
+  List<String> categoryIds = testBook.getCategories().stream()
+      .map(CategoryVO::getCategoryId)
+      .collect(Collectors.toList());
 
   @Test
   public void testInsert() {
     log.info("매퍼 책 추가 테스트 시작");
-    mapper.insert(testBook);
+    mapper.insertBook(testBook);
+    mapper.insertBookDetail(testBook);
+    mapper.insertBookCategories(testBook.getIsbn13(), categoryIds);
     BookListVO result = mapper.read(testBook.getIsbn13());
     assertNotNull(result);
     log.info("매퍼 책 추가 테스트 종료");

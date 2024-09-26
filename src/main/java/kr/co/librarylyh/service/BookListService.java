@@ -13,6 +13,7 @@ public interface BookListService {
 
 	public BookListVO get(long isbn13);
 
+
 	public List<CategoryVO> getCategoriesByISBN(long isbn13);
 
 	public boolean modify(BookListVO bookList);

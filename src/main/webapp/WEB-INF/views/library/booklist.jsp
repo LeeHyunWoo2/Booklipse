@@ -33,6 +33,7 @@
     display: inline-block;
     cursor: pointer;
   }
+
   .content-wrapper {
     display: flex;
     padding: 20px;
@@ -41,13 +42,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     align-items: flex-start;
   }
+
   .listcard:hover {
     background-color: #f3f3f3;
   }
 
   .listcard-image {
-    width: 215px; /* 이미지 너비 조정 */
-    height: 28vh; /* 이미지 높이 조정 */
+    height: 28vh;
     border-radius: 3px;
   }
 
@@ -58,6 +59,7 @@
     height: 28vh; /* 전체 높이 고정 */
     padding: 1.4vh;
   }
+
   .listcard-content {
     display: flex;
     flex-direction: column;
@@ -182,6 +184,11 @@
     padding: 20px;
     border: 1px solid #888;
     width: 90%;
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 1rem;
+    font-weight: 500; /* 일반 글씨 */
+    font-style: normal;
   }
 
   button {
@@ -523,7 +530,7 @@
     box-shadow: 0px 0px var(--main2-color);
   }
 
-  .dropdown-item2{
+  .dropdown-item2 {
     display: block;
     width: 100%;
     padding: .25rem 1.5rem;
@@ -534,6 +541,49 @@
     white-space: nowrap;
     background: 0 0;
     border: 0;
+  }
+
+  .PB-range-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background: #D5DBE1;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+  .PB-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #000000;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+
+  .PB-range-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.16);
+    transition: 0.3s ease-in-out;
+  }
+
+  .PB-range-slider-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid #C6CACE;
+    box-shadow: 0px 1px 2px 0px #1F1E241F;
+  }
+
+  .PB-range-slidervalue {
+    font-weight: 600;
   }
 
 
@@ -624,6 +674,7 @@
                 <button id="sortButton" class="btn btn-info" onclick="toggleSortOrder()"
                         style="min-width: 90px; margin-bottom: 5%;">최신순
                 </button>
+
             </div>
         </nav>
         <div class="collapse navbar-collapse" id="navbarToggle">
@@ -656,16 +707,18 @@
                         <li class="dropdown-item2" style="cursor: pointer;"
                             data-value="50"></li>
                     </ul>
+                    <button type="button" class="btn btn-outline-success ml-1" onclick="window.location.href='/library/manage?mode=add'">도서 추가</button>
                 </div>
 
                 <!-- 모달 창 -->
-                <div class="modal fade" id="modal1" tabindex="-1" role="dialog"
+                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" style="color: black"
                      aria-labelledby="advancedSearchLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="advancedSearchLabel">고급 검색은 추후 업데이트 됩니다.</h5>
+                                <h5 class="modal-title" id="advancedSearchLabel">고급 검색은 추후 업데이트
+                                    됩니다.</h5>
                                 <button type="button" class="close" data-dismiss="modal"
                                         aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -715,12 +768,12 @@
                                     <!-- 최소 평점 (라디오 버튼) -->
                                     <div class="form-group">
                                         <label>최소 평균 리뷰점수</label><br>
-                                        <div>
-                                            <label><input type="radio" name="minRating" value="1"> 1</label>
-                                            <label><input type="radio" name="minRating" value="2"> 2</label>
-                                            <label><input type="radio" name="minRating" value="3"> 3</label>
-                                            <label><input type="radio" name="minRating" value="4"> 4</label>
-                                            <label><input type="radio" name="minRating" value="5"> 5</label>
+                                        <div class="PB-range-slider-div">
+                                            <label for="ratingRange"></label>
+                                            <input type="range" min="0" max="10" step="0.1"
+                                                   value="5" class="PB-range-slider"
+                                                   id="ratingRange">
+                                            <p class="PB-range-slidervalue" id="ratingValue">5.0</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -751,10 +804,10 @@
     </nav>
 
 
-        <div id="list_wrap" class="list_wrap">
-        </div>
-        <div id="grid_wrap" class="grid_wrap">
-        </div>
+    <div id="list_wrap" class="list_wrap">
+    </div>
+    <div id="grid_wrap" class="grid_wrap">
+    </div>
 
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center mt-5 mb-5">
@@ -796,112 +849,106 @@
               });
             });
 
-            // 고급 검색 실행
             $("#executeAdvancedSearch").on("click", function () {
-              var formData = $("#advancedSearchForm").serialize(); // 폼 데이터 직렬화
-
-              $.ajax({
-                url: '/ajax/booklist', // 서버의 고급 검색 엔드포인트
-                type: 'GET',
-                data: formData,
-                success: function (data) {
-                  renderBookList(data.list); // 검색 결과를 화면에 표시
-                  renderPaging(data); // 페이지네이션 렌더링
-                  $("#advancedSearchModal").modal('hide'); // 검색 후 모달 창 닫기
-                },
-                error: function (xhr, status, error) {
-                  alert('검색 결과를 가져올 수 없습니다: ' + error);
-                }
-              });
+              // 고급 검색 조건 수집
+              var advancedParams = {
+                searchType: $('#searchType').val() || null,  // 검색 기준
+                searchQuery: $('#keyword').val(),
+                publicationDateRange: $('#publicationDateRange').val() || null,  // 출판일 범위
+                minRating: $('#ratingRange').val() || null,  // 최소 평점
+                maxPrice: $('#maxPrice').val() || null  // 최대 가격
+              };
+              // loadPage 호출
+              loadPage(1, advancedParams);
+              $("#advancedSearchModal").modal('hide');  // 모달 닫기
             });
           });
 
-      let isPageMode = false;
-      let maxPage = 1;
+            let isPageMode = false;
+            let maxPage = 1;
 
+            function toggleFunction() {
+              $('#toggleButton').tooltip('hide');
 
-      function toggleFunction() {
-        $('#toggleButton').tooltip('hide');
+              // 토글 상태 변경
+              isPageMode = !isPageMode;
 
-        // 토글 상태 변경
-        isPageMode = !isPageMode;
+              // 토글 상태에 따라 placeholder 변경
+              const searchInput = document.getElementById('searchInput');
+              const toggleButton = document.getElementById('toggleButton');
+              const toggleButton2 = document.getElementById('toggleButton2');
+              searchInput.value = '';
+              searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '제목 간편검색';
+              toggleButton.setAttribute('title', isPageMode ? '검색모드로 전환합니다.' : '페이지 이동 모드로 전환합니다.');
+              toggleButton2.setAttribute('title', !isPageMode ? '검색을 시작합니다.' : '페이지를 이동합니다.');
+              toggleButton2.textContent = (!isPageMode ? '검색' : '이동');
+              $(toggleButton).tooltip('dispose').tooltip();
+              $(toggleButton2).tooltip('dispose').tooltip();
 
-        // 토글 상태에 따라 placeholder 변경
-        const searchInput = document.getElementById('searchInput');
-        const toggleButton = document.getElementById('toggleButton');
-        const toggleButton2 = document.getElementById('toggleButton2');
-        searchInput.value = '';
-        searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '제목 간편검색';
-        toggleButton.setAttribute('title', isPageMode ? '검색모드로 전환합니다.' : '페이지 이동 모드로 전환합니다.');
-        toggleButton2.setAttribute('title', !isPageMode ? '검색을 시작합니다.' : '페이지를 이동합니다.');
-        toggleButton2.textContent = (!isPageMode ? '검색' : '이동');
-        $(toggleButton).tooltip('dispose').tooltip();
-        $(toggleButton2).tooltip('dispose').tooltip();
+              // 디자인 클래스 적용
+              if (isPageMode) {
+                searchInput.classList.remove('search-mode');
+                searchInput.classList.add('page-mode');
+                toggleButton.classList.remove('toggle-search');
+                toggleButton.classList.add('toggle-page');
+                toggleButton2.classList.remove('toggle-search2');
+                toggleButton2.classList.add('toggle-page');
+              } else {
+                searchInput.classList.remove('page-mode');
+                searchInput.classList.add('search-mode');
+                toggleButton.classList.remove('toggle-page');
+                toggleButton.classList.add('toggle-search');
+                toggleButton2.classList.remove('toggle-page');
+                toggleButton2.classList.add('toggle-search2');
+              }
+            }
 
-        // 디자인 클래스 적용
-        if (isPageMode) {
-          searchInput.classList.remove('search-mode');
-          searchInput.classList.add('page-mode');
-          toggleButton.classList.remove('toggle-search');
-          toggleButton.classList.add('toggle-page');
-          toggleButton2.classList.remove('toggle-search2');
-          toggleButton2.classList.add('toggle-page');
-        } else {
-          searchInput.classList.remove('page-mode');
-          searchInput.classList.add('search-mode');
-          toggleButton.classList.remove('toggle-page');
-          toggleButton.classList.add('toggle-search');
-          toggleButton2.classList.remove('toggle-page');
-          toggleButton2.classList.add('toggle-search2');
-        }
-      }
+            function handleFormSubmit(event) {
+              event.preventDefault();
 
-      function handleFormSubmit(event) {
-        event.preventDefault();
+              const searchInput = $('#searchInput');
+              const query = searchInput.val().trim();
 
-        const searchInput = $('#searchInput');
-        const query = searchInput.val().trim();
+              // 숫자만 입력되었는지 정규식으로 검증
+              const isNumeric = /^\d+$/.test(query);
+              const pageNumber = parseInt(query, 10);
 
-        // 숫자만 입력되었는지 정규식으로 검증
-        const isNumeric = /^\d+$/.test(query);
-        const pageNumber = parseInt(query, 10);
+              if (isPageMode) {
+                if (isNumeric && pageNumber >= 1 && pageNumber <= maxPage) {
+                  loadPage(pageNumber); // AJAX로 페이지 로드
+                } else {
+                  showTooltip(searchInput, `1부터 ${maxPage} 사이의 유효한 숫자를 입력하세요.`);
+                }
+              } else {
+                loadPage(1, undefined, query);
+              }
+            }
 
-        if (isPageMode) {
-          if (isNumeric && pageNumber >= 1 && pageNumber <= maxPage) {
-            loadPage(pageNumber); // AJAX로 페이지 로드
-          } else {
-            showTooltip(searchInput, `1부터 ${maxPage} 사이의 유효한 숫자를 입력하세요.`);
-          }
-        } else {
-          const searchQuery = query;
-          loadPage(1, undefined, searchQuery);
-        }
-      }
+            function showTooltip(element, message) {
+              element.tooltip('dispose')
+              .attr('title', message)
+              .tooltip({trigger: 'manual'})
+              .tooltip('show');
 
-      function showTooltip(element, message) {
-        element.tooltip('dispose')
-        .attr('title', message)
-        .tooltip({trigger: 'manual'})
-        .tooltip('show');
+              setTimeout(() => {
+                element.tooltip('hide');
+              }, 3000);
+            }
 
-        setTimeout(() => {
-          element.tooltip('hide');
-        }, 3000);
-      }
+            function titleSearchHandler(event) {
+              event.preventDefault(); // 폼 기본 제출 방지
+              const searchQuery = document.getElementById('searchInput').value.trim();
+              loadPage(1, undefined, searchQuery);
+            }
 
-      function titleSearchHandler(event) {
-        event.preventDefault(); // 폼 기본 제출 방지
-        const searchQuery = document.getElementById('searchInput').value.trim();
-        loadPage(1, undefined, searchQuery);
-      }
-
-      function changeButtonText(element) {
-        document.getElementById('dropdownMenuButton').textContent = element.textContent;
-      }
+            function changeButtonText(element) {
+              document.getElementById('dropdownMenuButton').textContent = element.textContent;
+            }
 
       $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip()
       });
+
     </script>
     <script>
       const module = {
@@ -1042,8 +1089,9 @@
       function executeSearch() {
         const query = $('#searchInput').val().trim();
         if (query.length > 0) {
-          console.log("Searching for:", query);  // 실제 검색 실행
-          // 실제 검색 실행 로직을 추가
+          console.log("Searching for:", query);
+          ajaxSearchParams.searchQuery = query;
+          loadPage(1);
         }
       }
 

@@ -74,20 +74,21 @@
 .rating-container{
   position: relative;
   padding: 31px;
-  text-align: center;
   border: solid 1px #ebebeb;
   background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
 }
 .rating-box{
-  margin: 0 3px;
   width: 318px;
   border: solid 1px #ebebeb;
   background-color: #fff;
+  margin-right: 10%;
 }
 
 </style>
 <head>
-    <title>책 상세정보</title>
+    <title>도서 상세정보</title>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/resources/styles/courses_styles.css">
@@ -110,22 +111,20 @@
 </div>
 
 <!-- Product section-->
-<section class="bookinfo py-5">
+<section class="bookinfo">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${bookDetail.photo}" alt="..." /></div>
             <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
+                <div class="small mb-1"><c:out value="${bookDetail.publisher}"/></div>
                 <h1 class="display-5 fw-bolder">${bookDetail.book}</h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">$45.00</span>
-                    <span>$40.00</span>
+                <div class="fs-5 mb-5 mt-3">
+                    <span class="text-decoration-line-through"><c:out value="${bookDetail.author}"/></span>
                 </div>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                <p id="container"> <c:out value="${bookDetail.bookDescription}"/></p>
                 <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
+                    <button id="btn" class="btn btn-outline-dark flex-shrink-0" type="button">
+                        더보기
                     </button>
                 </div>
             </div>
@@ -133,37 +132,17 @@
     </div>
 </section>
 <section class="bookinfo py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="row">
-                <div class="row">
+    <div class="container px-4 px-lg-5 my-5"style="display: flex; justify-content: center">
+        <div class="row gx-4 gx-lg-5 align-items-center" >
                     <div class="col-md-12">
                         <dl>
-                            <dt>
-                                작가
-                            </dt>
-                            <dd>
-                                <c:out value="${bookDetail.author}"/>
-                            </dd>
-                            <dt>
-                                출판사
-                            </dt>
-                            <dd>
-                                <c:out value="${bookDetail.publisher}"/>
-                            </dd>
                             <dt>
                                 출판일
                             </dt>
                             <dd>
                                 <c:out value="${bookDetail.publicationDate}"/>
                             </dd>
-                            <dt>
-                                책 소개
-                            </dt>
                         </dl>
-                        <p>
-                            <c:out value="${bookDetail.bookDescription}"/>
-                        </p>
                         <dl>
                             <dd>
                                 <span class="bold">페이지 수 : </span><c:out value="${bookDetail.pageCount}"/><br>
@@ -175,28 +154,23 @@
                             </dt>
                         </dl>
                     </div>
-                </div>
                 <div class="row">
                     <div class="col-md-4">
-
-                        <button type="button" class="btn btn-warning">
-                            Button
+                        <button type="button" class="btn btn-warning" id="reservation" data-isbn="${bookDetail.isbn13}" onclick="window.location.href='/library/reservation/RsCreate'">
+                            예약하기
                         </button>
                     </div>
                     <div class="col-md-4">
-
                         <button type="button" class="btn btn-info">
-                            Button
+                            구매신청
                         </button>
                     </div>
                     <div class="col-md-4">
-
                         <button type="button" class="btn btn-primary" onclick='backtolist()'>
                             뒤로가기
                         </button>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="rating-container">
@@ -273,12 +247,8 @@
         </ol>
     </nav>
     </div>
-
 </div>
-
 </body>
-
-
 <script>
 
   // 뒤로 가기 버튼 함수
@@ -355,10 +325,20 @@
       $("#available").html('<span id="available" style="color: red">불가능</span>');
     }
   });
+</script>
+<script>
+  var container = document.getElementById("container")
+  var btn = document.getElementById("btn")
+  var full = container.textContent
+  var less = (container.textContent = full.substring(0,300) + "...")
+  var isfull = '더보기';
 
 
+  btn.addEventListener('click',function(){
+    isfull === '더보기' ? (container.textContent = full) : (container.textContent = less);
+    isfull = document.getElementById("btn").innerHTML = (isfull === '더보기') ? '숨기기' : '더보기';
+  })
 </script>
 <jsp:include page="../includes/footer.jsp"/>
-<script src="/resources/js/booklist_ajax.js"></script>
 <script src="/resources/js/category_ajax.js"></script>
 </html>

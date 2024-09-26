@@ -1,5 +1,10 @@
 package kr.co.librarylyh.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import kr.co.librarylyh.domain.BookListVO;
 import kr.co.librarylyh.domain.CategoryVO;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Log4j2
@@ -26,7 +32,7 @@ public class BookListRestController {
   private final BookListService service;
 
   // 책 목록 조회 (페이징 및 필터 적용)
-  @GetMapping(value = "/booklist", produces = { MediaType.APPLICATION_JSON_VALUE })
+  @GetMapping(value = "/booklist", produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<ListPageDTO> getBookList(
       @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
       @RequestParam(value = "amount", defaultValue = "10") int amount,
@@ -34,8 +40,7 @@ public class BookListRestController {
       @RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
       @RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
       @RequestParam(value = "searchQuery", required = false) String searchQuery,
-      @RequestParam(value = "sort", defaultValue = "b.publicationDate DESC") String sort) { // 정렬 옵션 추가
-
+      @RequestParam(value = "sort", defaultValue = "b.publicationDate DESC") String sort) {
 
     // 페이징 객체 생성
     Paging pge = new Paging(pageNum, amount);
@@ -58,16 +63,16 @@ public class BookListRestController {
     return new ResponseEntity<>(listPageDTO, HttpStatus.OK);
   }
 
-  @GetMapping(value = "/searchTitles", produces = { MediaType.APPLICATION_JSON_VALUE })
-  public List<BookListVO> searchTitles(@RequestParam("query")String query){
+  @GetMapping(value = "/searchTitles", produces = {MediaType.APPLICATION_JSON_VALUE})
+  public List<BookListVO> searchTitles(@RequestParam("query") String query) {
     log.info("AJAX 요청 - 검색어: {}", query);
-    List<BookListVO>result = service.searchTitles(query);
+    List<BookListVO> result = service.searchTitles(query);
     log.info("AJAX 응답 - 검색 결과: {}", result);
     return result;
   }
 
   // 책의 카테고리 ID 목록 제공
-  @GetMapping(value = "/getBookCategoryIds", produces = { MediaType.APPLICATION_JSON_VALUE })
+  @GetMapping(value = "/getBookCategoryIds", produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<List<String>> getBookCategoryIds(@RequestParam("isbn13") Long isbn13) {
     try {
       // 책의 카테고리 ID 목록을 가져오기
@@ -83,32 +88,95 @@ public class BookListRestController {
     }
   }
 
+  @PostMapping("/book/add")
+  public ResponseEntity<String> addBook(
+      @RequestParam("bookData") String bookData,
+      @RequestParam("imageUploadType") String imageUploadType,
+      @RequestParam(value = "photoUrl", required = false) String photoUrl,
+      @RequestParam(value = "file", required = false) MultipartFile file) {
 
-  // 책 추가 (모달을 통해 처리)
-  @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-  public ResponseEntity<String> addBook(@RequestBody BookListVO bookList) {
-    service.add(bookList); // 책 추가 처리
-    return new ResponseEntity<>("success", HttpStatus.CREATED);
+    try {
+      ObjectMapper objectMapper = new ObjectMapper();
+      objectMapper.registerModule(new JavaTimeModule());
+
+      // JSON을 VO로 변환
+      BookListVO bookListVO = objectMapper.readValue(bookData, BookListVO.class);
+
+      // 업로드 방식에 따라 photo 필드 처리
+      if ("url".equals(imageUploadType) && photoUrl != null) {
+        // URL 방식으로 이미지 처리
+        bookListVO.setPhoto(photoUrl);
+      } else if ("file".equals(imageUploadType) && file != null) {
+        // 파일 업로드 방식으로 이미지 처리
+        String savedFileName = handleFileUpload(file);  // 파일 저장 후 저장된 파일명 가져옴
+        bookListVO.setPhoto(savedFileName);
+      }
+
+      long isbn13 = Long.parseLong(String.valueOf(bookListVO.getIsbn13()));
+      bookListVO.setIsbn13(isbn13);
+      log.info(isbn13);
+
+
+      // 책 정보 추가
+      service.add(bookListVO);
+      return new ResponseEntity<>("success", HttpStatus.CREATED);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+    }
   }
 
   // 책 수정
-  @PutMapping(value = "/{isbn13}", produces = { MediaType.APPLICATION_JSON_VALUE })
-  public ResponseEntity<String> modifyBook(@PathVariable("isbn13") Long isbn13, @RequestBody BookListVO bookList) {
-    bookList.setIsbn13(isbn13); // 책 수정시 isbn13 설정
-    if (service.modify(bookList)) {
+  @PutMapping("/book/{isbn13}")
+  public ResponseEntity<String> modifyBook(@PathVariable("isbn13") Long isbn13,
+      @RequestParam("bookData") String bookData,
+      @RequestParam(value = "file", required = false) MultipartFile file) {
+    try {
+      // 기존 책 정보 로드
+      BookListVO currentBook = service.get(isbn13);
+
+      // 수정된 책 정보 변환
+      BookListVO updatedBook = new ObjectMapper().readValue(bookData, BookListVO.class);
+
+      // 파일 처리 (새 파일이 있을 경우)
+      if (file != null && !file.isEmpty()) {
+        String savedFileName = handleFileUpload(file);
+        updatedBook.setPhoto(savedFileName);  // 새 이미지 파일 이름 설정
+      } else {
+        updatedBook.setPhoto(currentBook.getPhoto());  // 기존 파일 이름 유지
+      }
+
+      // 책 정보 수정
+      service.modify(updatedBook);
       return new ResponseEntity<>("success", HttpStatus.OK);
-    } else {
+    } catch (Exception e) {
+      e.printStackTrace();
       return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
     }
   }
 
   // 책 삭제
-  @DeleteMapping(value = "/{isbn13}", produces = { MediaType.APPLICATION_JSON_VALUE })
+  @DeleteMapping("/book/{isbn13}")
   public ResponseEntity<String> removeBook(@PathVariable("isbn13") Long isbn13) {
-    if (service.remove(isbn13)) {
+    try {
+      service.remove(isbn13);
       return new ResponseEntity<>("success", HttpStatus.NO_CONTENT);
-    } else {
+    } catch (Exception e) {
       return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
     }
   }
+
+  private String handleFileUpload(MultipartFile file) throws IOException {
+    String originalFileName = file.getOriginalFilename();
+    String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+    String savedFileName = UUID.randomUUID() + fileExtension;
+
+    String uploadDir = "D:/upload/books";  // 파일 저장 경로
+    File saveFile = new File(uploadDir + savedFileName);
+    file.transferTo(saveFile);  // 파일 저장
+
+    return savedFileName;  // 저장된 파일 이름 반환
+  }
+
 }

@@ -1,14 +1,16 @@
 package kr.co.librarylyh.domain;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class BookListVO {
 	private Long isbn13;
@@ -23,7 +25,7 @@ public class BookListVO {
 	private String weight;
 	private String bookSize;
 	private int pageCount;
-	private double averageRating;  // NUMBER(2, 1)
+	private double averageRating;  // NUMBER(3, 1)
 	private String star5Count;
 	private String star4Count;
 	private String star3Count;

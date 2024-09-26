@@ -9,44 +9,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.3">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/DataBaseExceptionHandlingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/DataValidationAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/ExceptionHandlingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/LoggingAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/LogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/error-page.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/developHelper.jsp" afterDir="false" />
+    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.4">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.smarttomcat/library/conf/logging.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.smarttomcat/library/conf/logging.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/LoggingAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/LoggingAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/PageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/ListPageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/Paging.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/Paging.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/developHelper.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/developHelper.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/courses.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/elements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/index.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/news.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/news_post.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/teachers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/PageDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/Paging.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/Paging.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/CategoryServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j2.xml" afterDir="false" />
     </list>
@@ -71,15 +69,16 @@
         <option value="Interface" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1.0.2" />
+        <entry key="$PROJECT_DIR$" value="1.0.3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +95,7 @@
   </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LeeHyunWoo2/TeamProject2.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/LeeHyunWoo2/Library.git&quot;,
     &quot;accountId&quot;: &quot;d7a73c42-7cbf-43ec-8d7f-84c909c78c6b&quot;
   }
 }</component>
@@ -128,74 +127,77 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.BookListControllerTests.testGet.executor": "Run",
-    "JUnit.BookListControllerTests.testList.executor": "Run",
-    "JUnit.BookListControllerTests.testListPaging.executor": "Run",
-    "JUnit.BookListControllerTests.testModify.executor": "Run",
-    "JUnit.BookListControllerTests.testaddBook.executor": "Run",
-    "JUnit.BookListMapperTest.setUp.executor": "Run",
-    "JUnit.BookListMapperTest.testRead.executor": "Run",
-    "JUnit.BookListMapperTests.executor": "Run",
-    "JUnit.BookListMapperTests.testAdd.executor": "Run",
-    "JUnit.BookListMapperTests.testDelete.executor": "Run",
-    "JUnit.BookListMapperTests.testGetList.executor": "Run",
-    "JUnit.BookListMapperTests.testGetListWithFiltersAndPaging.executor": "Run",
-    "JUnit.BookListMapperTests.testInsert.executor": "Run",
-    "JUnit.BookListMapperTests.testRead.executor": "Run",
-    "JUnit.BookListMapperTests.testSerch.executor": "Run",
-    "JUnit.BookListMapperTests.testUpdate.executor": "Run",
-    "JUnit.BookListRestControllerTests.testGetBookList.executor": "Run",
-    "JUnit.BookListServiceTests.testAddBook.executor": "Run",
-    "JUnit.BookListServiceTests.testGet.executor": "Run",
-    "JUnit.BookListServiceTests.testGetListWithFiltersAndPaging.executor": "Run",
-    "JUnit.BookListServiceTests.testModifyBook.executor": "Run",
-    "JUnit.BookListServiceTests.testRegister.executor": "Run",
-    "JUnit.BookListServiceTests.testRemoveBook.executor": "Run",
-    "JUnit.BookListServiceTests.testUpdate.executor": "Run",
-    "JUnit.controller의 전부.executor": "Run",
-    "Maven.library [clean,install].executor": "Run",
-    "Notification.DisplayName-DoNotAsk-Framework Detection": "프레임워크가 탐지됨",
-    "Notification.DoNotAsk-Framework Detection": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ShowUsagesActions.previewPropertyKey": "true",
-    "Smart Tomcat.Library.executor": "Run",
-    "database.data.extractors.current.export.id": "SQL-Insert-Statements.sql.groovy",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/진짜진짜제발마지막/books_categories.csv",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "패싯",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.24082074",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editor.preferences.gutterIcons",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.BookListControllerTests.testGet.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListControllerTests.testList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListControllerTests.testListPaging.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListControllerTests.testModify.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListControllerTests.testaddBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTest.setUp.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTest.testRead.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testAdd.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testDelete.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testGetList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testGetListWithFiltersAndPaging.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testInsert.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testRead.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testSerch.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListMapperTests.testUpdate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListRestControllerTests.testGetBookList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testAddBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testGet.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testGetListWithFiltersAndPaging.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testModifyBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testRegister.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testRemoveBook.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BookListServiceTests.testUpdate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.controller의 전부.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.library [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Framework Detection&quot;: &quot;프레임워크가 탐지됨&quot;,
+    &quot;Notification.DoNotAsk-Framework Detection&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
+    &quot;Smart Tomcat.Library.executor&quot;: &quot;Run&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;SQL-Insert-Statements.sql.groovy&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;라이브러리&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2505747&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;spring&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory",
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "oracle"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 파생 언어": [
-      "Oracle"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 파생 언어&quot;: [
+      &quot;Oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="kr.co.librarylyh.domain" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\workspace\Library\Library\src\main\webapp\WEB-INF" />
       <recent name="D:\workspace\Library\Library\src\main\webapp\WEB-INF\views" />
@@ -211,7 +213,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Smart Tomcat.Library">
+  <component name="RunManager" selected="JUnit.BookListMapperTests">
     <configuration name="BookListMapperTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="library" />
       <extension name="coverage">
@@ -612,7 +614,18 @@
       <workItem from="1727054157276" duration="15656000" />
       <workItem from="1727069891721" duration="135000" />
       <workItem from="1727070036356" duration="12246000" />
-      <workItem from="1727094396650" duration="21238000" />
+      <workItem from="1727094396650" duration="21849000" />
+      <workItem from="1727132393204" duration="164000" />
+      <workItem from="1727132581772" duration="24000" />
+      <workItem from="1727137161582" duration="28949000" />
+      <workItem from="1727173928025" duration="20613000" />
+      <workItem from="1727195736260" duration="10940000" />
+      <workItem from="1727222882395" duration="30396000" />
+      <workItem from="1727268763211" duration="921000" />
+      <workItem from="1727269701083" duration="1207000" />
+      <workItem from="1727270983723" duration="2995000" />
+      <workItem from="1727304481275" duration="1170000" />
+      <workItem from="1727309603622" duration="26720000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -678,7 +691,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726763434682</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="1.0.4">
+      <option name="closed" value="true" />
+      <created>1727116249932</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727116249932</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +747,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="1.0.3" />
+                        <option value="1.0.4" />
                       </list>
                     </value>
                   </entry>
@@ -743,7 +764,8 @@
     <MESSAGE value="1.0.1" />
     <MESSAGE value="1.0.2" />
     <MESSAGE value="1.0.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.3" />
+    <MESSAGE value="1.0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

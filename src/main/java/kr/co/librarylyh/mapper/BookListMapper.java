@@ -5,14 +5,21 @@ import java.util.Map;
 
 import kr.co.librarylyh.domain.BookListVO;
 import kr.co.librarylyh.domain.CategoryVO;
-import kr.co.librarylyh.domain.Paging;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Mapper
 public interface BookListMapper {
 
-	public void insert(BookListVO bookList);
+	// 책 기본 정보 추가
+	void insertBook(BookListVO book);
+
+	// 책 상세 정보 추가
+	void insertBookDetail(BookListVO bookDetail);
+
+	// 책 카테고리 추가 (여러 개의 카테고리)
+	void insertBookCategories(@Param("isbn13") Long isbn13, @Param("categoryIds") List<String> categoryIds);
 
 	public BookListVO read(long isbn13);
 

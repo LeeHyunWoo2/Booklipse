@@ -250,7 +250,7 @@
     }
 
   // 메시지가 메서드 로그인지 오류 로그인지 구분
-  if (message.includes("메서드 시작") || message.includes("메서드 정상 종료")) {
+  if (message.includes("메서드 시작") || message.includes("메서드 종료")) {
     logBox = document.getElementById("method-log");
     logBox.innerHTML += "[Method] " + message + "<br>";  // 메서드 로그 추가
     deleteLastLine(logBox);

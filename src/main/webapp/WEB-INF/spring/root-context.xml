@@ -6,8 +6,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:task="http://www.springframework.org/schema/task"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring
-		https://mybatis.org/schema/mybatis-spring-1.2.xsd
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
@@ -16,37 +15,54 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<context:annotation-config/>
+	<context:annotation-config></context:annotation-config>
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
-	<!--	jdbclog4j2 용으로 교체
-			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>	-->
+		<!--	jdbclog4j2 용으로 교체
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+        <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"></property>	-->
 
 
 		<!-- log4jdbc용으로 콘솔에 표 형식 으로 출력-->
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
 
-		<property name="username" value="library"/>
-		<property name="password" value="6673"/>
-		</bean>
+		<property name="username" value="library"></property>
+		<property name="password" value="6673"></property>
+	</bean>
 
-		<!-- 커넥션 풀 설정 HikariCP configuration -->
-		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-			<constructor-arg ref="hikariConfig" />
-		</bean>
+	<!-- 커넥션 풀 설정 HikariCP configuration -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
 
-		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource"/>
-		</bean>
-		<!-- mybatis는 pstmt를 사용하지 않고 인터페이스 + xml로 매핑한다. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- 게시글 조회수 구현을 위한 트랜젝션-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 
 
-		<mybatis-spring:scan base-package="kr.co.librarylyh.mapper"/>
+
+
+	<!-- mybatis는 pstmt를 사용하지 않고 인터페이스 + xml로 매핑한다. -->
+	<mybatis-spring:scan base-package="kr.co.librarylyh.mapper"/>
 	<!-- mybatis에서 자동으로 처리할 패키지 명시  -->
 
-	<context:component-scan base-package="kr.co.librarylyh.aop, kr.co.librarylyh.domain, kr.co.librarylyh.service, kr.co.librarylyh.mapper"/>
+	<context:component-scan base-package="kr.co.librarylyh.service"></context:component-scan>	<!-- 스프링에서 @Service 를 찾는다. -->
+
+	<context:component-scan base-package="kr.co.librarylyh.aop"></context:component-scan>	<!--  AOP 설정 추가 -->
+
+	<!-- <tx:annotation-driven/>	 어노테이션 기반으로 트랜젝션 설정 추가 -->
 
 </beans>

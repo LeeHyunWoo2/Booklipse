@@ -2,6 +2,7 @@ package kr.co.librarylyh.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import kr.co.librarylyh.domain.CategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,20 +20,22 @@ public class BookListServiceImpl implements BookListService {
 	@Setter(onMethod_ = @Autowired)
 	private BookListMapper mapper;
 
-	public void updateAvailable (BookListVO bookList){
-		if(bookList.getBookCount() <= 0){
-			bookList.setRentalAvailable("N");
-		} else {
-			bookList.setRentalAvailable("Y");
-		}
-	}
 
-	@Transactional
 	@Override
-	public void add(BookListVO bookList) {
-		// log.info("책 추가: " + bookList);
-		updateAvailable(bookList);
-		mapper.insert(bookList);
+	@Transactional
+	public void add(BookListVO bookListVO) {
+		// 1. 책 기본 정보 저장
+		mapper.insertBook(bookListVO);
+
+		// 2. 책 상세 정보 저장
+
+		mapper.insertBookDetail(bookListVO);
+
+		// 3. 카테고리 여러 개 저장
+		List<String> categoryIds = bookListVO.getCategories().stream()
+				.map(CategoryVO::getCategoryId)
+				.collect(Collectors.toList());
+		mapper.insertBookCategories(bookListVO.getIsbn13(), categoryIds);
 	}
 
 	@Override
@@ -50,7 +53,6 @@ public class BookListServiceImpl implements BookListService {
 	@Override
 	public boolean modify(BookListVO bookList) {
 		// log.info("책 수정: " + bookList);
-		updateAvailable(bookList);
 		return mapper.update(bookList) == 1;
 	}
 

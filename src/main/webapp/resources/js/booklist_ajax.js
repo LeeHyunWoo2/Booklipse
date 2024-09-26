@@ -91,14 +91,12 @@ function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`,
     success: function (data) {
       if (data && data.list) {
         const radioButton = document.querySelector('input[name="tabs"]:checked');
-
         let selectView;
         if (radioButton) {
           selectView = radioButton.value;  // 선택된 라디오 버튼이 있는 경우 그 값을 가져옴
         } else {
           selectView = 'list';  // 선택된 것이 없으면 기본값으로 'list' 설정
         }
-
         if (selectView === 'list') {
           renderBookList(data.list);
         } else {
@@ -156,23 +154,12 @@ radioButtons.forEach(function(radio) {
   });
 });
 
-function formatDate(publicationDate) {
-  if (publicationDate && typeof(publicationDate) === 'object') {
-    const { year, month, dayOfMonth } = publicationDate;
-    const monthIndex = new Date(Date.parse(`${month} 1, ${year}`)).getMonth();
-    const date = new Date(year, monthIndex, dayOfMonth);
-
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  }
-}
-
 
 function renderBookList(bookList) {
   const listBox = $('.list_wrap');
   listBox.empty();
   console.log('bookList:', bookList);
   bookList.forEach(function (book, index) {
-    const formattedDate = formatDate(book.publicationDate);
     const rentalStatus = book.rentalAvailable === 'Y' ? '가능' : '불가능'; // Y 또는 N에 따라 텍스트 설정
     const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red'; // 색상 설정
     const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);'; // 대여 가능 여부에 따른 흑백 처리
@@ -185,11 +172,11 @@ function renderBookList(bookList) {
           </div>
           <div class="col-md-8">
             <div class="listcard-body">
-              <p class="booktitle">(${index + 1}) ${book.book}</p>
+              <p class="booktitle" data-end-value="" >(${index + 1}) ${book.book}</p>
               <div class="info-line">
                 <span class="author">${book.author}</span>
                 <span class="publisher">${book.publisher}</span>
-                <span class="publicationDate">발행일 : ${formattedDate}</span>
+                <span class="publicationDate">발행일 : ${book.publicationDate}</span>
                 <span class="rentalAvailable">대여 가능 여부: <span style="color: ${rentalColor};">${rentalStatus}</span></span>
               </div>
               <div class="info-line">
@@ -202,6 +189,7 @@ function renderBookList(bookList) {
           </div>
         </div>
       </div>
+      <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href = '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
         `;
     listBox.append(bookItem);
   });
@@ -226,11 +214,11 @@ function renderBookList(bookList) {
       });*/
     }
   });
-
   $('.listcard').on('click', function () {
     const isbn = $(this).data('isbn');
     window.location.href = `/library/read/${isbn}`;
   });
+
 }
 
 function renderBookGrid(bookList) {
@@ -238,7 +226,6 @@ function renderBookGrid(bookList) {
   gridBox.empty();
   console.log('bookList:', bookList);
   bookList.forEach(function (book, index) {
-    const formattedDate = formatDate(book.publicationDate);
     const bookItem = `
             <div class="gridcard" data-isbn="${book.isbn13}">
                 <div class="gridcard__image">
@@ -249,10 +236,11 @@ function renderBookGrid(bookList) {
                         <p class="gridcard__title">(${index + 1}) ${book.book}</p>
                         <p class="gridcard__text">${book.author}</p>
                         <p class="gridcard__text">${book.publisher}</p>
-                        <p class="gridcard__text">발행일 : ${formattedDate}</p>
+                        <p class="gridcard__text">발행일 : ${book.publicationDate}</p>
                     </div>
                 </div>
             </div>
+            <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href = '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
         `;
     gridBox.append(bookItem);
   });

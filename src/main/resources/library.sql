@@ -15,7 +15,7 @@ create table book_tbl
     publicationDate date,
     reviewCount     number(6),
     averageRating   number(3, 1),
-    bookCount          number(10)
+    bookCount       number(10)
 );
 
 

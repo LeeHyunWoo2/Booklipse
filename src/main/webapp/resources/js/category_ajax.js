@@ -92,6 +92,10 @@ $(document).ready(function () {
         const link = document.createElement('div');
         link.textContent = category.categoryName; // 카테고리 이름 설정
         link.style.cursor = 'pointer'; // 커서를 포인터로 설정
+
+        // 카테고리 ID를 data-category-id 속성에 추가
+        link.setAttribute('data-category-id', category.categoryId);
+
         link.onclick = function () {
             clearSubCategoryMenus(level + 1); // 하위 카테고리 초기화
             createSubCategoryMenu(category, level + 1); // 하위 카테고리 메뉴 생성
@@ -160,20 +164,37 @@ $(document).ready(function () {
         resetBookFilters(); // 도서 필터 초기화
     }
 
+// 경로에 따라 URL 업데이트 및 책 로드 함수 차단
     function updateCategoryInURL(categoryId) {
-        // URL에 카테고리 ID를 업데이트하는 함수
+        // /library/manage?mode=add 또는 /library/manage?mode=edit 경로일 때만 차단
+        const isManagePage = window.location.pathname.includes('/library/manage') &&
+            (window.location.search.includes('mode=add') || window.location.search.includes('mode=edit'));
+
+        if (isManagePage) {
+            return; // 관리 페이지에서 차단
+        }
+
+        // 메인 페이지에서는 정상적으로 동작
         const currentUrlParams = new URLSearchParams(window.location.search);
         const currentCategory = currentUrlParams.get('category');
 
         if (currentCategory !== categoryId) {
-            updateURLParam('category', categoryId, false); // URL 파라미터에 카테고리 반영
+            updateURLParam('category', categoryId, false);
         }
-
-        updateURLParam('category', categoryId); // 카테고리 업데이트
+        updateURLParam('category', categoryId);
     }
 
+
     function loadBooksByCategory(categoryId) {
-        // 선택한 카테고리의 도서를 로드하는 함수
+        // /library/manage?mode=add 또는 /library/manage?mode=edit 경로일 때만 차단
+        const isManagePage = window.location.pathname.includes('/library/manage') &&
+            (window.location.search.includes('mode=add') || window.location.search.includes('mode=edit'));
+
+        if (isManagePage) {
+            return; // 관리 페이지에서 차단
+        }
+
+        // 메인 페이지에서는 정상적으로 동작
         loadPage(1, undefined, '', categoryId);
     }
 

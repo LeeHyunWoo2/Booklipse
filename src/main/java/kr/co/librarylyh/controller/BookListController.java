@@ -1,7 +1,6 @@
 package kr.co.librarylyh.controller;
 
 import kr.co.librarylyh.domain.BookListVO;
-import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -61,5 +59,20 @@ public class BookListController {
 		BookListVO bookDetail = service.get(isbn13);
 		model.addAttribute("bookDetail", bookDetail);
 		return "library/bookDetail"; // 책 상세 보기 뷰로 이동
+	}
+
+	@GetMapping("/manage")
+	public String manageBook(@RequestParam(value = "isbn13", required = false) Long isbn13,
+			@RequestParam("mode") String mode, Model model) {
+		log.info("Mode: " + mode);
+		log.info("ISBN13: " + isbn13);
+
+		if ("edit".equals(mode) && isbn13 != null) {
+			BookListVO bookDetail = service.get(isbn13);
+			log.info("Book Detail: " + bookDetail);  // 책 정보를 로그로 확인
+			model.addAttribute("bookDetail", bookDetail);
+		}
+		model.addAttribute("mode", mode);
+		return "library/bookManagement";
 	}
 }
