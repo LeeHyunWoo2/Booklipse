@@ -168,7 +168,7 @@ function renderBookList(bookList) {
        <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
         <div class="row g-0">
           <div class="col-md-4">
-              <img src="${book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
+             <img src="${book.photo.startsWith('http') ? book.photo : '/books/' + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
           </div>
           <div class="col-md-8">
             <div class="listcard-body">

@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AIAssistantCustomInstructionsStorage">
+    <option name="instructions">
+      <map>
+        <entry key="AIAssistant.VCS.GenerateCommitMessage">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.VCS.GenerateCommitMessage" />
+              <option name="content" value="한국어를 사용해주세요.&#10;지나치게 장황한 설명이나 불필요한 세부 사항은 피하세요.&#10;&#10;첫 부분은 한 문장만 작성하고 자세한 설명은 최대 두세 문장으로 작성하세요.&#10;&#10;다수의 변경사항이 있을 때 글머리 기호를 사용해주세요.&#10;&#10;기존의 커밋 서식을 활용해주세요.&#10;" />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+        <entry key="AIAssistant.WriteDocumentation.Java">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.WriteDocumentation.Java" />
+              <option name="content" value="한국어를 사용해주세요. (코드는 예외)&#10;&#10;Do not return example code, do not use @author or @version or @since tags.&#10;DO NOT generate example usage.&#10;DO NOT generate usage example.&#10;DO NOT use html tags such as &lt;p&gt;, &lt;lu&gt;, &lt;li&gt;.&#10;DO NOT generate documentation for type member properties.&#10;Write javadoc." />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+        <entry key="AIAssistant.WriteDocumentation.JavaScript">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.WriteDocumentation.JavaScript" />
+              <option name="content" value="한국어를 사용해주세요. (코드는 예외)&#10;&#10;Do not return example code, do not use @author or @version or @since tags.&#10;DO NOT generate example usage.&#10;DO NOT generate usage example.&#10;DO NOT use html tags such as &lt;p&gt;, &lt;lu&gt;, &lt;li&gt;.&#10;DO NOT generate documentation for type member properties.&#10;Write JSDoc." />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="library:war" />
@@ -9,44 +39,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.4">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.5">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/LoggingAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/aop/LoggingAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/BookListVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/domain/CategoryVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/developHelper.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/developHelper.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/contact.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/courses.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/elements.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/category_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/news.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/news_post.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/teachers.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/controller/BookListControllerTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/controller/BookListRestControllerTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/aop/LoggingAspect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/aop/LoggingAspect.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/BookListVO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/domain/CategoryVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListControllerTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListRestControllerTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +103,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1.0.3" />
+        <entry key="$PROJECT_DIR$" value="1.0.4" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -127,73 +152,78 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.BookListControllerTests.testGet.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListControllerTests.testList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListControllerTests.testListPaging.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListControllerTests.testModify.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListControllerTests.testaddBook.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTest.setUp.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTest.testRead.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testAdd.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testDelete.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testGetList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testGetListWithFiltersAndPaging.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testInsert.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testRead.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testSerch.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListMapperTests.testUpdate.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListRestControllerTests.testGetBookList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testAddBook.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testGet.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testGetListWithFiltersAndPaging.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testModifyBook.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testRegister.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testRemoveBook.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BookListServiceTests.testUpdate.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.controller의 전부.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.library [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Framework Detection&quot;: &quot;프레임워크가 탐지됨&quot;,
-    &quot;Notification.DoNotAsk-Framework Detection&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;Smart Tomcat.Library.executor&quot;: &quot;Run&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;SQL-Insert-Statements.sql.groovy&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;라이브러리&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2505747&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;spring&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.BookListControllerTests.testGet.executor": "Run",
+    "JUnit.BookListControllerTests.testList.executor": "Run",
+    "JUnit.BookListControllerTests.testListPaging.executor": "Run",
+    "JUnit.BookListControllerTests.testModify.executor": "Run",
+    "JUnit.BookListControllerTests.testaddBook.executor": "Run",
+    "JUnit.BookListMapperTest.setUp.executor": "Run",
+    "JUnit.BookListMapperTest.testRead.executor": "Run",
+    "JUnit.BookListMapperTests.executor": "Run",
+    "JUnit.BookListMapperTests.testAdd.executor": "Run",
+    "JUnit.BookListMapperTests.testDelete.executor": "Run",
+    "JUnit.BookListMapperTests.testGetList.executor": "Run",
+    "JUnit.BookListMapperTests.testGetListWithFiltersAndPaging.executor": "Run",
+    "JUnit.BookListMapperTests.testInsert.executor": "Run",
+    "JUnit.BookListMapperTests.testRead.executor": "Run",
+    "JUnit.BookListMapperTests.testSerch.executor": "Run",
+    "JUnit.BookListMapperTests.testUpdate.executor": "Run",
+    "JUnit.BookListRestControllerTests.testGetBookList.executor": "Run",
+    "JUnit.BookListServiceTests.testAddBook.executor": "Run",
+    "JUnit.BookListServiceTests.testGet.executor": "Run",
+    "JUnit.BookListServiceTests.testGetListWithFiltersAndPaging.executor": "Run",
+    "JUnit.BookListServiceTests.testModifyBook.executor": "Run",
+    "JUnit.BookListServiceTests.testRegister.executor": "Run",
+    "JUnit.BookListServiceTests.testRemoveBook.executor": "Run",
+    "JUnit.BookListServiceTests.testUpdate.executor": "Run",
+    "JUnit.controller의 전부.executor": "Run",
+    "Maven.library [clean,install].executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Framework Detection": "프레임워크가 탐지됨",
+    "Notification.DoNotAsk-Framework Detection": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "Smart Tomcat.Library.executor": "Run",
+    "database.data.extractors.current.export.id": "SQL-Insert-Statements.sql.groovy",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/workspace/3_TeamProject-Library-/src/main/webapp/WEB-INF/spring/root-context.xml",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "전역 라이브러리",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2977941",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "two.files.diff.last.used.file": "D:/workspace/3_TeamProject-Library-/src/main/webapp/WEB-INF/spring/root-context.xml",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;directory&quot;,
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "directory",
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
+    "DatabaseDriversLRU": [
+      "oracle"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 파생 언어&quot;: [
-      &quot;Oracle&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 파생 언어": [
+      "Oracle"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kr.co.librarylyh.domain" />
@@ -205,6 +235,11 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="kr.co.librarylyh.controller" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="toast" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
@@ -625,7 +660,26 @@
       <workItem from="1727269701083" duration="1207000" />
       <workItem from="1727270983723" duration="2995000" />
       <workItem from="1727304481275" duration="1170000" />
-      <workItem from="1727309603622" duration="26720000" />
+      <workItem from="1727309603622" duration="27264000" />
+      <workItem from="1727336945886" duration="92000" />
+      <workItem from="1727338405889" duration="211000" />
+      <workItem from="1727338805069" duration="11000" />
+      <workItem from="1727338948004" duration="1407000" />
+      <workItem from="1727341084871" duration="95000" />
+      <workItem from="1727341310883" duration="114000" />
+      <workItem from="1727341454138" duration="39000" />
+      <workItem from="1727345404261" duration="26000" />
+      <workItem from="1727345468006" duration="78000" />
+      <workItem from="1727347601075" duration="41000" />
+      <workItem from="1727352704946" duration="10000" />
+      <workItem from="1727354113477" duration="396000" />
+      <workItem from="1727480013686" duration="19162000" />
+      <workItem from="1727513657141" duration="3439000" />
+      <workItem from="1727526771559" duration="156000" />
+      <workItem from="1727527578588" duration="13164000" />
+      <workItem from="1727570440619" duration="8317000" />
+      <workItem from="1727578863976" duration="11751000" />
+      <workItem from="1727599430876" duration="16629000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -699,7 +753,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727116249932</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="1.0.5">
+      <option name="closed" value="true" />
+      <created>1727336426457</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727336426457</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -747,7 +809,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="1.0.4" />
+                        <option value="1.0.5" />
                       </list>
                     </value>
                   </entry>
@@ -765,7 +827,8 @@
     <MESSAGE value="1.0.2" />
     <MESSAGE value="1.0.3" />
     <MESSAGE value="1.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.4" />
+    <MESSAGE value="1.0.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

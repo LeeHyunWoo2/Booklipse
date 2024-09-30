@@ -44,8 +44,8 @@
 
 			</div>
 
-			<div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200">prev</span></div>
-			<div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200">next</span></div>
+			<div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200"> <- </span></div>
+			<div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200"> -> </span></div>
 		</div>
 
 	</div>
@@ -57,30 +57,30 @@
 
 					<div class="col-lg-4 hero_box_col">
 						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
-							<img src="/resources/images/earth-globe.svg" class="svg" alt="">
+							<img src="/resources/images/book_log.png" >
 							<div class="hero_box_content">
-								<h2 class="hero_box_title">Online Courses</h2>
-								<a href="courses.html" class="hero_box_link">view more</a>
+								<h2 class="hero_box_title">도서 전체 목록</h2>
+								<a href="/library/booklist" class="hero_box_link">view more</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-4 hero_box_col">
 						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
-							<img src="/resources/images/books.svg" class="svg" alt="">
+							<img src="/resources/images/board.png">
 							<div class="hero_box_content">
-								<h2 class="hero_box_title">Our Library</h2>
-								<a href="courses.html" class="hero_box_link">view more</a>
+								<h2 class="hero_box_title">게시판</h2>
+								<a href='library/list' class="hero_box_link">view more</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-4 hero_box_col">
 						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
-							<img src="/resources/images/professor.svg" class="svg" alt="">
+							<img src="/resources/images/reservation.png">
 							<div class="hero_box_content">
-								<h2 class="hero_box_title">Our Teachers</h2>
-								<a href="teachers.html" class="hero_box_link">view more</a>
+								<h2 class="hero_box_title">도서 대출 | 예약</h2>
+								<a href='/library/reservation/ReservationMain' class="hero_box_link">view more</a>
 							</div>
 						</div>
 					</div>
@@ -97,7 +97,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="section_title text-center">
-						<h1>Popular Courses</h1>
+						<img class="bestseller" src="/resources/images/bestseller.png"><h1>Best-Seller</h1>
 					</div>
 				</div>
 			</div>
@@ -460,34 +460,8 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
 
-	 <footer class="footer">
-		<div class="container">
-<!--			<div class="newsletter">
- 				<div class="row">
-					<div class="col">
-						<div class="section_title text-center">
-							<h1>Search for Books!</h1>
-						</div>
-					</div>
-				</div>
 
-				<div class="row">
-					<div class="col text-center">
-						<div class="newsletter_form_container mx-auto">
-							<form action="post">
-								<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
-									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
-									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subscribe</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div> 
-
-			</div> -->
-
-<%@ include file="./includes/footer.jsp" %>		 	
+<%@ include file="../includes/footer.jsp" %>
 </body>
 </html>

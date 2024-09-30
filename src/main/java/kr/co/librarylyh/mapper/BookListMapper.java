@@ -25,9 +25,22 @@ public interface BookListMapper {
 
 	public List<CategoryVO> readCategoriesByISBN(long isbn13);
 
-	public int update(BookListVO bookList);
+	// 책 기본 정보 수정
+	void updateBook(BookListVO book);
 
-	public int delete(long isbn13);
+	// 책 상세 정보 수정
+	void updateBookDetail(BookListVO bookDetail);
+
+	// 책 카테고리 정보 수정이 없는 이유는, 복합테이블을 사용하는 경우에는 일반적으로 직접 update 를 하는게 아니라 delete 후에 add 하는식으로 설계한다고 함
+
+	// 책 기본 정보 삭제
+	void deleteBook(@Param("isbn13") Long isbn13);
+
+	// 책 상세 정보 삭제
+	void deleteBookDetail(@Param("isbn13") Long isbn13);
+
+	// 책 카테고리 삭제
+	void deleteBookCategories(@Param("isbn13") Long isbn13);
 
 	public List<BookListVO> getList();
 
@@ -39,5 +52,6 @@ public interface BookListMapper {
 
 	public List<BookListVO> searchTitles(@RequestParam("query") String query);
 
+	int checkIsbnExists(Long isbn13);
 }
 

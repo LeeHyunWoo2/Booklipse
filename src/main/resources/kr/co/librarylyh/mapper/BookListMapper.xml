@@ -39,7 +39,8 @@
   </sql>
 
   <!-- 책 목록 조회 (검색 및 페이징 포함) -->
-  <select id="getListWithFiltersAndPaging" parameterType="map" resultType="kr.co.librarylyh.domain.BookListVO">
+  <select id="getListWithFiltersAndPaging" parameterType="map"
+    resultType="kr.co.librarylyh.domain.BookListVO">
     <![CDATA[ SELECT * FROM ( SELECT ROW_NUMBER() OVER ( ORDER BY ]]>
     <!-- sort 기준대로 정렬해서 순번을 매기고 그 순서대로 결과를 가져옴 (페이징 적용) -->
     <if test="sort != null and sort != ''">
@@ -106,8 +107,6 @@
   </insert>
 
 
-
-
   <!-- 책 조회 (카테고리 정보는 따로) -->
   <select id="read" parameterType="long" resultType="kr.co.librarylyh.domain.BookListVO">
     <![CDATA[ SELECT b.*, bd.* FROM book_tbl b LEFT JOIN book_detail_tbl bd ON b.isbn13 = bd.isbn13 WHERE b.isbn13 = #{isbn13} ]]>
@@ -115,24 +114,55 @@
   </select>
 
   <!-- 책 조회 시 카테고리 정보 제공 -->
-  <select id="readCategoriesByISBN" parameterType="long" resultType="kr.co.librarylyh.domain.CategoryVO">
+  <select id="readCategoriesByISBN" parameterType="long"
+    resultType="kr.co.librarylyh.domain.CategoryVO">
     <![CDATA[ SELECT c.categoryId FROM book_category_tbl bc LEFT JOIN category_tbl c ON bc.categoryId = c.categoryId WHERE bc.isbn13 = #{isbn13} ]]>
     <!-- 해당 책의 카테고리 정보를 조회 -->
   </select>
 
+
   <!-- 책 수정 -->
-  <update id="update">
-    <![CDATA[ UPDATE book_tbl SET book = #{book}, bookDescription = #{bookDescription, jdbcType=CLOB}, price = #{price, jdbcType=NUMERIC}, bookCount = #{bookCount, jdbcType=NUMERIC},
-    averageRating = #{averageRating, jdbcType=NUMERIC}, rentalAvailable = #{rentalAvailable}, pageCount = #{pageCount, jdbcType=NUMERIC}, weight = #{weight, jdbcType=VARCHAR}, bookSize = #{bookSize, jdbcType=VARCHAR},
-    star1Count = #{star1Count, jdbcType=CHAR}, star2Count = #{star2Count, jdbcType=CHAR}, star3Count = #{star3Count, jdbcType=CHAR}, star4Count = #{star4Count, jdbcType=CHAR}, star5Count = #{star5Count, jdbcType=CHAR}, reviewCount = #{reviewCount, jdbcType=NUMERIC} WHERE isbn13 = #{isbn13, jdbcType=NUMERIC} ]]>
-    <!-- 책 정보를 수정 -->
+  <update id="updateBook">
+    <![CDATA[
+    UPDATE book_tbl
+    SET book = #{book}, author = #{author}, publisher = #{publisher}, price = #{price, jdbcType=NUMERIC},
+        rentalAvailable = #{rentalAvailable}, photo = #{photo}, publicationDate = #{publicationDate},
+        reviewCount = #{reviewCount, jdbcType=NUMERIC}, averageRating = #{averageRating, jdbcType=NUMERIC},
+        bookCount = #{bookCount, jdbcType=NUMERIC}
+    WHERE isbn13 = #{isbn13, jdbcType=NUMERIC}
+  ]]>
   </update>
 
+  <!-- 책 세부 정보 수정 -->
+  <update id="updateBookDetail">
+    <![CDATA[
+    UPDATE book_detail_tbl
+    SET bookDescription = #{bookDescription, jdbcType=CLOB}, pageCount = #{pageCount, jdbcType=NUMERIC},
+        weight = #{weight, jdbcType=VARCHAR}, bookSize = #{bookSize, jdbcType=VARCHAR},
+        star1Count = #{star1Count, jdbcType=CHAR}, star2Count = #{star2Count, jdbcType=CHAR},
+        star3Count = #{star3Count, jdbcType=CHAR}, star4Count = #{star4Count, jdbcType=CHAR},
+        star5Count = #{star5Count, jdbcType=CHAR}
+    WHERE isbn13 = #{isbn13, jdbcType=NUMERIC}
+  ]]>
+  </update>
+
+
   <!-- 책 삭제 -->
-  <delete id="delete">
+  <delete id="deleteBook">
     <![CDATA[ DELETE FROM book_tbl WHERE isbn13 = #{isbn13} ]]>
-    <!-- 책을 삭제 -->
   </delete>
+
+  <delete id="deleteBookDetail">
+    <![CDATA[
+        DELETE FROM book_detail_tbl WHERE isbn13 = #{isbn13}
+    ]]>
+  </delete>
+  <delete id="deleteBookCategories">
+    <![CDATA[
+        DELETE FROM book_category_tbl WHERE isbn13 = #{isbn13}
+    ]]>
+  </delete>
+
 
   <!-- 자동검색 기능용 제목검색 -->
   <select id="searchTitles" parameterType="string" resultType="kr.co.librarylyh.domain.BookListVO">

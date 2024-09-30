@@ -33,8 +33,11 @@ public class BookListServiceImpl implements BookListService {
 
 		// 3. 카테고리 여러 개 저장
 		List<String> categoryIds = bookListVO.getCategories().stream()
+				// streamAPI는 리스트에 있는 데이터를 하나씩 처리해줌
 				.map(CategoryVO::getCategoryId)
+				// CategoryVO에서 getCategoryId 메서드를 참조함
 				.collect(Collectors.toList());
+				// 리스트로 반환 => categoryIds 라는 List<String> 이 만들어짐
 		mapper.insertBookCategories(bookListVO.getIsbn13(), categoryIds);
 	}
 
@@ -51,15 +54,28 @@ public class BookListServiceImpl implements BookListService {
 
 
 	@Override
-	public boolean modify(BookListVO bookList) {
-		// log.info("책 수정: " + bookList);
-		return mapper.update(bookList) == 1;
+	@Transactional
+	public void modify(BookListVO bookList) {
+
+		// url과 파일 방식을 교체했는지 검증 및 그에 맞는 로직을 추가해야함
+
+		List<String> categoryIds = bookList.getCategories().stream()
+						.map(CategoryVO::getCategoryId)
+								.collect(Collectors.toList());
+
+		// 책의 카테고리를 먼저 삭제하고, 다시 생성함. (복합 테이블은 보통 이렇게 설계 한다고 함)
+		mapper.deleteBookCategories(bookList.getIsbn13());
+		mapper.insertBookCategories(bookList.getIsbn13(), categoryIds);
+		mapper.updateBookDetail(bookList);
+		mapper.updateBook(bookList);
 	}
 
 	@Override
-	public boolean remove(long isbn13) {
-		// log.info("책 삭제: " + isbn13);
-		return mapper.delete(isbn13) == 1;
+	@Transactional
+	public void remove(long isbn13) {
+		mapper.deleteBookCategories(isbn13);
+		mapper.deleteBookDetail(isbn13);
+		mapper.deleteBook(isbn13);
 	}
 
 	@Override

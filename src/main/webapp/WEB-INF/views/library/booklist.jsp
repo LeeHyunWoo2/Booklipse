@@ -707,7 +707,9 @@
                         <li class="dropdown-item2" style="cursor: pointer;"
                             data-value="50"></li>
                     </ul>
-                    <button type="button" class="btn btn-outline-success ml-1" onclick="window.location.href='/library/manage?mode=add'">도서 추가</button>
+                    <button type="button" class="btn btn-outline-success ml-1"
+                            onclick="window.location.href='/library/manage?mode=add'">도서 추가
+                    </button>
                 </div>
 
                 <!-- 모달 창 -->
@@ -813,361 +815,360 @@
         <ul class="pagination justify-content-center mt-5 mb-5">
         </ul>
     </nav>
-
-    <script type="text/javascript">
-      $(document).ready(
-          function () {
-            // 모달 열기 함수
-            function openModal(modalId) {
-              const modal = document.getElementById(modalId);
-              if (modal) {
-                modal.style.display = 'block';
-              }
-            }
-
-            // 모달 닫기 함수
-            function closeModal(modalId) {
-              const modal = document.getElementById(modalId);
-              if (modal) {
-                modal.style.display = 'none';
-              }
-            }
-
-            // 모달 열기 이벤트 설정
-            document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
-              const targetModalId = button.getAttribute('data-target');
-              button.addEventListener('click', function () {
-                openModal(targetModalId); // 모달 열기
-              });
-            });
-
-            // 모달 닫기 이벤트 설정
-            document.querySelectorAll('.modal .close').forEach(function (closeButton) {
-              const modalId = closeButton.closest('.modal').id;
-              closeButton.addEventListener('click', function () {
-                closeModal(modalId); // 모달 닫기
-              });
-            });
-
-            $("#executeAdvancedSearch").on("click", function () {
-              // 고급 검색 조건 수집
-              var advancedParams = {
-                searchType: $('#searchType').val() || null,  // 검색 기준
-                searchQuery: $('#keyword').val(),
-                publicationDateRange: $('#publicationDateRange').val() || null,  // 출판일 범위
-                minRating: $('#ratingRange').val() || null,  // 최소 평점
-                maxPrice: $('#maxPrice').val() || null  // 최대 가격
-              };
-              // loadPage 호출
-              loadPage(1, advancedParams);
-              $("#advancedSearchModal").modal('hide');  // 모달 닫기
-            });
-          });
-
-            let isPageMode = false;
-            let maxPage = 1;
-
-            function toggleFunction() {
-              $('#toggleButton').tooltip('hide');
-
-              // 토글 상태 변경
-              isPageMode = !isPageMode;
-
-              // 토글 상태에 따라 placeholder 변경
-              const searchInput = document.getElementById('searchInput');
-              const toggleButton = document.getElementById('toggleButton');
-              const toggleButton2 = document.getElementById('toggleButton2');
-              searchInput.value = '';
-              searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '제목 간편검색';
-              toggleButton.setAttribute('title', isPageMode ? '검색모드로 전환합니다.' : '페이지 이동 모드로 전환합니다.');
-              toggleButton2.setAttribute('title', !isPageMode ? '검색을 시작합니다.' : '페이지를 이동합니다.');
-              toggleButton2.textContent = (!isPageMode ? '검색' : '이동');
-              $(toggleButton).tooltip('dispose').tooltip();
-              $(toggleButton2).tooltip('dispose').tooltip();
-
-              // 디자인 클래스 적용
-              if (isPageMode) {
-                searchInput.classList.remove('search-mode');
-                searchInput.classList.add('page-mode');
-                toggleButton.classList.remove('toggle-search');
-                toggleButton.classList.add('toggle-page');
-                toggleButton2.classList.remove('toggle-search2');
-                toggleButton2.classList.add('toggle-page');
-              } else {
-                searchInput.classList.remove('page-mode');
-                searchInput.classList.add('search-mode');
-                toggleButton.classList.remove('toggle-page');
-                toggleButton.classList.add('toggle-search');
-                toggleButton2.classList.remove('toggle-page');
-                toggleButton2.classList.add('toggle-search2');
-              }
-            }
-
-            function handleFormSubmit(event) {
-              event.preventDefault();
-
-              const searchInput = $('#searchInput');
-              const query = searchInput.val().trim();
-
-              // 숫자만 입력되었는지 정규식으로 검증
-              const isNumeric = /^\d+$/.test(query);
-              const pageNumber = parseInt(query, 10);
-
-              if (isPageMode) {
-                if (isNumeric && pageNumber >= 1 && pageNumber <= maxPage) {
-                  loadPage(pageNumber); // AJAX로 페이지 로드
-                } else {
-                  showTooltip(searchInput, `1부터 ${maxPage} 사이의 유효한 숫자를 입력하세요.`);
-                }
-              } else {
-                loadPage(1, undefined, query);
-              }
-            }
-
-            function showTooltip(element, message) {
-              element.tooltip('dispose')
-              .attr('title', message)
-              .tooltip({trigger: 'manual'})
-              .tooltip('show');
-
-              setTimeout(() => {
-                element.tooltip('hide');
-              }, 3000);
-            }
-
-            function titleSearchHandler(event) {
-              event.preventDefault(); // 폼 기본 제출 방지
-              const searchQuery = document.getElementById('searchInput').value.trim();
-              loadPage(1, undefined, searchQuery);
-            }
-
-            function changeButtonText(element) {
-              document.getElementById('dropdownMenuButton').textContent = element.textContent;
-            }
-
-      $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      });
-
-    </script>
-    <script>
-      const module = {
-        clickButtonTop: function (selectors) {
-          const toTop = document.querySelector(selectors);
-
-          if (toTop) {
-            toTop.addEventListener('click', () => {
-              backToTop(); // 부드러운 스크롤 함수 호출
-            });
-          }
-        },
-
-        ScrollTopButtonView: function () {
-          // 페이지가 완전히 로드된 후 실행
-          window.addEventListener('load', () => {
-            const topButton = document.querySelector('.back_to_top');
-            let y = window.scrollY;
-
-            // 초기 상태 설정: 스크롤 위치에 따라 TOP 버튼 표시 여부 결정
-            if (y >= 400) {
-              module.addClass('.back_to_top', 'on');
-            } else {
-              module.removeClass('.back_to_top', 'on');
-            }
-
-            // 스크롤 이벤트 리스너 추가
-            window.addEventListener('scroll', () => {
-              y = window.scrollY;
-              if (y >= 400) {
-                module.addClass('.back_to_top', 'on');
-              } else {
-                module.removeClass('.back_to_top', 'on');
-              }
-            });
-
-            // 버튼의 클릭 이벤트 설정
-            this.clickButtonTop('.back_to_top');
-          });
-        },
-
-        addClass: function (selectors, className) {
-          let element = document.querySelector(selectors);
-
-          if (element) {
-            element.classList.add(className);
-          }
-        },
-
-        removeClass: function (selectors, className) {
-          let element = document.querySelector(selectors);
-
-          if (element) {
-            element.classList.remove(className);
-          }
-        }
-      };
-
-      // 부드러운 스크롤 함수 정의
-      function backToTop() {
-        const position = document.documentElement.scrollTop || document.body.scrollTop;
-        if (position) {
-          window.requestAnimationFrame(() => {
-            window.scrollTo(0, position - position / 5); // 점진적으로 스크롤 이동
-            backToTop(); // 재귀 호출
-          });
-        }
-      }
-
-      // DOM이 준비된 후에 스크립트 실행
-      document.addEventListener('DOMContentLoaded', function () {
-        module.ScrollTopButtonView();
-      });
-
-    </script>
-
-    <script>
-      $(document).ready(function () {
-        $('#searchInput').on('input', function () {
-          const query = $(this).val().trim();
-
-          if (query.length > 0) {
-            $.ajax({
-              url: '/ajax/searchTitles',  // 서버의 엔드포인트
-              type: 'GET',
-              data: {query: query},     // 검색어를 서버로 전달
-              success: function (data) {
-                showAutocompleteResults(data);  // 서버에서 받은 결과를 보여줌
-              },
-              error: function (xhr, status, error) {
-                console.error('자동완성 요청 실패:', error);
-              }
-            });
-          } else {
-            clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
-          }
-        });
-      });
-
-      let nowIndex = -1;  // 현재 선택된 항목을 추적
-      let matchDataList = [];  // 자동완성 항목을 저장하는 배열
-
-      function showAutocompleteResults(results) {
-        const autocompleteList = $('#autocompleteList');
-
-        if (results.length > 0) {
-          autocompleteList.css('display', 'block');
-          autocompleteList.empty();  // 기존 결과 제거
-        }
-        nowIndex = -1;  // 새 목록이 생기면 포커스 초기화
-
-        matchDataList = results;  // 결과 저장
-
-        results.forEach(function (item, index) {
-          const div = $('<div></div>').text(item.book);  // 객체의 book 필드를 텍스트로 표시
-          div.attr('data-index', index);  // 각 div에 인덱스 부여
-          div.on('click', function () {
-            selectAutocompleteItem(item.book);  // 선택한 항목을 반영하고 검색 실행
-          });
-          autocompleteList.append(div);
-        });
-      }
-
-      function selectAutocompleteItem(book) {
-        $('#searchInput').val(book);  // 선택된 제목을 입력 필드에 반영
-        clearAutocompleteList();  // 자동완성 목록 지우기
-        executeSearch();  // 검색 실행
-      }
-
-      function clearAutocompleteList() {
-        const clearlist = $('#autocompleteList');  // 자동완성 목록 비우기
-        clearlist.css('display', 'none');
-        clearlist.empty();
-        nowIndex = -1;  // 포커스 초기화
-
-      }
-
-      function executeSearch() {
-        const query = $('#searchInput').val().trim();
-        if (query.length > 0) {
-          console.log("Searching for:", query);
-          ajaxSearchParams.searchQuery = query;
-          loadPage(1);
-        }
-      }
-
-      // 키보드 입력 처리
-      $('#searchInput').on('keydown', function (event) {
-        const items = $('#autocompleteList div');
-
-        switch (event.keyCode) {
-            // UP KEY
-          case 38:
-            event.preventDefault();  // 기본 동작 방지
-            if (nowIndex === -1) {
-              nowIndex = items.length - 1;  // 현재 포커스가 없을 때 마지막 항목으로 이동
-            } else {
-              nowIndex = nowIndex === 0 ? -1 : nowIndex - 1;  // 첫 번째 항목에서 위로 가면 포커스 해제
-            }
-            addActive(items);
-            break;
-
-            // DOWN KEY
-          case 40:
-            event.preventDefault();  // 기본 동작 방지
-            nowIndex = nowIndex === items.length - 1 ? -1 : nowIndex + 1;  // 마지막 인덱스에서 아래로 가면 포커스 해제
-            addActive(items);
-            // 자동완성창 비활성화 + 텍스트바에 텍스트 있을때 아래방향키 누르면 자동완성창 다시 열리게 하는 기능 만들기
-            break;
-
-            // ENTER KEY
-          case 13:
-            event.preventDefault();  // 기본 동작 방지
-            if (nowIndex > -1 && matchDataList[nowIndex]) {
-              selectAutocompleteItem(matchDataList[nowIndex].book);  // 현재 선택된 항목 반영
-            } else {
-              executeSearch();  // 목록에서 선택하지 않고 바로 엔터 시 검색 실행
-            }
-            break;
-
-            // ESC, LEFT, RIGHT KEYS
-          case 27:  // ESC 키
-          case 37:  // LEFT KEY
-          case 39:  // RIGHT KEY
-            clearAutocompleteList();  // 자동완성 목록 해제
-            break;
-
-            // 그외 입력은 초기화
-          default:
-            nowIndex = -1;
-            break;
-        }
-      });
-
-      // 선택된 항목에 활성화 효과를 추가하는 함수
-      function addActive(items) {
-        if (!items || items.length === 0) return;
-        removeActive(items);  // 모든 항목에서 active 제거
-
-        if (nowIndex >= items.length || nowIndex === -1) return;  // 인덱스가 -1일 때는 포커스 해제
-        items.eq(nowIndex).addClass('autocomplete-active');  // 현재 선택된 항목에 active 클래스 추가
-      }
-
-      // 선택된 항목에서 활성화 효과를 제거하는 함수
-      function removeActive(items) {
-        items.removeClass('autocomplete-active');  // 모든 항목에서 active 클래스 제거
-      }
-
-      // 입력 필드가 포커스를 잃으면 자동완성 목록 해제
-      $('#searchInput').on('blur', function () {
-        clearAutocompleteList();  // 포커스를 잃으면 자동완성 목록 제거
-      });
-    </script>
-
-
-    <jsp:include page="../includes/footer.jsp"/>
-    <script src="/resources/js/booklist_ajax.js"></script>
-    <script src="/resources/js/category_ajax.js"></script>
-
 </div>
 </body>
+<jsp:include page="../includes/footer.jsp"/>
+
+<script type="text/javascript">
+  $(document).ready(
+      function () {
+        // 모달 열기 함수
+        function openModal(modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'block';
+          }
+        }
+
+        // 모달 닫기 함수
+        function closeModal(modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        }
+
+        // 모달 열기 이벤트 설정
+        document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
+          const targetModalId = button.getAttribute('data-target');
+          button.addEventListener('click', function () {
+            openModal(targetModalId); // 모달 열기
+          });
+        });
+
+        // 모달 닫기 이벤트 설정
+        document.querySelectorAll('.modal .close').forEach(function (closeButton) {
+          const modalId = closeButton.closest('.modal').id;
+          closeButton.addEventListener('click', function () {
+            closeModal(modalId); // 모달 닫기
+          });
+        });
+
+        $("#executeAdvancedSearch").on("click", function () {
+          // 고급 검색 조건 수집
+          var advancedParams = {
+            searchType: $('#searchType').val() || null,  // 검색 기준
+            searchQuery: $('#keyword').val(),
+            publicationDateRange: $('#publicationDateRange').val() || null,  // 출판일 범위
+            minRating: $('#ratingRange').val() || null,  // 최소 평점
+            maxPrice: $('#maxPrice').val() || null  // 최대 가격
+          };
+          // loadPage 호출
+          loadPage(1, advancedParams);
+          $("#advancedSearchModal").modal('hide');  // 모달 닫기
+        });
+      });
+
+  let isPageMode = false;
+  let maxPage = 1;
+
+  function toggleFunction() {
+    $('#toggleButton').tooltip('hide');
+
+    // 토글 상태 변경
+    isPageMode = !isPageMode;
+
+    // 토글 상태에 따라 placeholder 변경
+    const searchInput = document.getElementById('searchInput');
+    const toggleButton = document.getElementById('toggleButton');
+    const toggleButton2 = document.getElementById('toggleButton2');
+    searchInput.value = '';
+    searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '제목 간편검색';
+    toggleButton.setAttribute('title', isPageMode ? '검색모드로 전환합니다.' : '페이지 이동 모드로 전환합니다.');
+    toggleButton2.setAttribute('title', !isPageMode ? '검색을 시작합니다.' : '페이지를 이동합니다.');
+    toggleButton2.textContent = (!isPageMode ? '검색' : '이동');
+    $(toggleButton).tooltip('dispose').tooltip();
+    $(toggleButton2).tooltip('dispose').tooltip();
+
+    // 디자인 클래스 적용
+    if (isPageMode) {
+      searchInput.classList.remove('search-mode');
+      searchInput.classList.add('page-mode');
+      toggleButton.classList.remove('toggle-search');
+      toggleButton.classList.add('toggle-page');
+      toggleButton2.classList.remove('toggle-search2');
+      toggleButton2.classList.add('toggle-page');
+    } else {
+      searchInput.classList.remove('page-mode');
+      searchInput.classList.add('search-mode');
+      toggleButton.classList.remove('toggle-page');
+      toggleButton.classList.add('toggle-search');
+      toggleButton2.classList.remove('toggle-page');
+      toggleButton2.classList.add('toggle-search2');
+    }
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const searchInput = $('#searchInput');
+    const query = searchInput.val().trim();
+
+    // 숫자만 입력되었는지 정규식으로 검증
+    const isNumeric = /^\d+$/.test(query);
+    const pageNumber = parseInt(query, 10);
+
+    if (isPageMode) {
+      if (isNumeric && pageNumber >= 1 && pageNumber <= maxPage) {
+        loadPage(pageNumber); // AJAX로 페이지 로드
+      } else {
+        showTooltip(searchInput, `1부터 ${maxPage} 사이의 유효한 숫자를 입력하세요.`);
+      }
+    } else {
+      loadPage(1, undefined, query);
+    }
+  }
+
+  function showTooltip(element, message) {
+    element.tooltip('dispose')
+    .attr('title', message)
+    .tooltip({trigger: 'manual'})
+    .tooltip('show');
+
+    setTimeout(() => {
+      element.tooltip('hide');
+    }, 3000);
+  }
+
+  function titleSearchHandler(event) {
+    event.preventDefault(); // 폼 기본 제출 방지
+    const searchQuery = document.getElementById('searchInput').value.trim();
+    loadPage(1, undefined, searchQuery);
+  }
+
+  function changeButtonText(element) {
+    document.getElementById('dropdownMenuButton').textContent = element.textContent;
+  }
+
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
+</script>
+<script>
+  const module = {
+    clickButtonTop: function (selectors) {
+      const toTop = document.querySelector(selectors);
+
+      if (toTop) {
+        toTop.addEventListener('click', () => {
+          backToTop(); // 부드러운 스크롤 함수 호출
+        });
+      }
+    },
+
+    ScrollTopButtonView: function () {
+      // 페이지가 완전히 로드된 후 실행
+      window.addEventListener('load', () => {
+        const topButton = document.querySelector('.back_to_top');
+        let y = window.scrollY;
+
+        // 초기 상태 설정: 스크롤 위치에 따라 TOP 버튼 표시 여부 결정
+        if (y >= 400) {
+          module.addClass('.back_to_top', 'on');
+        } else {
+          module.removeClass('.back_to_top', 'on');
+        }
+
+        // 스크롤 이벤트 리스너 추가
+        window.addEventListener('scroll', () => {
+          y = window.scrollY;
+          if (y >= 400) {
+            module.addClass('.back_to_top', 'on');
+          } else {
+            module.removeClass('.back_to_top', 'on');
+          }
+        });
+
+        // 버튼의 클릭 이벤트 설정
+        this.clickButtonTop('.back_to_top');
+      });
+    },
+
+    addClass: function (selectors, className) {
+      let element = document.querySelector(selectors);
+
+      if (element) {
+        element.classList.add(className);
+      }
+    },
+
+    removeClass: function (selectors, className) {
+      let element = document.querySelector(selectors);
+
+      if (element) {
+        element.classList.remove(className);
+      }
+    }
+  };
+
+  // 부드러운 스크롤 함수 정의
+  function backToTop() {
+    const position = document.documentElement.scrollTop || document.body.scrollTop;
+    if (position) {
+      window.requestAnimationFrame(() => {
+        window.scrollTo(0, position - position / 5); // 점진적으로 스크롤 이동
+        backToTop(); // 재귀 호출
+      });
+    }
+  }
+
+  // DOM이 준비된 후에 스크립트 실행
+  document.addEventListener('DOMContentLoaded', function () {
+    module.ScrollTopButtonView();
+  });
+
+</script>
+
+<script>
+  $(document).ready(function () {
+    $('#searchInput').on('input', function () {
+      const query = $(this).val().trim();
+
+      if (query.length > 0) {
+        $.ajax({
+          url: '/ajax/searchTitles',  // 서버의 엔드포인트
+          type: 'GET',
+          data: {query: query},     // 검색어를 서버로 전달
+          success: function (data) {
+            showAutocompleteResults(data);  // 서버에서 받은 결과를 보여줌
+          },
+          error: function (xhr, status, error) {
+            console.error('자동완성 요청 실패:', error);
+          }
+        });
+      } else {
+        clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
+      }
+    });
+  });
+
+  let nowIndex = -1;  // 현재 선택된 항목을 추적
+  let matchDataList = [];  // 자동완성 항목을 저장하는 배열
+
+  function showAutocompleteResults(results) {
+    const autocompleteList = $('#autocompleteList');
+
+    if (results.length > 0) {
+      autocompleteList.css('display', 'block');
+      autocompleteList.empty();  // 기존 결과 제거
+    }
+    nowIndex = -1;  // 새 목록이 생기면 포커스 초기화
+
+    matchDataList = results;  // 결과 저장
+
+    results.forEach(function (item, index) {
+      const div = $('<div></div>').text(item.book);  // 객체의 book 필드를 텍스트로 표시
+      div.attr('data-index', index);  // 각 div에 인덱스 부여
+      div.on('click', function () {
+        selectAutocompleteItem(item.book);  // 선택한 항목을 반영하고 검색 실행
+      });
+      autocompleteList.append(div);
+    });
+  }
+
+  function selectAutocompleteItem(book) {
+    $('#searchInput').val(book);  // 선택된 제목을 입력 필드에 반영
+    clearAutocompleteList();  // 자동완성 목록 지우기
+    executeSearch();  // 검색 실행
+  }
+
+  function clearAutocompleteList() {
+    const clearlist = $('#autocompleteList');  // 자동완성 목록 비우기
+    clearlist.css('display', 'none');
+    clearlist.empty();
+    nowIndex = -1;  // 포커스 초기화
+
+  }
+
+  function executeSearch() {
+    const query = $('#searchInput').val().trim();
+    if (query.length > 0) {
+      console.log("Searching for:", query);
+      ajaxSearchParams.searchQuery = query;
+      loadPage(1);
+    }
+  }
+
+  // 키보드 입력 처리
+  $('#searchInput').on('keydown', function (event) {
+    const items = $('#autocompleteList div');
+
+    switch (event.keyCode) {
+        // UP KEY
+      case 38:
+        event.preventDefault();  // 기본 동작 방지
+        if (nowIndex === -1) {
+          nowIndex = items.length - 1;  // 현재 포커스가 없을 때 마지막 항목으로 이동
+        } else {
+          nowIndex = nowIndex === 0 ? -1 : nowIndex - 1;  // 첫 번째 항목에서 위로 가면 포커스 해제
+        }
+        addActive(items);
+        break;
+
+        // DOWN KEY
+      case 40:
+        event.preventDefault();  // 기본 동작 방지
+        nowIndex = nowIndex === items.length - 1 ? -1 : nowIndex + 1;  // 마지막 인덱스에서 아래로 가면 포커스 해제
+        addActive(items);
+        // 자동완성창 비활성화 + 텍스트바에 텍스트 있을때 아래방향키 누르면 자동완성창 다시 열리게 하는 기능 만들기
+        break;
+
+        // ENTER KEY
+      case 13:
+        event.preventDefault();  // 기본 동작 방지
+        if (nowIndex > -1 && matchDataList[nowIndex]) {
+          selectAutocompleteItem(matchDataList[nowIndex].book);  // 현재 선택된 항목 반영
+        } else {
+          executeSearch();  // 목록에서 선택하지 않고 바로 엔터 시 검색 실행
+        }
+        break;
+
+        // ESC, LEFT, RIGHT KEYS
+      case 27:  // ESC 키
+      case 37:  // LEFT KEY
+      case 39:  // RIGHT KEY
+        clearAutocompleteList();  // 자동완성 목록 해제
+        break;
+
+        // 그외 입력은 초기화
+      default:
+        nowIndex = -1;
+        break;
+    }
+  });
+
+  // 선택된 항목에 활성화 효과를 추가하는 함수
+  function addActive(items) {
+    if (!items || items.length === 0) return;
+    removeActive(items);  // 모든 항목에서 active 제거
+
+    if (nowIndex >= items.length || nowIndex === -1) return;  // 인덱스가 -1일 때는 포커스 해제
+    items.eq(nowIndex).addClass('autocomplete-active');  // 현재 선택된 항목에 active 클래스 추가
+  }
+
+  // 선택된 항목에서 활성화 효과를 제거하는 함수
+  function removeActive(items) {
+    items.removeClass('autocomplete-active');  // 모든 항목에서 active 클래스 제거
+  }
+
+  // 입력 필드가 포커스를 잃으면 자동완성 목록 해제
+  $('#searchInput').on('blur', function () {
+    clearAutocompleteList();  // 포커스를 잃으면 자동완성 목록 제거
+  });
+</script>
+
+<script src="/resources/js/booklist_ajax.js"></script>
+<script src="/resources/js/category_ajax.js"></script>
+
 </html>

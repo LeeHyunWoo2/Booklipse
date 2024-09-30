@@ -10,9 +10,11 @@ import kr.co.librarylyh.domain.BookListVO;
 import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.ListPageDTO;
 import kr.co.librarylyh.domain.Paging;
+import kr.co.librarylyh.mapper.BookListMapper;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class BookListRestController {
 
   private final BookListService service;
+
+  private BookListMapper mapper; // 매퍼 인터페이스 직접 주입 (서비스는 아닌 로직이라서 즉시 매퍼로 직행시킴)
 
   // 책 목록 조회 (페이징 및 필터 적용)
   @GetMapping(value = "/booklist", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -131,20 +135,27 @@ public class BookListRestController {
   @PutMapping("/book/{isbn13}")
   public ResponseEntity<String> modifyBook(@PathVariable("isbn13") Long isbn13,
       @RequestParam("bookData") String bookData,
+      @RequestParam("imageUploadType") String imageUploadType,  // 수정: 이미지 업로드 타입 추가
+      @RequestParam(value = "photoUrl", required = false) String photoUrl,  // 수정: URL 파라미터 추가
       @RequestParam(value = "file", required = false) MultipartFile file) {
     try {
+      ObjectMapper objectMapper = new ObjectMapper();
+      objectMapper.registerModule(new JavaTimeModule());
+
       // 기존 책 정보 로드
       BookListVO currentBook = service.get(isbn13);
 
       // 수정된 책 정보 변환
-      BookListVO updatedBook = new ObjectMapper().readValue(bookData, BookListVO.class);
+      BookListVO updatedBook =  objectMapper.readValue(bookData, BookListVO.class);
 
-      // 파일 처리 (새 파일이 있을 경우)
-      if (file != null && !file.isEmpty()) {
+      // 이미지 업로드 타입에 따른 처리
+      if ("url".equals(imageUploadType) && photoUrl != null) {
+        updatedBook.setPhoto(photoUrl);  // URL 방식으로 이미지 설정
+      } else if ("file".equals(imageUploadType) && file != null && !file.isEmpty()) {
         String savedFileName = handleFileUpload(file);
-        updatedBook.setPhoto(savedFileName);  // 새 이미지 파일 이름 설정
+        updatedBook.setPhoto(savedFileName);  // 파일 업로드 방식으로 이미지 설정
       } else {
-        updatedBook.setPhoto(currentBook.getPhoto());  // 기존 파일 이름 유지
+        updatedBook.setPhoto(currentBook.getPhoto());  // 기존 이미지 유지
       }
 
       // 책 정보 수정
@@ -161,7 +172,7 @@ public class BookListRestController {
   public ResponseEntity<String> removeBook(@PathVariable("isbn13") Long isbn13) {
     try {
       service.remove(isbn13);
-      return new ResponseEntity<>("success", HttpStatus.NO_CONTENT);
+      return new ResponseEntity<>("success", HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
     }
@@ -177,6 +188,16 @@ public class BookListRestController {
     file.transferTo(saveFile);  // 파일 저장
 
     return savedFileName;  // 저장된 파일 이름 반환
+  }
+
+
+  @RequestMapping(value = "/checkIsbn", method = RequestMethod.GET)
+  @ResponseBody
+  public Map<String, Boolean> checkIsbnExists(@RequestParam("isbn13") Long isbn13) {
+    int count = mapper.checkIsbnExists(isbn13);
+    Map<String, Boolean> response = new HashMap<>();
+    response.put("isDuplicate", count > 0);
+    return response;
   }
 
 }

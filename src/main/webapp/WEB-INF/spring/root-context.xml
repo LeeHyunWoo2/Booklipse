@@ -59,6 +59,8 @@
 	<mybatis-spring:scan base-package="kr.co.librarylyh.mapper"/>
 	<!-- mybatis에서 자동으로 처리할 패키지 명시  -->
 
+	<context:component-scan base-package="kr.co.librarylyh.mapper"></context:component-scan>
+
 	<context:component-scan base-package="kr.co.librarylyh.service"></context:component-scan>	<!-- 스프링에서 @Service 를 찾는다. -->
 
 	<context:component-scan base-package="kr.co.librarylyh.aop"></context:component-scan>	<!--  AOP 설정 추가 -->
