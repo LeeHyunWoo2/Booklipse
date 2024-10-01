@@ -40,38 +40,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.5">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/mapper/BookListMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/service/BookListServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/root-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/includes/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/controller/BookListControllerTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/controller/BookListRestControllerTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/mapper/BookListMapperTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kr/co/librarylyh/service/BookListServiceTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/aop/LoggingAspect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/aop/LoggingAspect.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/service/BookListServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListControllerTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/controller/BookListRestControllerTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/mapper/BookListMapperTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/kr/co/librarylyh/service/BookListServiceTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +84,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1.0.4" />
+        <entry key="$PROJECT_DIR$" value="1.0.5" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -136,7 +117,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -191,7 +172,8 @@
     "ShowUsagesActions.previewPropertyKey": "true",
     "Smart Tomcat.Library.executor": "Run",
     "database.data.extractors.current.export.id": "SQL-Insert-Statements.sql.groovy",
-    "git-widget-placeholder": "master",
+    "font_size": "14",
+    "git-widget-placeholder": "1.0.6",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/workspace/3_TeamProject-Library-/src/main/webapp/WEB-INF/spring/root-context.xml",
@@ -203,11 +185,12 @@
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "notes": "document.addEventListener('DOMContentLoaded', function () {\n  let isImageOrUrlValid = false;  // 기본 상태 설정\n\n  // 파일 선택 시 미리보기 업데이트 및 유효성 검사\n  document.getElementById('fileInput').addEventListener('change', function (event) {\n    let files = event.target.files;\n    let previewContainer = document.getElementById('preview');\n    if (files && files[0]) {\n      var reader = new FileReader();\n      reader.onload = function (e) {\n        let imgElement = document.createElement('img');\n        imgElement.src = e.target.result;\n        imgElement.alt = \"Uploaded Image\";\n        previewContainer.innerHTML = '';  // 기존의 프리뷰를 삭제\n        previewContainer.appendChild(imgElement);\n      };\n      reader.readAsDataURL(files[0]);  // 파일을 읽어 미리보기 생성\n      isImageOrUrlValid = true;  // 파일이 선택된 경우 유효 상태로 설정\n    } else {\n      previewContainer.innerHTML = '';  // 파일 선택 취소 시 미리보기 제거\n      isImageOrUrlValid = false;  // 파일이 선택되지 않은 경우 유효하지 않은 상태\n    }\n  });\n\n  // URL 입력 시 유효성 검사\n  document.getElementById('photoUrl').addEventListener('input', function () {\n    const urlValue = this.value.trim();\n    if (urlValue) {\n      isImageOrUrlValid = true;  // URL 값이 입력된 경우 유효 상태로 설정\n    } else {\n      isImageOrUrlValid = false;  // URL 값이 비어있으면 유효하지 않은 상태\n    }\n  });\n\n  // 라디오 버튼 전환 시 기존 데이터 초기화\n  $('input[name=\"imageUploadType\"]').on('change', function () {\n    const selectedType = $(this).val();\n    if (selectedType === 'url') {\n      $('#photoUrl').val('');  // URL 필드 초기화\n      $('#fileInput').val('');  // 파일 필드 초기화\n      isImageOrUrlValid = false;  // 유효하지 않은 상태로 초기화\n      $('#preview').hide();  // 파일 미리보기 숨기기\n      $('#imageUrlInput').show();\n      $('#imageFileInput').hide();\n    } else {\n      $('#photoUrl').val('');  // URL 필드 초기화\n      $('#fileInput').val('');  // 파일 필드 초기화\n      isImageOrUrlValid = false;  // 유효하지 않은 상태로 초기화\n      $('#preview').show();\n      $('#imageUrlInput').hide();\n      $('#imageFileInput').show();\n    }\n  });\n\n  // 최종 유효성 검사 시 플래그 확인\n  document.getElementById('bookForm').addEventListener('submit', function (e) {\n    if (!isImageOrUrlValid) {\n      alert('이미지 파일 또는 URL 중 하나를 입력해야 합니다.');\n      e.preventDefault();\n    }\n  });\n});\n",
     "project.structure.last.edited": "전역 라이브러리",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2977941",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "inlay.hints",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
     "two.files.diff.last.used.file": "D:/workspace/3_TeamProject-Library-/src/main/webapp/WEB-INF/spring/root-context.xml",
     "vue.rearranger.settings.migration": "true"
   },
@@ -680,6 +663,20 @@
       <workItem from="1727570440619" duration="8317000" />
       <workItem from="1727578863976" duration="11751000" />
       <workItem from="1727599430876" duration="16629000" />
+      <workItem from="1727654886584" duration="3346000" />
+      <workItem from="1727658260424" duration="269000" />
+      <workItem from="1727658541507" duration="67000" />
+      <workItem from="1727658618885" duration="360000" />
+      <workItem from="1727658996546" duration="21670000" />
+      <workItem from="1727680813333" duration="2896000" />
+      <workItem from="1727686095495" duration="31000" />
+      <workItem from="1727687075004" duration="1000" />
+      <workItem from="1727699863459" duration="1785000" />
+      <workItem from="1727701690925" duration="7000" />
+      <workItem from="1727701938236" duration="5593000" />
+      <workItem from="1727707922279" duration="1549000" />
+      <workItem from="1727741329734" duration="1126000" />
+      <workItem from="1727742569275" duration="29513000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -761,7 +758,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727336426457</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1.0.5">
+      <option name="closed" value="true" />
+      <created>1727654957147</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727654957147</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

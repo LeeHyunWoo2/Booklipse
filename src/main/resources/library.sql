@@ -59,7 +59,3 @@ CREATE INDEX idx_publication_date ON book_tbl (publicationDate);
 CREATE INDEX idx_book_category_isbn ON book_category_tbl (isbn13);
 -- book_category_tbl의 categoryId 에 대한 인덱스
 CREATE INDEX idx_book_categoryId ON book_category_tbl (categoryId);
-
-
-SELECT b.*, bd.* FROM book_tbl b LEFT JOIN book_detail_tbl bd ON b.isbn13 = bd.isbn13
-WHERE b.isbn13 = 9791186906071;

@@ -114,7 +114,19 @@
 <section class="bookinfo">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${bookDetail.photo}" alt="..." /></div>
+            <div class="col-md-6">
+                <c:choose>
+                    <c:when test="${empty bookDetail.photo}">
+                        <img class="card-img-top mb-5 mb-md-0" src="" alt="${bookDetail.book}">
+                    </c:when>
+                    <c:when test="${bookDetail.photo.startsWith('http')}">
+                        <img class="card-img-top mb-5 mb-md-0" src="${bookDetail.photo}" alt="${bookDetail.book}">
+                    </c:when>
+                    <c:otherwise>
+                        <img class="card-img-top mb-5 mb-md-0" src="/library/books/${bookDetail.photo}" alt="${bookDetail.book}">
+                    </c:otherwise>
+                </c:choose>
+            </div>
             <div class="col-md-6">
                 <div class="small mb-1"><c:out value="${bookDetail.publisher}"/></div>
                 <h1 class="display-5 fw-bolder">${bookDetail.book}</h1>
@@ -237,6 +249,8 @@
     <p>Average Rating: <fmt:formatNumber value="${bookDetail.averageRating}" minFractionDigits="1"/></p>
 
     <p>Review Count: <c:out value="${bookDetail.reviewCount}"/></p>
+    
+    <p>사진 제목 : <c:out value="${bookDetail.photo}"/></p>
 
 
 </div>

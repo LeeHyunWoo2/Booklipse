@@ -127,8 +127,7 @@
 
   .gridcard .gridcard__image img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 225px;
     transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 
@@ -799,8 +798,10 @@
             </div>
         </div>
     </div>
-
-    <nav aria-label="Page navigation">
+    <div id="totalBook" class="col"
+         style="position: absolute; display: flex; justify-content: center; margin-top: 8px; font-size: 22px; color: #0D6EFD;">
+    </div>
+    <nav aria-label="Page navigation" class="justify-content-center">
         <ul class="pagination justify-content-center mt-5 mb-5">
         </ul>
     </nav>
@@ -818,7 +819,8 @@
 </div>
 </body>
 <jsp:include page="../includes/footer.jsp"/>
-
+<script src="/resources/js/booklist_ajax.js"></script>
+<script src="/resources/js/category_ajax.js"></script>
 <script type="text/javascript">
   $(document).ready(
       function () {
@@ -872,11 +874,16 @@
   let isPageMode = false;
   let maxPage = 1;
 
+  function totalValue() {
+    document.getElementById('totalBook').textContent = (`총 ${'${totalBook}'} 권`);
+  }
+
   function toggleFunction() {
     $('#toggleButton').tooltip('hide');
 
     // 토글 상태 변경
     isPageMode = !isPageMode;
+    console.log(isPageMode)
 
     // 토글 상태에 따라 placeholder 변경
     const searchInput = document.getElementById('searchInput');
@@ -940,15 +947,15 @@
     }, 3000);
   }
 
-  function titleSearchHandler(event) {
+/*  function titleSearchHandler(event) {
     event.preventDefault(); // 폼 기본 제출 방지
     const searchQuery = document.getElementById('searchInput').value.trim();
     loadPage(1, undefined, searchQuery);
-  }
+  }*/
 
-  function changeButtonText(element) {
+/*  function changeButtonText(element) {
     document.getElementById('dropdownMenuButton').textContent = element.textContent;
-  }
+  }*/
 
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -1032,25 +1039,26 @@
 
 <script>
   $(document).ready(function () {
-    $('#searchInput').on('input', function () {
-      const query = $(this).val().trim();
+      $('#searchInput').on('input', function () {
+        const query = $(this).val().trim();
 
-      if (query.length > 0) {
-        $.ajax({
-          url: '/ajax/searchTitles',  // 서버의 엔드포인트
-          type: 'GET',
-          data: {query: query},     // 검색어를 서버로 전달
-          success: function (data) {
-            showAutocompleteResults(data);  // 서버에서 받은 결과를 보여줌
-          },
-          error: function (xhr, status, error) {
-            console.error('자동완성 요청 실패:', error);
-          }
-        });
-      } else {
-        clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
-      }
-    });
+        if (query.length > 0) {
+          $.ajax({
+            url: '/ajax/searchTitles',  // 서버의 엔드포인트
+            type: 'GET',
+            data: {query: query},     // 검색어를 서버로 전달
+            success: function (data) {
+              showAutocompleteResults(data);  // 서버에서 받은 결과를 보여줌
+            },
+            error: function (xhr, status, error) {
+              console.error('자동완성 요청 실패:', error);
+            }
+          });
+        } else {
+          clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
+        }
+      });
+
   });
 
   let nowIndex = -1;  // 현재 선택된 항목을 추적
@@ -1059,7 +1067,7 @@
   function showAutocompleteResults(results) {
     const autocompleteList = $('#autocompleteList');
 
-    if (results.length > 0) {
+    if (results.length > 0 && !isPageMode) {
       autocompleteList.css('display', 'block');
       autocompleteList.empty();  // 기존 결과 제거
     }
@@ -1095,8 +1103,8 @@
     const query = $('#searchInput').val().trim();
     if (query.length > 0) {
       console.log("Searching for:", query);
-      ajaxSearchParams.searchQuery = query;
-      loadPage(1);
+      currentSearchQuery = query;
+      loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
     }
   }
 
@@ -1167,8 +1175,137 @@
     clearAutocompleteList();  // 포커스를 잃으면 자동완성 목록 제거
   });
 </script>
+<script>
+  var inputArea = document.getElementById("searchInput"),
+      suggestionsBox = document.getElementById("autocompleteList"),
+      len = result.length,
+      lastSuggestionIndex, suggestionElements, isNavigating = false, sBoxHeight = 0;
 
-<script src="/resources/js/booklist_ajax.js"></script>
-<script src="/resources/js/category_ajax.js"></script>
+  function hideSuggestionsBox() {
+    suggestionsBox.innerHTML = "";
+    suggestionsBox.style.display = "none";
+  }
+
+  inputArea.onkeyup = function() {
+    if (isNavigating) {
+      return;
+    }
+
+    var q = this.value,
+        suggestions = [];
+
+    if (q.length === 0) {
+      hideSuggestionsBox();
+      return;
+    }
+
+    suggestionsBox.innerHTML = "";
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].toLowerCase().indexOf(q.toLowerCase()) !== -1) {
+        suggestions.push('<li>' + list[i] + '</li>');
+      }
+    }
+
+    if (suggestions.length === 0) {
+      suggestionsBox.innerHTML = "<div>No results found!</div>";
+    }
+    else {
+      suggestionsBox.innerHTML = '<ul>' + suggestions.join("") + '</ul>';
+      lastSuggestionIndex = suggestions.length - 1;
+      suggestionElements = suggestionsBox.childNodes[0].childNodes;
+      sIndex = -1;
+    }
+
+    suggestionsBoxClicked = false;
+    suggestionsBox.style.display = "block";
+    suggestionHighlighted = -1;
+    sBoxHeight = suggestionsBox.clientHeight;
+    suggestionsBox.scrollTop = 0
+  }
+
+  suggestionsBox.onclick = function (e) {
+    // if clicked on a suggestion, select it
+    if (e.target.nodeName === "LI") {
+      inputArea.value = e.target.innerHTML;
+      hideSuggestionsBox();
+    }
+  }
+
+  var suggestionsBoxClicked = false;
+  suggestionsBox.onmousedown = function(e) {
+    suggestionsBoxClicked = true;
+    e.preventDefault();
+    setTimeout(function() {
+      suggestionsBoxClicked = false;
+    }, 0);
+  }
+
+  inputArea.onblur = function () {
+    if (!suggestionsBoxClicked) {
+      suggestionsBox.style.display = "none";
+    }
+  }
+
+  var sIndex = -1;
+
+  function synchroniseSuggestionsBox() {
+    var sOffsetTop = suggestionElements[sIndex].offsetTop,
+        sHeight = suggestionElements[sIndex].clientHeight;
+
+    if ((sOffsetTop + sHeight - suggestionsBox.scrollTop) > sBoxHeight) {
+      suggestionsBox.scrollTop = sOffsetTop + sHeight - sBoxHeight
+    }
+    else if (suggestionsBox.scrollTop > sOffsetTop) {
+      suggestionsBox.scrollTop = sOffsetTop
+    }
+  }
+
+  inputArea.onkeydown = function (e) {
+    isNavigating = false;
+
+    // down key is pressed
+    if (e.keyCode === 40) {
+      isNavigating = true;
+      if (sIndex === -1) {
+        suggestionElements[++sIndex].classList.add("hl");
+      }
+      else if (sIndex === lastSuggestionIndex) {
+        suggestionElements[sIndex].classList.remove("hl");
+        sIndex = -1;
+      }
+      else {
+        suggestionElements[sIndex].classList.remove("hl");
+        suggestionElements[++sIndex].classList.add("hl");
+      }
+      if (sIndex !== -1) synchroniseSuggestionsBox();
+    }
+
+    else if (e.keyCode === 38) {
+      isNavigating = true;
+      if (sIndex === -1) {
+        sIndex = lastSuggestionIndex;
+        suggestionElements[sIndex].classList.add("hl");
+      }
+      else if (sIndex === 0) {
+        suggestionElements[sIndex].classList.remove("hl");
+        sIndex = -1;
+      }
+      else {
+        suggestionElements[sIndex].classList.remove("hl");
+        suggestionElements[--sIndex].classList.add("hl");
+      }
+      if (sIndex !== -1) synchroniseSuggestionsBox();
+    }
+
+    else if (e.keyCode === 13) {
+      isNavigating = true;
+      if (sIndex !== -1) {
+        inputArea.value = suggestionElements[sIndex].innerHTML;
+        hideSuggestionsBox();
+      }
+    }
+  }
+</script>
 
 </html>

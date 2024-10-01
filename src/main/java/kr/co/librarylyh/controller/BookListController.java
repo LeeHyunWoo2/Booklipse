@@ -1,7 +1,10 @@
 package kr.co.librarylyh.controller;
 
 import com.google.gson.Gson;
-import java.net.MalformedURLException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import kr.co.librarylyh.domain.BookListVO;
@@ -96,23 +99,38 @@ public class BookListController {
 
 
 	// 파일 제공 메서드 추가
-	@GetMapping("/files/{filename:.+}")  // 파일 경로 매핑
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	@GetMapping("/books/{filename:.+}")
+	public ResponseEntity<Resource> serveBookImage(@PathVariable String filename) {
 		try {
-			Path file = Paths.get("D:/upload/books/").resolve(filename).normalize();
-			Resource resource = new UrlResource(file.toUri());
+			// 경로 변수 디코딩
+			String decodedFilename = URLDecoder.decode(filename, StandardCharsets.UTF_8.toString());
 
+			// 디코딩된 파일명을 사용하여 경로 설정
+			Path file = Paths.get("D:/upload/books/").resolve(decodedFilename).normalize();
+
+			// 파일 존재 여부 확인
+			Resource resource = new UrlResource(file.toUri());
 			if (!resource.exists()) {
-				return ResponseEntity.notFound().build();
+				return ResponseEntity.notFound().build();  // 파일이 없으면 404 반환
 			}
 
+			// 원본 파일명 추출 (UUID_제거)
+			String originalFilename = decodedFilename.substring(
+					decodedFilename.indexOf('_') + 1);  // UUID_ 제거
+			System.out.println("원본 파일명: " + originalFilename);  // 원본 파일명 출력
+
+			// 브라우저에서 다운로드 시 표시할 파일명 설정 (UTF-8 인코딩)
+			String encodedFilename = URLEncoder.encode(originalFilename, "UTF-8");
+			String contentDisposition = "inline; filename=\"" + encodedFilename + "\"";
+
 			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+					.header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+					.header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(file))
 					.body(resource);
 
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().build();
 		}
 	}
-
 }

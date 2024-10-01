@@ -14,7 +14,6 @@ import kr.co.librarylyh.mapper.BookListMapper;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -120,7 +119,6 @@ public class BookListRestController {
       bookListVO.setIsbn13(isbn13);
       log.info(isbn13);
 
-
       // 책 정보 추가
       service.add(bookListVO);
       return new ResponseEntity<>("success", HttpStatus.CREATED);
@@ -146,14 +144,21 @@ public class BookListRestController {
       BookListVO currentBook = service.get(isbn13);
 
       // 수정된 책 정보 변환
-      BookListVO updatedBook =  objectMapper.readValue(bookData, BookListVO.class);
+      BookListVO updatedBook = objectMapper.readValue(bookData, BookListVO.class);
 
       // 이미지 업로드 타입에 따른 처리
       if ("url".equals(imageUploadType) && photoUrl != null) {
         updatedBook.setPhoto(photoUrl);  // URL 방식으로 이미지 설정
-      } else if ("file".equals(imageUploadType) && file != null && !file.isEmpty()) {
-        String savedFileName = handleFileUpload(file);
-        updatedBook.setPhoto(savedFileName);  // 파일 업로드 방식으로 이미지 설정
+      } else if ("file".equals(imageUploadType) && file != null) {
+        // 파일이 비어있거나 크기가 0인 경우 기존 파일명 유지
+        if (file.isEmpty() || file.getSize() == 0) {
+          System.out.println("파일이 비어있으므로 기존 이미지 파일명을 유지합니다.");
+          updatedBook.setPhoto(currentBook.getPhoto());  // 기존 파일명 유지
+        } else {
+          // 새로운 파일이 업로드된 경우에만 UUID 파일명 생성
+          String savedFileName = handleFileUpload(file);
+          updatedBook.setPhoto(savedFileName);  // 파일 업로드 방식으로 이미지 설정
+        }
       } else {
         updatedBook.setPhoto(currentBook.getPhoto());  // 기존 이미지 유지
       }
@@ -180,14 +185,27 @@ public class BookListRestController {
 
   private String handleFileUpload(MultipartFile file) throws IOException {
     String originalFileName = file.getOriginalFilename();
-    String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-    String savedFileName = UUID.randomUUID() + fileExtension;
 
-    String uploadDir = "D:/upload/books";  // 파일 저장 경로
+    // 경로 인젝션 방지 및 파일명 안전 처리
+    if (originalFileName.contains("..")) {
+      throw new IOException("인젝션당한다고!! : " + originalFileName);
+    }
+
+    // 정규식을 통해 한글, 영어, 숫자, 일부 특수문자만 허용
+    String safeFileName = originalFileName.replaceAll("[^a-zA-Z0-9ㄱ-ㅎ가-힣.\\-_]", "_");
+
+    // UUID와 원본 파일명 결합
+    String savedFileName = UUID.randomUUID().toString() + "_" + safeFileName;
+
+    // 파일 저장 경로 설정
+    String uploadDir = "D:/upload/books/";
     File saveFile = new File(uploadDir + savedFileName);
-    file.transferTo(saveFile);  // 파일 저장
 
-    return savedFileName;  // 저장된 파일 이름 반환
+    // 파일 저장
+    file.transferTo(saveFile);
+
+    // 저장된 파일명 반환
+    return savedFileName;
   }
 
 

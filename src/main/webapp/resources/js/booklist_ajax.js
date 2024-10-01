@@ -103,6 +103,7 @@ function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`,
           renderBookGrid(data.list);
         }
         renderPaging(data);
+        totalValue();
       } else {
         alert('데이터를 불러오지 못했습니다.');
       }
@@ -158,8 +159,7 @@ radioButtons.forEach(function(radio) {
 function renderBookList(bookList) {
   const listBox = $('.list_wrap');
   listBox.empty();
-  console.log('bookList:', bookList);
-  bookList.forEach(function (book, index) {
+  bookList.forEach(function (book) {
     const rentalStatus = book.rentalAvailable === 'Y' ? '가능' : '불가능'; // Y 또는 N에 따라 텍스트 설정
     const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red'; // 색상 설정
     const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);'; // 대여 가능 여부에 따른 흑백 처리
@@ -168,11 +168,11 @@ function renderBookList(bookList) {
        <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
         <div class="row g-0">
           <div class="col-md-4">
-             <img src="${book.photo.startsWith('http') ? book.photo : '/books/' + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
+             <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/' + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
           </div>
           <div class="col-md-8">
             <div class="listcard-body">
-              <p class="booktitle" data-end-value="" >(${index + 1}) ${book.book}</p>
+              <p class="booktitle" data-end-value="" > ${book.book}</p>
               <div class="info-line">
                 <span class="author">${book.author}</span>
                 <span class="publisher">${book.publisher}</span>
@@ -226,16 +226,23 @@ function renderBookGrid(bookList) {
   gridBox.empty();
   console.log('bookList:', bookList);
   bookList.forEach(function (book, index) {
+    const rentalStatus = book.rentalAvailable === 'Y' ? '가능' : '불가능';
+    const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red';
+    const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);';
     const bookItem = `
-            <div class="gridcard" data-isbn="${book.isbn13}">
+            <div class="gridcard" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
                 <div class="gridcard__image">
+                <div style="display: flex; justify-content: center">
                     <span class="img position-absolute border border-dark">
-                        <img src="${book.photo}" class="img-fluid rounded-start" alt="${book.book}">
+                        <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/' + book.photo}"
+                         class="img-fluid rounded-start" alt="${book.book}" style="${imageFilter}">
                     </span>
+                    </div>
                     <div class="gridcard__content">
                         <p class="gridcard__title">(${index + 1}) ${book.book}</p>
                         <p class="gridcard__text">${book.author}</p>
                         <p class="gridcard__text">${book.publisher}</p>
+                        <span class="rentalAvailable" style="position: absolute; left: 70%;">대여 : <span style="color: ${rentalColor};">${rentalStatus}</span></span>
                         <p class="gridcard__text">발행일 : ${book.publicationDate}</p>
                     </div>
                 </div>
@@ -244,16 +251,27 @@ function renderBookGrid(bookList) {
         `;
     gridBox.append(bookItem);
   });
+  $('.gridcard').each(function () {
 
+  const isable = $(this).data('able');
+  if ( isable === 'N'){
+    $(this).on('mouseenter', function() {
+      $(this).find('.img-fluid').css('filter', 'none');
+    });
+    $(this).on('mouseleave', function() {
+      $(this).find('.img-fluid').css('filter', 'grayscale(100%)');
+    });
+  }
+  })
   $('.gridcard').on('click', function () {
     const isbn = $(this).data('isbn');
     window.location.href = `/library/read/${isbn}`;
   });
 }
 
-
 function renderPaging(pageData) {
   const pagingBox = $('.pagination');
+  totalBook = pageData.total;
   pagingBox.empty();
 
   const firstPageItem = `<li class="page-item ${pageData.startPage === 1 ? 'disabled' : ''}">
