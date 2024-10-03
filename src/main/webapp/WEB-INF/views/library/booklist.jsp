@@ -202,12 +202,14 @@
     border: 2px solid #28a745 !important; /* 테두리 색상 */
     border-radius: 5px !important; /* 모서리 둥글게 */
     background-color: #fff !important; /* 배경색 */
+    min-width: 500px; !important;
   }
 
   .page-mode {
     border: 2px solid #dc3545 !important; /* 점선 테두리 */
     border-radius: 5px !important; /* 모서리 더 둥글게 */
     background-color: #fff !important; /* 연한 회색 배경 */
+    min-width: 300px; !important;
   }
 
   .toggle-search {
@@ -446,8 +448,9 @@
     border: 1px solid #d4d4d4;
     background-color: white;
     z-index: 1000; /* 다른 요소들 위에 나타나도록 설정 */
-    max-height: 250px; /* 최대 높이 설정, 스크롤 가능 */
+    max-height: 242px; /* 최대 높이 설정, 스크롤 가능 */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: auto;
     display: none;
   }
 
@@ -457,14 +460,26 @@
     background-color: #fff;
   }
 
-  .autocomplete-items div:hover {
-    background-color: #e9e9e9;
+  .autocompleteul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .autocomplete-active {
-    background-color: #e0e5f6;
+  .autocompleteli, #autocompleteList div {
     color: #000;
+    padding: 8px;
   }
+
+  .autocompleteli:hover {
+    background-color: #c8dbff;
+  }
+
+  .autocompleteli.hl {
+    background-color: #c8dbff;
+  }
+
+
 
   .rebutton {
     --main2-focus: #2d8cf0;
@@ -584,9 +599,8 @@
   .PB-range-slidervalue {
     font-weight: 600;
   }
-
-
 </style>
+
 <head>
     <title>도서목록</title>
     <meta charset="utf-8">
@@ -604,8 +618,6 @@
 <body class="booklist">
 
 <div class="super_container">
-
-
     <div class="home2">
         <div class="home_background_container prlx_parent">
             <div class="home_background prlx2"
@@ -642,16 +654,15 @@
                         d="M35.3 12.7c-2.89-2.9-6.88-4.7-11.3-4.7-8.84 0-15.98 7.16-15.98 16s7.14 16 15.98 16c7.45 0 13.69-5.1 15.46-12h-4.16c-1.65 4.66-6.07 8-11.3 8-6.63 0-12-5.37-12-12s5.37-12 12-12c3.31 0 6.28 1.38 8.45 3.55l-6.45 6.45h14v-14l-4.7 4.7z"></path><path
                         d="M0 0h48v48h-48z" fill="none"></path></svg></span>
             </button>
-            <form class="form-inline mt-1 mb-1" onsubmit="handleFormSubmit(event)">
+            <form class="form-inline mt-1 mb-1" onsubmit="handleFormSubmit(event)" style="display: flex; justify-content: center">
                 <button id="toggleButton" type="button"
                         class="btn btn-outline-danger mr-2 my-sm-2 toggle-mode"
                         onclick="toggleFunction()"
                         data-toggle="tooltip" data-placement="top" title="검색모드로 전환합니다.">페이지 이동
                 </button>
 
-                <input id="searchInput" class="form-control search-mode mr-sm-2" type="search"
-                       placeholder="제목 간편검색"
-                       aria-label="Search" required>
+                <input id="searchInput" class="form-control search-mode mr-sm-2" type="text"
+                       placeholder="간편검색" aria-label="Search" required>
                 <div id="autocompleteList" class="autocomplete-items"></div>
 
                 <button id="toggleButton2" class="btn btn-outline-success my-2 my-sm-0 toggle-mode"
@@ -676,7 +687,7 @@
 
             </div>
         </nav>
-        <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="collapse navbar-collapse show" id="navbarToggle">
             <div class="bg-light p-5" style="min-height: 100px">
                 <div class="btn-group" role="group">
                     <button id="dropdownMenuButton" type="button"
@@ -743,14 +754,9 @@
                                         </select>
                                     </div>
                                     <!-- 가격 범위 (일반 텍스트 박스) -->
+
                                     <div class="form-group">
-                                        <label for="minPrice">최소 가격</label>
-                                        <input type="text" class="form-control" id="minPrice"
-                                               name="minPrice"
-                                               placeholder="최소 가격">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="maxPrice">최대 가격</label>
+                                        <label for="maxPrice">최대 가격(도서관이지만 기능구현을 위해 넣어봄)</label>
                                         <input type="text" class="form-control" id="maxPrice"
                                                name="maxPrice"
                                                placeholder="최대 가격">
@@ -890,7 +896,7 @@
     const toggleButton = document.getElementById('toggleButton');
     const toggleButton2 = document.getElementById('toggleButton2');
     searchInput.value = '';
-    searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '제목 간편검색';
+    searchInput.placeholder = isPageMode ? '페이지 입력 1 ~ ' + maxPage + '' : '간편검색';
     toggleButton.setAttribute('title', isPageMode ? '검색모드로 전환합니다.' : '페이지 이동 모드로 전환합니다.');
     toggleButton2.setAttribute('title', !isPageMode ? '검색을 시작합니다.' : '페이지를 이동합니다.');
     toggleButton2.textContent = (!isPageMode ? '검색' : '이동');
@@ -947,15 +953,15 @@
     }, 3000);
   }
 
-/*  function titleSearchHandler(event) {
-    event.preventDefault(); // 폼 기본 제출 방지
-    const searchQuery = document.getElementById('searchInput').value.trim();
-    loadPage(1, undefined, searchQuery);
-  }*/
+  /*  function titleSearchHandler(event) {
+      event.preventDefault(); // 폼 기본 제출 방지
+      const searchQuery = document.getElementById('searchInput').value.trim();
+      loadPage(1, undefined, searchQuery);
+    }*/
 
-/*  function changeButtonText(element) {
-    document.getElementById('dropdownMenuButton').textContent = element.textContent;
-  }*/
+  /*  function changeButtonText(element) {
+      document.getElementById('dropdownMenuButton').textContent = element.textContent;
+    }*/
 
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -1039,272 +1045,184 @@
 
 <script>
   $(document).ready(function () {
-      $('#searchInput').on('input', function () {
-        const query = $(this).val().trim();
-
-        if (query.length > 0) {
-          $.ajax({
-            url: '/ajax/searchTitles',  // 서버의 엔드포인트
-            type: 'GET',
-            data: {query: query},     // 검색어를 서버로 전달
-            success: function (data) {
-              showAutocompleteResults(data);  // 서버에서 받은 결과를 보여줌
-            },
-            error: function (xhr, status, error) {
-              console.error('자동완성 요청 실패:', error);
-            }
-          });
-        } else {
-          clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
-        }
-      });
-
+    $('#searchInput').on('input', function () {
+      const query = $(this).val().trim();
+      if (query.length > 0) {
+        $.ajax({
+          url: '/ajax/searchTitles',  // 서버의 엔드포인트
+          type: 'GET',
+          data: {query: query},     // 검색어를 서버로 전달
+          success: function (data) {
+            // 1. `book` 컬럼만 추출하여 `matchDataList`에 저장
+            matchDataList = data.map(item => item.book);
+/*            // 2. `book`과 `author`를 조합하여 새로운 문자열로 `matchDataList`에 저장
+            matchDataList = data.map(item => `${item.book} (${item.author})`);*/
+            inputArea.onkeyup();
+          },
+          error: function (xhr, status, error) {
+            console.error('자동완성 요청 실패:', error);
+          }
+        });
+      } else {
+        clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
+      }
+    });
   });
 
-  let nowIndex = -1;  // 현재 선택된 항목을 추적
+  let inputArea = document.getElementById('searchInput');
+  let autocompleteList = document.getElementById('autocompleteList');
   let matchDataList = [];  // 자동완성 항목을 저장하는 배열
+  let nowIndex = -1;  // 현재 선택된 항목을 추적
+  let isNavigating = false;
+  let autoBoxHeight = 0;
+  let lastAutoCompleteIndex, autoCompleteElements;
+  let autocompleteListClicked = false;
+  let originalInputValue = ''; // 사용자가 원래 입력했던 인풋내용을 저장하는 변수
 
-  function showAutocompleteResults(results) {
-    const autocompleteList = $('#autocompleteList');
-
-    if (results.length > 0 && !isPageMode) {
-      autocompleteList.css('display', 'block');
-      autocompleteList.empty();  // 기존 결과 제거
-    }
-    nowIndex = -1;  // 새 목록이 생기면 포커스 초기화
-
-    matchDataList = results;  // 결과 저장
-
-    results.forEach(function (item, index) {
-      const div = $('<div></div>').text(item.book);  // 객체의 book 필드를 텍스트로 표시
-      div.attr('data-index', index);  // 각 div에 인덱스 부여
-      div.on('click', function () {
-        selectAutocompleteItem(item.book);  // 선택한 항목을 반영하고 검색 실행
-      });
-      autocompleteList.append(div);
-    });
-  }
-
-  function selectAutocompleteItem(book) {
-    $('#searchInput').val(book);  // 선택된 제목을 입력 필드에 반영
-    clearAutocompleteList();  // 자동완성 목록 지우기
-    executeSearch();  // 검색 실행
-  }
 
   function clearAutocompleteList() {
-    const clearlist = $('#autocompleteList');  // 자동완성 목록 비우기
-    clearlist.css('display', 'none');
-    clearlist.empty();
-    nowIndex = -1;  // 포커스 초기화
-
+    // 자동완성 목록을 완전히 숨기기
+    autocompleteList.innerHTML = '';  // 기존 목록 비우기
+    autocompleteList.style.display = 'none';
   }
 
-  function executeSearch() {
-    const query = $('#searchInput').val().trim();
-    if (query.length > 0) {
-      console.log("Searching for:", query);
-      currentSearchQuery = query;
-      loadPage(1, `b.publicationDate ${currentSortOrder}`, currentSearchQuery, currentCategoryId, currentAmount);
-    }
-  }
-
-  // 키보드 입력 처리
-  $('#searchInput').on('keydown', function (event) {
-    const items = $('#autocompleteList div');
-
-    switch (event.keyCode) {
-        // UP KEY
-      case 38:
-        event.preventDefault();  // 기본 동작 방지
-        if (nowIndex === -1) {
-          nowIndex = items.length - 1;  // 현재 포커스가 없을 때 마지막 항목으로 이동
-        } else {
-          nowIndex = nowIndex === 0 ? -1 : nowIndex - 1;  // 첫 번째 항목에서 위로 가면 포커스 해제
-        }
-        addActive(items);
-        break;
-
-        // DOWN KEY
-      case 40:
-        event.preventDefault();  // 기본 동작 방지
-        nowIndex = nowIndex === items.length - 1 ? -1 : nowIndex + 1;  // 마지막 인덱스에서 아래로 가면 포커스 해제
-        addActive(items);
-        // 자동완성창 비활성화 + 텍스트바에 텍스트 있을때 아래방향키 누르면 자동완성창 다시 열리게 하는 기능 만들기
-        break;
-
-        // ENTER KEY
-      case 13:
-        event.preventDefault();  // 기본 동작 방지
-        if (nowIndex > -1 && matchDataList[nowIndex]) {
-          selectAutocompleteItem(matchDataList[nowIndex].book);  // 현재 선택된 항목 반영
-        } else {
-          executeSearch();  // 목록에서 선택하지 않고 바로 엔터 시 검색 실행
-        }
-        break;
-
-        // ESC, LEFT, RIGHT KEYS
-      case 27:  // ESC 키
-      case 37:  // LEFT KEY
-      case 39:  // RIGHT KEY
-        clearAutocompleteList();  // 자동완성 목록 해제
-        break;
-
-        // 그외 입력은 초기화
-      default:
-        nowIndex = -1;
-        break;
-    }
-  });
-
-  // 선택된 항목에 활성화 효과를 추가하는 함수
-  function addActive(items) {
-    if (!items || items.length === 0) return;
-    removeActive(items);  // 모든 항목에서 active 제거
-
-    if (nowIndex >= items.length || nowIndex === -1) return;  // 인덱스가 -1일 때는 포커스 해제
-    items.eq(nowIndex).addClass('autocomplete-active');  // 현재 선택된 항목에 active 클래스 추가
-  }
-
-  // 선택된 항목에서 활성화 효과를 제거하는 함수
-  function removeActive(items) {
-    items.removeClass('autocomplete-active');  // 모든 항목에서 active 클래스 제거
-  }
-
-  // 입력 필드가 포커스를 잃으면 자동완성 목록 해제
-  $('#searchInput').on('blur', function () {
-    clearAutocompleteList();  // 포커스를 잃으면 자동완성 목록 제거
-  });
-</script>
-<script>
-  var inputArea = document.getElementById("searchInput"),
-      suggestionsBox = document.getElementById("autocompleteList"),
-      len = result.length,
-      lastSuggestionIndex, suggestionElements, isNavigating = false, sBoxHeight = 0;
-
-  function hideSuggestionsBox() {
-    suggestionsBox.innerHTML = "";
-    suggestionsBox.style.display = "none";
-  }
-
-  inputArea.onkeyup = function() {
-    if (isNavigating) {
+  inputArea.onkeyup = function (){
+    if (isNavigating){
       return;
     }
 
-    var q = this.value,
-        suggestions = [];
+    let q = this.value, autoCompletes = [];
 
-    if (q.length === 0) {
-      hideSuggestionsBox();
+    if (q.length === 0){
+      clearAutocompleteList();
       return;
     }
 
-    suggestionsBox.innerHTML = "";
+    autocompleteList.innerHTML = "";
 
-    for (var i = 0; i < list.length; i++) {
-      if (list[i].toLowerCase().indexOf(q.toLowerCase()) !== -1) {
-        suggestions.push('<li>' + list[i] + '</li>');
+    for (let i = 0; i < matchDataList.length; i++){
+      if (matchDataList[i].toLowerCase().indexOf(q.toLowerCase()) !== -1) {
+        autoCompletes.push('<li class="autocompleteli">' + matchDataList[i] + '</li>');
       }
     }
 
-    if (suggestions.length === 0) {
-      suggestionsBox.innerHTML = "<div>No results found!</div>";
+    if (autoCompletes.length === 0){
+      clearAutocompleteList();
+    } else {
+      autocompleteList.innerHTML = '<ul class="autocompleteul">' + autoCompletes.join("") + '<ul>';
+      autocompleteList.style.display = "block";
+      lastAutoCompleteIndex = autoCompletes.length -1;
+      autoCompleteElements = autocompleteList.childNodes[0].childNodes;
+      nowIndex = -1;
     }
-    else {
-      suggestionsBox.innerHTML = '<ul>' + suggestions.join("") + '</ul>';
-      lastSuggestionIndex = suggestions.length - 1;
-      suggestionElements = suggestionsBox.childNodes[0].childNodes;
-      sIndex = -1;
-    }
-
-    suggestionsBoxClicked = false;
-    suggestionsBox.style.display = "block";
-    suggestionHighlighted = -1;
-    sBoxHeight = suggestionsBox.clientHeight;
-    suggestionsBox.scrollTop = 0
+    autocompleteListClicked = false;
+    autoBoxHeight = autocompleteList.clientHeight;
+    autocompleteList.scrollTop = 0
   }
 
-  suggestionsBox.onclick = function (e) {
-    // if clicked on a suggestion, select it
+  autocompleteList.onclick = function (e) {
+    // 클릭 시 해당 검색어 선택
     if (e.target.nodeName === "LI") {
       inputArea.value = e.target.innerHTML;
-      hideSuggestionsBox();
+      clearAutocompleteList();
     }
   }
 
-  var suggestionsBoxClicked = false;
-  suggestionsBox.onmousedown = function(e) {
-    suggestionsBoxClicked = true;
+  autocompleteList.onmousedown = function (e){
+    autocompleteListClicked = true;
     e.preventDefault();
-    setTimeout(function() {
-      suggestionsBoxClicked = false;
+    setTimeout(function (){
+      autocompleteListClicked = false;
     }, 0);
   }
-
-  inputArea.onblur = function () {
-    if (!suggestionsBoxClicked) {
-      suggestionsBox.style.display = "none";
+  
+  inputArea.onblur = function (){
+    if (!autocompleteListClicked){
+      autocompleteList.style.display = "none";
     }
   }
 
-  var sIndex = -1;
+  function synchroniseautocompleteList() {
+    var sOffsetTop = autoCompleteElements[nowIndex].offsetTop,
+        sHeight = autoCompleteElements[nowIndex].clientHeight;
 
-  function synchroniseSuggestionsBox() {
-    var sOffsetTop = suggestionElements[sIndex].offsetTop,
-        sHeight = suggestionElements[sIndex].clientHeight;
-
-    if ((sOffsetTop + sHeight - suggestionsBox.scrollTop) > sBoxHeight) {
-      suggestionsBox.scrollTop = sOffsetTop + sHeight - sBoxHeight
+    if ((sOffsetTop + sHeight - autocompleteList.scrollTop) > autoBoxHeight) {
+      autocompleteList.scrollTop = sOffsetTop + sHeight - autoBoxHeight
     }
-    else if (suggestionsBox.scrollTop > sOffsetTop) {
-      suggestionsBox.scrollTop = sOffsetTop
+    else if (autocompleteList.scrollTop > sOffsetTop) {
+      autocompleteList.scrollTop = sOffsetTop
     }
   }
 
   inputArea.onkeydown = function (e) {
     isNavigating = false;
 
-    // down key is pressed
-    if (e.keyCode === 40) {
-      isNavigating = true;
-      if (sIndex === -1) {
-        suggestionElements[++sIndex].classList.add("hl");
+    // 자동완성 리스트가 표시되고 있을 때만 방향키의 기본 동작 막기
+    if (autocompleteList.style.display === "block") {
+      if (e.keyCode === 40 || e.keyCode === 38) { // Down(40) / Up(38) Arrow keys
+        e.preventDefault();  // 기본 동작(커서 이동) 막기
       }
-      else if (sIndex === lastSuggestionIndex) {
-        suggestionElements[sIndex].classList.remove("hl");
-        sIndex = -1;
-      }
-      else {
-        suggestionElements[sIndex].classList.remove("hl");
-        suggestionElements[++sIndex].classList.add("hl");
-      }
-      if (sIndex !== -1) synchroniseSuggestionsBox();
     }
 
-    else if (e.keyCode === 38) {
+    if (e.keyCode === 40) { // 아래 방향키
       isNavigating = true;
-      if (sIndex === -1) {
-        sIndex = lastSuggestionIndex;
-        suggestionElements[sIndex].classList.add("hl");
+      if (nowIndex === -1) {
+        originalInputValue = inputArea.value; // 현재 인풋값을 저장
+        autoCompleteElements[++nowIndex].classList.add("hl");
+        inputArea.value = matchDataList[nowIndex]; // 현재 인덱스의 자동완성 항목을 안풋창에 반영
       }
-      else if (sIndex === 0) {
-        suggestionElements[sIndex].classList.remove("hl");
-        sIndex = -1;
+      else if (nowIndex === lastAutoCompleteIndex) {
+        autoCompleteElements[nowIndex].classList.remove("hl");
+        nowIndex = -1;
+        inputArea.value = originalInputValue; // 마지막 항목에서 빠져나오면 원래대로 복귀
       }
       else {
-        suggestionElements[sIndex].classList.remove("hl");
-        suggestionElements[--sIndex].classList.add("hl");
+        autoCompleteElements[nowIndex].classList.remove("hl");
+        autoCompleteElements[++nowIndex].classList.add("hl");
+        inputArea.value = matchDataList[nowIndex];
       }
-      if (sIndex !== -1) synchroniseSuggestionsBox();
+      if (nowIndex !== -1) synchroniseautocompleteList();
     }
 
-    else if (e.keyCode === 13) {
+    else if (e.keyCode === 38) { // 위 방향키
       isNavigating = true;
-      if (sIndex !== -1) {
-        inputArea.value = suggestionElements[sIndex].innerHTML;
-        hideSuggestionsBox();
+      if (nowIndex === -1) {
+        originalInputValue = inputArea.value;
+        nowIndex = lastAutoCompleteIndex;
+        autoCompleteElements[nowIndex].classList.add("hl");
+        inputArea.value = matchDataList[nowIndex];
+      }
+      else if (nowIndex === 0) {
+        autoCompleteElements[nowIndex].classList.remove("hl");
+        nowIndex = -1;
+        inputArea.value = originalInputValue; // 첫항목에서 벗어나면....
+      }
+      else {
+        autoCompleteElements[nowIndex].classList.remove("hl");
+        autoCompleteElements[--nowIndex].classList.add("hl");
+        inputArea.value = matchDataList[nowIndex];
+      }
+      if (nowIndex !== -1) synchroniseautocompleteList();
+    }
+
+    else if (e.keyCode === 13) { // 엔터키
+      isNavigating = true;
+      if (nowIndex !== -1) {
+        inputArea.value = matchDataList[nowIndex];
+        clearAutocompleteList();
+      } else if (nowIndex === -1){
+        // 자동완성 목록에 포커싱하지 않고 엔터를 쳤을경우에도 자동완성 목록을 닫음
+        clearAutocompleteList();
       }
     }
+
+    else if (e.keyCode === 37 || e.keyCode === 39){ // 좌 우 방향키
+      if (nowIndex !== -1){ // 자동완성 목록에 포커싱중일경우 작동
+        inputArea.value = originalInputValue; // 원래대로 되돌림
+      }
+    }
+
+
   }
 </script>
 

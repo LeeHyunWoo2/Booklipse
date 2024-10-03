@@ -40,7 +40,6 @@ public class BookListRestController {
       @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
       @RequestParam(value = "amount", defaultValue = "10") int amount,
       @RequestParam(value = "categoryId", required = false) String categoryId,
-      @RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
       @RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
       @RequestParam(value = "searchQuery", required = false) String searchQuery,
       @RequestParam(value = "sort", defaultValue = "b.publicationDate DESC") String sort) {
@@ -51,7 +50,6 @@ public class BookListRestController {
     // 검색 조건들을 맵으로 전달
     Map<String, Object> searchParams = new HashMap<>();
     searchParams.put("categoryId", categoryId);
-    searchParams.put("rentalAvailable", rentalAvailable);
     searchParams.put("publicationDateFilter", publicationDateFilter);
     searchParams.put("searchQuery", searchQuery);
     searchParams.put("sort", sort); // 정렬 옵션 추가

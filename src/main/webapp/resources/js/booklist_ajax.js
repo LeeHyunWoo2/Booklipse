@@ -48,12 +48,10 @@ function toggleSortOrder() {
 
 function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`, searchQuery = '', categoryId = currentCategoryId, amount = currentAmount) {
   const searchParams = new URLSearchParams(window.location.search);
-  const rentalAvailable = $("input[name='rentalAvailable']").is(":checked") ? 'Y' : '';
   const publicationDateFilter = $("select[name='publicationDateFilter']").val() || '';
 
   currentCategoryId = categoryId;
 
-  if (rentalAvailable) updateURLParam('rentalAvailable', rentalAvailable, false);
   if (publicationDateFilter) updateURLParam('publicationDateFilter', publicationDateFilter, false);
   if (categoryId) updateURLParam('category', categoryId, false); // URL에는 'category'로 표시
 
@@ -82,7 +80,6 @@ function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`,
     data: {
       pageNum: pageNum,
       amount: amount,
-      rentalAvailable: rentalAvailable,
       publicationDateFilter: publicationDateFilter,
       categoryId: categoryId,
       searchQuery: searchQuery,
@@ -168,7 +165,8 @@ function renderBookList(bookList) {
        <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
         <div class="row g-0">
           <div class="col-md-4">
-             <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/' + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
+             <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/'
+        + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
           </div>
           <div class="col-md-8">
             <div class="listcard-body">
@@ -189,7 +187,8 @@ function renderBookList(bookList) {
           </div>
         </div>
       </div>
-      <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href = '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
+      <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href =
+       '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
         `;
     listBox.append(bookItem);
   });
@@ -225,7 +224,7 @@ function renderBookGrid(bookList) {
   const gridBox = $('.grid_wrap');
   gridBox.empty();
   console.log('bookList:', bookList);
-  bookList.forEach(function (book, index) {
+  bookList.forEach(function (book) {
     const rentalStatus = book.rentalAvailable === 'Y' ? '가능' : '불가능';
     const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red';
     const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);';
@@ -239,7 +238,7 @@ function renderBookGrid(bookList) {
                     </span>
                     </div>
                     <div class="gridcard__content">
-                        <p class="gridcard__title">(${index + 1}) ${book.book}</p>
+                        <p class="gridcard__title">${book.book}</p>
                         <p class="gridcard__text">${book.author}</p>
                         <p class="gridcard__text">${book.publisher}</p>
                         <span class="rentalAvailable" style="position: absolute; left: 70%;">대여 : <span style="color: ${rentalColor};">${rentalStatus}</span></span>
@@ -247,7 +246,8 @@ function renderBookGrid(bookList) {
                     </div>
                 </div>
             </div>
-            <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href = '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
+            <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href =
+             '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
         `;
     gridBox.append(bookItem);
   });
@@ -346,7 +346,6 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
     document.getElementById('searchInput').value = '';
 
     // URL 파라미터 초기화
-    updateURLParam('rentalAvailable', '');
     updateURLParam('publicationDateFilter', '');
     updateURLParam('searchQuery', '', true);
 

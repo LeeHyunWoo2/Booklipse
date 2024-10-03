@@ -41,7 +41,6 @@ public class BookListController {
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "amount", defaultValue = "10") int amount,
 			@RequestParam(value = "categoryId", required = false) String categoryId,
-			@RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
 			@RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
 			Model model) {
 
@@ -51,9 +50,6 @@ public class BookListController {
 		// 필터 조건이 있을 경우에만 searchParams에 추가 (필터 설정 안할때 URL 난장판되길래 만듦)
 		if (categoryId != null && !categoryId.isEmpty()) {
 			searchParams.put("categoryId", categoryId);
-		}
-		if (rentalAvailable != null && !rentalAvailable.isEmpty()) {
-			searchParams.put("rentalAvailable", rentalAvailable);
 		}
 		if (publicationDateFilter != null && !publicationDateFilter.isEmpty()) {
 			searchParams.put("publicationDateFilter", publicationDateFilter);

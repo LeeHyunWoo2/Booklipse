@@ -39,20 +39,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.5">
+    <list default="true" id="9a59ba77-0b06-4eda-b95e-db8f816862b3" name="변경" comment="1.0.7  &#10;Book-related controller, XML, and JSP updates&#10;&#10;- BookListRestController 업데이트: 이미지 업로드 처리 방식 개선 및 파일명 안전 처리 추가.&#10;- web.xml 수정: XML 폼매팅 개선.&#10;- BookListController에 파일 제공 메서드 추가 및 경로 안전 처리.&#10;- bookManagement.jsp에 필드 유효성 검사, UI 및 인터랙션 개선.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kr/co/librarylyh/controller/BookListRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/library.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookDetail.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/bookManagement.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/booklist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/library/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/booklist_ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/controller/BookListRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kr/co/librarylyh/mapper/BookListMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/library.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/library.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,15 +74,15 @@
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="Class" />
-        <option value="Jsp File" />
         <option value="AnnotationType" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="1.0.5" />
+        <entry key="$PROJECT_DIR$" value="1.0.6" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -190,7 +188,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2977941",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "two.files.diff.last.used.file": "D:/workspace/3_TeamProject-Library-/src/main/webapp/WEB-INF/spring/root-context.xml",
     "vue.rearranger.settings.migration": "true"
   },
@@ -676,7 +674,17 @@
       <workItem from="1727701938236" duration="5593000" />
       <workItem from="1727707922279" duration="1549000" />
       <workItem from="1727741329734" duration="1126000" />
-      <workItem from="1727742569275" duration="29513000" />
+      <workItem from="1727742569275" duration="29779000" />
+      <workItem from="1727772691692" duration="339000" />
+      <workItem from="1727773275138" duration="200000" />
+      <workItem from="1727778504439" duration="683000" />
+      <workItem from="1727791306939" duration="4365000" />
+      <workItem from="1727827483279" duration="28419000" />
+      <workItem from="1727856559412" duration="3224000" />
+      <workItem from="1727885848089" duration="2915000" />
+      <workItem from="1727917739498" duration="4310000" />
+      <workItem from="1727922416693" duration="1500000" />
+      <workItem from="1727928660589" duration="95000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.0">
       <option name="closed" value="true" />
@@ -766,7 +774,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727654957147</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="1.0.7  &#10;Book-related controller, XML, and JSP updates&#10;&#10;- BookListRestController 업데이트: 이미지 업로드 처리 방식 개선 및 파일명 안전 처리 추가.&#10;- web.xml 수정: XML 폼매팅 개선.&#10;- BookListController에 파일 제공 메서드 추가 및 경로 안전 처리.&#10;- bookManagement.jsp에 필드 유효성 검사, UI 및 인터랙션 개선.">
+      <option name="closed" value="true" />
+      <created>1727772508827</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727772508827</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +830,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="1.0.5" />
+                        <option value="1.0.7" />
                       </list>
                     </value>
                   </entry>
@@ -833,7 +849,9 @@
     <MESSAGE value="1.0.3" />
     <MESSAGE value="1.0.4" />
     <MESSAGE value="1.0.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.5" />
+    <MESSAGE value="1.0.7" />
+    <MESSAGE value="1.0.7  &#10;Book-related controller, XML, and JSP updates&#10;&#10;- BookListRestController 업데이트: 이미지 업로드 처리 방식 개선 및 파일명 안전 처리 추가.&#10;- web.xml 수정: XML 폼매팅 개선.&#10;- BookListController에 파일 제공 메서드 추가 및 경로 안전 처리.&#10;- bookManagement.jsp에 필드 유효성 검사, UI 및 인터랙션 개선." />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.7  &#10;Book-related controller, XML, and JSP updates&#10;&#10;- BookListRestController 업데이트: 이미지 업로드 처리 방식 개선 및 파일명 안전 처리 추가.&#10;- web.xml 수정: XML 폼매팅 개선.&#10;- BookListController에 파일 제공 메서드 추가 및 경로 안전 처리.&#10;- bookManagement.jsp에 필드 유효성 검사, UI 및 인터랙션 개선." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

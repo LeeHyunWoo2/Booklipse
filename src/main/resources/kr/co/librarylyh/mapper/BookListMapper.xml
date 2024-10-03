@@ -9,7 +9,7 @@
   <sql id="searchConditions">
     <!-- 검색 조건을 동적으로 추가함 -->
     <if test="searchQuery != null and searchQuery != ''">
-      <![CDATA[ AND b.book LIKE '%'||#{searchQuery} ||'%' ]]>
+      <![CDATA[ AND LOWER(b.book) LIKE '%'|| LOWER(#{searchQuery}) ||'%' ]]>
       <!-- 책 제목에 searchQuery가 포함된 데이터를 검색 -->
     </if>
     <if test="categoryId != null and categoryId != ''">
@@ -53,9 +53,9 @@
     </if>
     <![CDATA[ ) AS rnum, b.isbn13, b.book, b.author, b.publisher, b.publicationDate AS publicationDate, b.rentalAvailable, b.price, b.averageRating
     AS averageRating, b.reviewCount, b.bookCount, b.photo FROM book_tbl b ]]>
-    <!-- 카테고리 필터가 있으면 카테고리 테이블과 LEFT JOIN -->
+    <!-- 카테고리 필터가 있으면 카테고리 테이블과 조인 -->
     <if test="categoryId != null and categoryId != ''">
-      <![CDATA[ LEFT JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 LEFT JOIN category_tbl c ON bc.categoryId = c.categoryId ]]>
+      <![CDATA[ INNER JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 INNER JOIN category_tbl c ON bc.categoryId = c.categoryId ]]>
     </if>
     <![CDATA[ WHERE 1=1 ]]>
     <!-- 공통 검색 조건 적용 -->
@@ -68,9 +68,9 @@
   <!-- 총 책 수 조회 -->
   <select id="getTotalCount" parameterType="map" resultType="int">
     <![CDATA[ SELECT COUNT(DISTINCT b.isbn13) FROM book_tbl b ]]>
-    <!-- 카테고리 필터가 있으면 카테고리 테이블과 LEFT JOIN -->
+    <!-- 카테고리 필터가 있으면 카테고리 테이블과 조인 -->
     <if test="categoryId != null and categoryId != ''">
-      <![CDATA[ LEFT JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 LEFT JOIN category_tbl c ON bc.categoryId = c.categoryId ]]>
+      <![CDATA[ INNER JOIN book_category_tbl bc ON b.isbn13 = bc.isbn13 INNER JOIN category_tbl c ON bc.categoryId = c.categoryId ]]>
     </if>
     <![CDATA[ WHERE 1=1 ]]>
     <!-- 공통 검색 조건 적용 -->
@@ -96,27 +96,31 @@
   <!-- 책과 카테고리를 book_category_tbl에 여러 개 저장 -->
   <insert id="insertBookCategories">
     <![CDATA[
-    INSERT INTO book_category_tbl (isbn13, categoryId)
-    VALUES
+    INSERT ALL
   ]]>
-    <foreach collection="categoryIds" item="categoryId" separator=",">
+    <foreach collection="categoryIds" item="categoryId">
       <![CDATA[
-      (#{isbn13, jdbcType=NUMERIC}, #{categoryId})
+      INTO book_category_tbl (isbn13, categoryId)
+      VALUES (#{isbn13, jdbcType=NUMERIC}, #{categoryId})
     ]]>
     </foreach>
+    <![CDATA[
+    SELECT 1 FROM DUAL
+  ]]>
   </insert>
+
 
 
   <!-- 책 조회 (카테고리 정보는 따로) -->
   <select id="read" parameterType="long" resultType="kr.co.librarylyh.domain.BookListVO">
-    <![CDATA[ SELECT b.*, bd.* FROM book_tbl b LEFT JOIN book_detail_tbl bd ON b.isbn13 = bd.isbn13 WHERE b.isbn13 = #{isbn13} ]]>
+    <![CDATA[ SELECT b.*, bd.* FROM book_tbl b INNER JOIN book_detail_tbl bd ON b.isbn13 = bd.isbn13 WHERE b.isbn13 = #{isbn13} ]]>
     <!-- 책과 책의 상세 정보를 함께 조회 -->
   </select>
 
   <!-- 책 조회 시 카테고리 정보 제공 -->
   <select id="readCategoriesByISBN" parameterType="long"
     resultType="kr.co.librarylyh.domain.CategoryVO">
-    <![CDATA[ SELECT c.categoryId FROM book_category_tbl bc LEFT JOIN category_tbl c ON bc.categoryId = c.categoryId WHERE bc.isbn13 = #{isbn13} ]]>
+    <![CDATA[ SELECT c.categoryId FROM book_category_tbl bc INNER JOIN category_tbl c ON bc.categoryId = c.categoryId WHERE bc.isbn13 = #{isbn13} ]]>
     <!-- 해당 책의 카테고리 정보를 조회 -->
   </select>
 
@@ -166,9 +170,9 @@
 
   <!-- 자동검색 기능용 제목검색 -->
   <select id="searchTitles" parameterType="string" resultType="kr.co.librarylyh.domain.BookListVO">
-    <![CDATA[ SELECT book, author FROM book_tbl WHERE LOWER(book) LIKE '%' || LOWER(#{query}) || '%' AND ROWNUM <= 5 ORDER BY book ASC ]]>
-    <!-- 책 제목을 검색하고, 최대 5개의 결과를 출력 -->
+    <![CDATA[ SELECT book FROM book_tbl WHERE LOWER(book) LIKE '%' || LOWER(#{query}) || '%' AND ROWNUM <= 10 ORDER BY book ASC ]]>
   </select>
+
 
   <!-- ISBN 중복 확인 -->
   <select id="checkIsbnExists" resultType="int">
