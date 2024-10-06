@@ -14,7 +14,6 @@ $(document).ready(function () {
         // 카테고리 데이터를 세션 스토리지에 저장하는 함수
         sessionStorage.setItem('categoryData', JSON.stringify(categoryData));
     }
-
     // 해당 함수는 타 jsp 파일에서도 공통적으로 사용되기 때문에 전역으로 선언하였습니다.
     // 유틸리티 파일처럼 공통적으로 사용되는 로직을 모아두는 파일을 만들었어야 했는데 이 부분이 아쉬운점으로 남습니다.
     window.getCategoryDataFromSessionStorage = function () {
@@ -23,7 +22,7 @@ $(document).ready(function () {
         return data ? JSON.parse(data) : null;
     };
 
-    // 브라우저의 뒤로가기, 앞으로가기에 대응하는 popstate 이벤트 처리
+    // 브라우저의 뒤로가기, 앞으로가기에 대응하는 popstate 이벤트 처리. 카테고리 정보가 히스토리가 변경될때 날라가는걸 확인 후 추가함
     window.addEventListener('popstate', function (event) {
         if (event.state) {
             const categoryId = event.state.categoryId;
@@ -120,8 +119,10 @@ $(document).ready(function () {
         link.setAttribute('data-category-id', category.categoryId);
 
         link.onclick = function () {
+            if (!window.location.pathname.includes('/library/manage')){
             updatePreferenceOnCategoryClick(category.categoryId, category.categoryName, level+1, 1.0);
-            // 클릭시 해당하는 카테고리의 선호도 점수 추가
+                // 클릭시 해당하는 카테고리의 선호도 점수 추가 (매니지먼트 페이지에선 비활성화)
+            }
             clearSubCategoryMenus(level + 1); // 하위 카테고리 초기화
             createSubCategoryMenu(category, level + 1); // 하위 카테고리 메뉴 생성
             updateCategoryInURL(category.categoryId); // URL에 카테고리 반영
