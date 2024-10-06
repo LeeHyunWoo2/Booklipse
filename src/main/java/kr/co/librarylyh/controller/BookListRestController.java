@@ -214,13 +214,13 @@ public class BookListRestController {
   }
 
 
-  @RequestMapping(value = "/checkIsbn", method = RequestMethod.GET)
-  @ResponseBody
+  @RequestMapping(value = "/checkIsbn", method = RequestMethod.GET, produces = "application/json")
   public Map<String, Boolean> checkIsbnExists(@RequestParam("isbn13") Long isbn13) {
+    log.info("중복검사 시작");
+    log.info("중복검사 시작" + isbn13);
     int count = mapper.checkIsbnExists(isbn13);
     Map<String, Boolean> response = new HashMap<>();
     response.put("isDuplicate", count > 0);
     return response;
   }
-
 }
