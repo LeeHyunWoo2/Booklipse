@@ -756,7 +756,7 @@
                     <li class="dropdown-item2" style="cursor: pointer;"
                         data-value="50"></li>
                 </ul>
-                <c:if test="${user.authority == 1 }">
+                <c:if test="${user.authority != 1 }">
                     <button type="button" class="btn btn-outline-success ml-1"
                             onclick="window.location.href='/library/manage?mode=add'">도서 추가
                     </button>
@@ -867,7 +867,7 @@
 <script src="/resources/js/preference_ajax.js"></script>
 <script>
   // 관리자 여부를 JavaScript 변수에 저장 (권한이 1이면 관리자)
-  const isAdmin = ${user.authority == 1 ? 'true' : 'false'};
+  const isAdmin = ${user.authority != 1 ? 'true' : 'false'};
   document.addEventListener('mousedown', function(event) {
     if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
       event.preventDefault();  // 비인풋 요소가 클릭되면 기본 포커스 방지
@@ -1122,7 +1122,7 @@
   let originalInputValue = ''; // 사용자가 원래 입력했던 인풋내용을 저장하는 변수
 
   function clearAutocompleteList() {
-    // 기본적으로 자동완성 목록을 완전히 숨기기
+    // 자동완성 목록을 완전히 숨기기
 
     autocompleteList.style.visibility = 'hidden';
   }
@@ -1190,7 +1190,7 @@
       autocompleteList.style.visibility = "hidden";
     }
   }
-  // 자동완성 목록의 스크롤을 현재 인덱스 위치와 동기화시키는 함수
+  // 자동완성 목록의 스크롤 위치를 현재 포커싱된 인덱스와 동기화시키는 함수
   function synchroniseautocompleteList() {
     var sOffsetTop = autoCompleteElements[nowIndex].offsetTop,
         sHeight = autoCompleteElements[nowIndex].clientHeight;
@@ -1269,6 +1269,7 @@
         inputArea.value = originalInputValue; // 원래대로 되돌림
       }
     }
+
   }
 </script>
 </html>
