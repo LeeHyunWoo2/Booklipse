@@ -2,6 +2,12 @@ let currentSortOrder = 'DESC';
 let currentCategoryId = ''; // 현재 선택된 카테고리 ID를 저장하는 변수
 let currentAmount = 10; // 현재 출력 개수를 저장할 전역 변수, 초기값 10
 let currentSearchQuery = '';
+// 현재 필터, 정렬 상황을 저장하는 변수
+// 이 변수들이 하나하나 나열된것, loadPage를 호출하는 부분,
+// 매번 선언되는 searchParams 부분, loadPage함수 그 자체의 복잡성 때문에
+// 동료 개발자가 혼란을 겪기 쉽겠다 판단되어 상태변수들을 객체화하고, 함수들을 좀 더 모듈화를 하는 등
+// 리팩토링을 하려 했으나 몸살 이슈로 인해 진행하지 못했습니다. 좋지 못한 코드 가독성에 미리 죄송합니다.
+
 
 $(document).ready(function() {
   const params = new URLSearchParams(window.location.search);
@@ -27,7 +33,6 @@ function changeItemsPerPageButton(event) {
   currentAmount = event ? parseInt(event.target.getAttribute('data-value')) : currentAmount; // 이벤트가 발동하면 값 갱신
   document.getElementById('itemsPerPageButton').textContent = currentAmount + '개씩 보기'; // 드롭다운 버튼의 텍스트 업데이트
   loadPage(1, `b.publicationDate ${currentSortOrder}`, '', currentCategoryId, currentAmount); // 페이지 로드
-  // if 로 리스트모드 앨범모드 파악하고 current 값 반대로 적용되는 중첩 if 문 만들고 이 로직 뜯어고치던가 지우던가 하기
 }
 
 function updateDropdownText(){
@@ -48,11 +53,11 @@ function toggleSortOrder() {
 
 function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`, searchQuery = '', categoryId = currentCategoryId, amount = currentAmount) {
   const searchParams = new URLSearchParams(window.location.search);
-  const publicationDateFilter = $("select[name='publicationDateFilter']").val() || '';
+/*  const publicationDateFilter = $("select[name='publicationDateFilter']").val() || '';*/
 
   currentCategoryId = categoryId;
 
-  if (publicationDateFilter) updateURLParam('publicationDateFilter', publicationDateFilter, false);
+ /* if (publicationDateFilter) updateURLParam('publicationDateFilter', publicationDateFilter, false);*/
   if (categoryId) updateURLParam('category', categoryId, false); // URL에는 'category'로 표시
 
   // 검색어와 페이지 번호를 URL에 반영
@@ -80,7 +85,7 @@ function loadPage(pageNum, sortOption = `b.publicationDate ${currentSortOrder}`,
     data: {
       pageNum: pageNum,
       amount: amount,
-      publicationDateFilter: publicationDateFilter,
+  /*    publicationDateFilter: publicationDateFilter,*/
       categoryId: categoryId,
       searchQuery: searchQuery,
       sort: sortOption
@@ -161,37 +166,41 @@ function renderBookList(bookList) {
     const rentalColor = book.rentalAvailable === 'Y' ? 'blue' : 'red'; // 색상 설정
     const imageFilter = book.rentalAvailable === 'Y' ? '' : 'filter: grayscale(100%);'; // 대여 가능 여부에 따른 흑백 처리
 
+    // 책 목록 HTML 생성
     const bookItem = `
-       <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
-        <div class="row g-0">
-          <div class="col-md-4">
-             <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/'
-        + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
-          </div>
-          <div class="col-md-8">
-            <div class="listcard-body">
-              <p class="booktitle" data-end-value="" > ${book.book}</p>
-              <div class="info-line">
-                <span class="author">${book.author}</span>
-                <span class="publisher">${book.publisher}</span>
-                <span class="publicationDate">발행일 : ${book.publicationDate}</span>
-                <span class="rentalAvailable">대여 가능 여부: <span style="color: ${rentalColor};">${rentalStatus}</span></span>
-              </div>
-              <div class="info-line">
-                <span class="price">정가 : ${book.price}</span>
-                <span class="bookCount">재고 수 : ${book.bookCount}</span>
-                <span class="reviewCount">리뷰 수 : ${book.reviewCount}</span>
-                <span class="averageRating">평점 : ${book.averageRating}</span>
-              </div>
+    <div class="listcard border border-secondary mb-3" data-isbn="${book.isbn13}" data-able="${book.rentalAvailable}">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${book.photo.startsWith('http') ? book.photo : '/library/books/' + book.photo}" class="listcard-image rounded-start" alt="${book.book}" style="${imageFilter}">
+        </div>
+        <div class="col-md-8">
+          <div class="listcard-body">
+            <p class="booktitle" data-end-value=""> ${book.book}</p>
+            <div class="info-line">
+              <span class="author">${book.author}</span>
+              <span class="publisher">${book.publisher}</span>
+              <span class="publicationDate">발행일 : ${book.publicationDate}</span>
+              <span class="rentalAvailable">대여 가능 여부: <span style="color: ${rentalColor};">${rentalStatus}</span></span>
+            </div>
+            <div class="info-line">
+              <span class="price">정가 : ${book.price}</span>
+              <span class="bookCount">재고 수 : ${book.bookCount}</span>
+              <span class="reviewCount">리뷰 수 : ${book.reviewCount}</span>
+              <span class="averageRating">평점 : ${book.averageRating}</span>
             </div>
           </div>
         </div>
       </div>
-      <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href =
-       '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
-        `;
-    listBox.append(bookItem);
+    </div>
+  `;
+    // 편집 버튼 생성 (관리자일 경우에만 추가)
+    const editButton = isAdmin === true ? `
+    <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href='/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
+  ` : '';
+    // 전체 HTML 요소를 결합
+    listBox.append(bookItem + editButton);
   });
+
   $('.listcard').each(function() { // 리스트 생성 후 대여 못하는거 판별
     const rentalAvailable = $(this).data('able');
 
@@ -204,13 +213,6 @@ function renderBookList(bookList) {
       $(this).on('mouseleave', function() {
         $(this).find('.listcard-image').css('filter', 'grayscale(100%)');
       });
-
-  /*  $(this).find('.listcard-image').on('mouseenter', function() {
-        $(this).css('filter', 'none');
-      });
-      $(this).find('.listcard-image').on('mouseleave', function() {
-        $(this).css('filter', 'grayscale(100%)');
-      });*/
     }
   });
   $('.listcard').on('click', function () {
@@ -246,10 +248,12 @@ function renderBookGrid(bookList) {
                     </div>
                 </div>
             </div>
+            `;
+    const editButton = isAdmin === true ? `
             <button type="button" data-isbn="${book.isbn13}" onclick="window.location.href =
              '/library/manage?mode=edit&isbn13=${book.isbn13}';" class="btn btn-outline-warning">편집</button>
-        `;
-    gridBox.append(bookItem);
+        ` : '';
+    gridBox.append(bookItem + editButton);
   });
   $('.gridcard').each(function () {
 
@@ -306,7 +310,7 @@ function renderPaging(pageData) {
 function updateURLParam(paramName, paramValue, shouldReplace = false) {
   const searchParams = new URLSearchParams(window.location.search);
 
-  if (paramName !== 'initialLoad' && paramName !== 'pageNum' && paramName !== 'sortOption') {
+  if (paramName !== 'pageNum' && paramName !== 'sortOption') {
     if (paramValue) {
       searchParams.set(paramName, paramValue);
     } else {
@@ -331,6 +335,7 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
   window.resetBookFilters = resetBookFilters;
 
   function resetBookFilters() {
+    // 이 함수를 만들면서 상태관리를 하는 로직은 따로 구현을 하거나, 상태관리를 돕는 도구의 필요성을 느꼈습니다.
 
     // 기타 필터 초기화 로직
     currentSortOrder = 'DESC';
@@ -346,7 +351,7 @@ function updateURLParam(paramName, paramValue, shouldReplace = false) {
     document.getElementById('searchInput').value = '';
 
     // URL 파라미터 초기화
-    updateURLParam('publicationDateFilter', '');
+ /*   updateURLParam('publicationDateFilter', '');*/
     updateURLParam('searchQuery', '', true);
 
     loadPage(1); // 기본 페이지 로드

@@ -31,12 +31,12 @@
 </head>
 <body>
 <jsp:include page="includes/header.jsp"/>
-<div class="error-container">
+<div class="error-container" style="margin-top: 130px; margin-bottom: 130px">
     <h1>문제가 발생했습니다</h1>
     <p>요청을 처리하는 도중 오류가 발생했습니다.</p>
     <p>오류 코드: <strong><%= request.getAttribute("javax.servlet.error.status_code") %></strong></p>
     <p>오류 메시지: <strong><%= exception != null ? exception.getMessage() : "오류 정보를 확인할 수 없습니다." %></strong></p>
-    <button onclick="history.back()">돌아가기</button>
+    <button class="btn btn-primary" onclick="history.back()">돌아가기</button>
 </div>
 <jsp:include page="includes/footer.jsp"/>
 </body>

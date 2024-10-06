@@ -3,6 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html>
 <style>
+  input[readonly], textarea[readonly] {
+    caret-color: transparent;
+  }
+
   .bookManagement * {
     font-family: "Noto Sans KR", sans-serif;
     font-optical-sizing: auto;
@@ -916,6 +920,12 @@
 <script src="/resources/js/category_ajax.js"></script>
 
 <script>
+  document.addEventListener('mousedown', function(event) {
+    if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
+      event.preventDefault();  // 비인풋 요소가 클릭되면 기본 포커스 방지
+    }
+  });
+
   let isStarRatingValid = true;
   let isCategoryValid = false;
   let isIsbnValid = false;
@@ -953,8 +963,6 @@
       closeModal();
     });
 
-
-
     // 책 추가 버튼 클릭 시 (/addBook)
     $('#confirmadd').on('click', function (e) {
       if (validateAllFields()) { // 최종 유효성 검사 통과시
@@ -983,7 +991,6 @@
       sendFormData('/book/'+isbn13, formData, 'DELETE');
     });
 
-
     function collectFormData() {
       // 전체 책 정보 객체 생성
       const bookData = {
@@ -1008,14 +1015,6 @@
         rentalAvailable: $('input[name="rentalAvailable"]:checked').val(),
         categories: selectedCategories.map(asdf => asdf.categoryId)
       };
-
-      console.log("별점 데이터:", {
-        star5Count: bookData.star5Count,
-        star4Count: bookData.star4Count,
-        star3Count: bookData.star3Count,
-        star2Count: bookData.star2Count,
-        star1Count: bookData.star1Count,
-      });
 
       // formData 객체 생성 후, 전체 데이터를 JSON 형태로 추가
       const formData = new FormData();
@@ -1089,7 +1088,7 @@
         let maxAllowed = parseInt(inputElement.max) || remainingPercentage;
         if (inputVal > maxAllowed) {
           inputVal = maxAllowed;  // 최대값 초과 시 최대값으로 강제 설정
-          console.log(`입력값이 초과되어 \${inputElement.name} 필드가 최대값(\${maxAllowed})으로 고정됨.`);
+          console.log(`입력값이 초과되어 \${inputElement.name} 필드가 최대값(\${maxAllowed})으로 고정`);
         }
 
         // 필드의 값을 최대값으로 설정
@@ -1138,11 +1137,9 @@
       if (total > 0 && total < 100) {
         starInvalidFeedback.style.display = 'block';  // 경고 메시지 표시
         isStarRatingValid = false;  // 경고가 표시되면 유효하지 않은 상태로 설정
-        console.log(`경고: 총합이 \${total}로 1~99 범위에 있음. isStarRatingValid = false`);
       } else {
         starInvalidFeedback.style.display = 'none';  // 경고 메시지 숨김
         isStarRatingValid = true;  // 총합이 0 또는 100이면 유효 상태로 설정
-        console.log('경고 메시지 숨김: 총합이 0 또는 100임. isStarRatingValid = true');
       }
     }
   });
@@ -1172,7 +1169,7 @@
         currentLowestCategoryName = selectedCategory.categoryName;
       }
     } else {
-      showToast('세션에서 카테고리 데이터를 찾을 수 없습니다. 관리자에게 문의하세요.', 'error');
+      showToast('카테고리 데이터를 찾을 수 없습니다. 관리자에게 문의하세요.', 'error');
     }
   }
 
@@ -1201,7 +1198,6 @@
       item.appendChild(removeButton);
       container.appendChild(item);
     });
-
     // 텍스트 필드 업데이트
     updateCategoryTextField();
   }
@@ -1214,6 +1210,8 @@
   }
 
   // 부모 요소인 categoryDropdownContainer에 이벤트 위임 적용 (1차 카테고리)
+  // 이후 동적으로 생성된 자식요소에서 이벤트가 발생했을때
+  // 자동으로 부모요소가 감지해서 이벤트처리를 함 => 밑에 새로 생기는거 눌러도 다 이벤트가 작동하게 해준다
   document.getElementById('categoryDropdownContainer').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.dropdown-item div')) {
       const categoryId = event.target.getAttribute('data-category-id');
@@ -1224,6 +1222,8 @@
   });
 
   // 하위 카테고리 메뉴에도 이벤트 위임 적용 (2차 카테고리 이후)
+  // 첫 카테고리는 페이지 시작부터 있는 categoryDropdownContainer 인데
+  // 2차 이후 카테고리는 subMenuWrapper 라서 따로 위임을 시킴.
   document.getElementById('subMenuWrapper').addEventListener('click', function (event) {
     if (event.target && event.target.matches('.dropdown-item div')) {
       const categoryId = event.target.getAttribute('data-category-id');
@@ -1278,7 +1278,6 @@
 
   // 카테고리 유효성 검사 함수
   function updateCategoryValidation() {
-    console.log('카테고리좀보자', selectedCategories)
     // selectedCategories 배열에 값이 하나라도 있으면 유효
     if (selectedCategories.length > 0) {
       categoryFeedback.style.display = 'none';  // 경고 메시지 숨김
@@ -1398,7 +1397,6 @@
   });
 
 </script>
-
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     // ------------------- ISBN 유효성 검사 -------------------
@@ -1435,7 +1433,7 @@
       // 0.2초 딜레이 후 중복 검사
       clearTimeout(timeout);
       timeout = setTimeout(function () {
-        fetch(`/ajax/checkIsbn?isbn13=${isbnInput.value}`)
+        fetch(`/ajax/checkIsbn?isbn13=${isbnInput.value}`) // 적힌걸 url로
         .then(response => response.text())
         .then(data => {
           if (data.isDuplicate) {
@@ -1518,7 +1516,6 @@
         // URL로 전환 시 파일 입력 필드와 미리보기 완전 초기화
         fileInput.value = '';  // 파일 입력 필드 초기화
         previewContainer.innerHTML = '';  // 파일 미리보기 삭제
-        console.log("파일 미리보기 및 입력 필드 초기화됨 (URL 전환 시)");
 
         // 유효성 상태 초기화
         isImageOrUrlValid = false;
@@ -1546,7 +1543,6 @@
     }
   });
 </script>
-
 <script>
   // 최종 유효성 검사 함수
   function validateAllFields() {
@@ -1564,16 +1560,9 @@
       isCategoryValid
     };
 
-    console.log(isStarRatingValid)
-    console.log(isIsbnValid)
-    console.log(isCategoryValid)
-    console.log(isImageOrUrlValid)
-
-    console.log(errorMessages)
     // 유효성 검사를 통과하지 못한 항목 수집
     const invalidFields = Object.entries(errorMessages)
-    // 아래의 _ 는 해당 자리의 변수를 사용하지 않겠다는 관례적으로 사용되는 변수명. 그냥 비워놔도 의도대로 작동함.
-    // 파이썬이나 스칼라같은 몇몇 언어에서 정말로 무시의 용도로 쓰이기 때문에 타 언어도 일괄로 이렇게 하는듯
+    // 아래의 _ 는 해당 자리의 변수를 사용하지 않겠다는 관례적으로 쓰이는 국룰 표시. 그냥 비워놔도 작동함.
 
     .filter(([flag, _]) => !flagValues[flag])  // 플래그가 false인 항목만 필터링
     .map(([_, message]) => message);  // 각 항목의 이름만 추출

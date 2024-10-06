@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import kr.co.librarylyh.domain.BookListVO;
 import kr.co.librarylyh.domain.CategoryVO;
-import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,10 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller // 스프링이 컨트롤러 역할을 제공
 @Log4j2
@@ -37,27 +34,7 @@ public class BookListController {
 	private BookListService service;
 
 	@GetMapping("/booklist")
-	public String booklist(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@RequestParam(value = "amount", defaultValue = "10") int amount,
-			@RequestParam(value = "categoryId", required = false) String categoryId,
-			@RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
-			Model model) {
-
-		Paging pge = new Paging(pageNum, amount);
-		Map<String, Object> searchParams = new HashMap<>();
-
-		// 필터 조건이 있을 경우에만 searchParams에 추가 (필터 설정 안할때 URL 난장판되길래 만듦)
-		if (categoryId != null && !categoryId.isEmpty()) {
-			searchParams.put("categoryId", categoryId);
-		}
-		if (publicationDateFilter != null && !publicationDateFilter.isEmpty()) {
-			searchParams.put("publicationDateFilter", publicationDateFilter);
-		}
-
-		// 기본 검색 조건에 맞는 모든 책 목록 가져오기
-		List<BookListVO> bookList = service.getListWithFiltersAndPaging(pge, searchParams);
-		model.addAttribute("bookList", bookList);
+	public String booklist() {
 		return "library/booklist"; // 책 목록 뷰로 이동
 	}
 
@@ -72,14 +49,14 @@ public class BookListController {
 	@GetMapping("/manage")
 	public String manageBook(@RequestParam(value = "isbn13", required = false) Long isbn13,
 			@RequestParam("mode") String mode, Model model) {
-		log.info("Mode: " + mode);
-		log.info("ISBN13: " + isbn13);
+    log.info("Mode: {}", mode);
+    log.info("ISBN13: {}", isbn13);
 
 		if ("edit".equals(mode) && isbn13 != null) {
 			// url의 mode가 'edit' 이고 isbn13 정보가 있다면 편집창으로 이동(isbn13을 기반으로 기존 책 정보 불러옴)
 
 			BookListVO bookDetail = service.get(isbn13);
-			log.info("Book Detail: " + bookDetail);  // 책 정보 체크용 로그
+      log.info("Book Detail: {}", bookDetail);  // 책 정보 체크용 로그
 			// 카테고리 정보를 불러옴
 			List<CategoryVO> categories = service.getCategoriesByISBN(isbn13);
 
@@ -113,7 +90,7 @@ public class BookListController {
 			// 원본 파일명 추출 (UUID_제거)
 			String originalFilename = decodedFilename.substring(
 					decodedFilename.indexOf('_') + 1);  // UUID_ 제거
-			System.out.println("원본 파일명: " + originalFilename);  // 원본 파일명 출력
+      log.info("원본 파일명: {}", originalFilename);  // 원본 파일명 출력
 
 			// 브라우저에서 다운로드 시 표시할 파일명 설정 (UTF-8 인코딩)
 			String encodedFilename = URLEncoder.encode(originalFilename, "UTF-8");

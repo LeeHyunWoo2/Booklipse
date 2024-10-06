@@ -50,7 +50,7 @@ public interface BookListMapper {
 	// 수정된 메서드: 총 카운트를 가져오는 메서드도 Map 타입 사용
 	public int getTotalCount(Map<String, Object> searchParams);
 
-	public List<BookListVO> searchTitles(@RequestParam("query") String query);
+	List<BookListVO> searchTitles(Map<String, Object> params);
 
 	int checkIsbnExists(Long isbn13);
 }

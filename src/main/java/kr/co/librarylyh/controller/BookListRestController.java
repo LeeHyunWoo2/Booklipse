@@ -31,8 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class BookListRestController {
 
   private final BookListService service;
-
-  private BookListMapper mapper; // 매퍼 인터페이스 직접 주입 (서비스는 아닌 로직이라서 즉시 매퍼로 직행시킴)
+  private BookListMapper mapper; // 매퍼 인터페이스 직접 주입(비즈니스 로직이 아닌게 있어서 매퍼로 직행하기 위해 만듦)
 
   // 책 목록 조회 (페이징 및 필터 적용)
   @GetMapping(value = "/booklist", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -40,7 +39,6 @@ public class BookListRestController {
       @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
       @RequestParam(value = "amount", defaultValue = "10") int amount,
       @RequestParam(value = "categoryId", required = false) String categoryId,
-      @RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
       @RequestParam(value = "searchQuery", required = false) String searchQuery,
       @RequestParam(value = "sort", defaultValue = "b.publicationDate DESC") String sort) {
 
@@ -50,7 +48,6 @@ public class BookListRestController {
     // 검색 조건들을 맵으로 전달
     Map<String, Object> searchParams = new HashMap<>();
     searchParams.put("categoryId", categoryId);
-    searchParams.put("publicationDateFilter", publicationDateFilter);
     searchParams.put("searchQuery", searchQuery);
     searchParams.put("sort", sort); // 정렬 옵션 추가
 
@@ -65,11 +62,21 @@ public class BookListRestController {
   }
 
   @GetMapping(value = "/searchTitles", produces = {MediaType.APPLICATION_JSON_VALUE})
-  public List<BookListVO> searchTitles(@RequestParam("query") String query) {
+  public ResponseEntity<List<BookListVO>> searchTitles(
+      @RequestParam("query") String query,
+      @RequestParam(value = "categoryId", required = false) String categoryId) {
+
+    Map<String, Object> searchParams = new HashMap<>();
+    searchParams.put("query", query);
+    searchParams.put("categoryId", categoryId);
+
     log.info("AJAX 요청 - 검색어: {}", query);
-    List<BookListVO> result = service.searchTitles(query);
-    log.info("AJAX 응답 - 검색 결과: {}", result);
-    return result;
+
+    List<BookListVO> titles = service.searchTitles(searchParams);
+
+    log.info("AJAX 응답 - 검색 결과: {}", searchParams);
+
+    return ResponseEntity.ok(titles);
   }
 
   // 책의 카테고리 ID 목록 제공
@@ -150,7 +157,7 @@ public class BookListRestController {
       } else if ("file".equals(imageUploadType) && file != null) {
         // 파일이 비어있거나 크기가 0인 경우 기존 파일명 유지
         if (file.isEmpty() || file.getSize() == 0) {
-          System.out.println("파일이 비어있으므로 기존 이미지 파일명을 유지합니다.");
+          log.info("파일이 비어있으므로 기존 파일명 유지");
           updatedBook.setPhoto(currentBook.getPhoto());  // 기존 파일명 유지
         } else {
           // 새로운 파일이 업로드된 경우에만 UUID 파일명 생성

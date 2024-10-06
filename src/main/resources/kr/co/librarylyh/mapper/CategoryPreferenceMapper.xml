@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.librarylyh.mapper.CategoryPreferenceMapper">
+
+  <!-- 특정 유저의 선호도 조회 -->
+  <select id="getAllPreferencesByUser" resultType="kr.co.librarylyh.domain.CategoryPreferenceDTO">
+    SELECT id, categoryId, categoryName, categoryLevel, preferenceScore, updatedAt
+    FROM category_preference_tbl
+    WHERE id = #{id, jdbcType=VARCHAR}
+    ORDER BY preferenceScore DESC
+  </select>
+
+  <insert id="insertOrUpdatePreference">
+    MERGE INTO category_preference_tbl target
+    USING (
+    SELECT #{id, jdbcType=VARCHAR} AS id,
+    #{categoryId, jdbcType=NUMERIC} AS categoryId,
+    #{categoryName, jdbcType=VARCHAR} as categoryName,
+    #{categoryLevel, jdbcType=NUMERIC} AS categoryLevel,
+    #{preferenceScore, jdbcType=NUMERIC} AS preferenceScore
+    FROM dual
+    ) source
+    ON (target.id = source.id AND target.categoryId = source.categoryId)
+    WHEN MATCHED THEN
+    UPDATE SET
+    target.preferenceScore = LEAST(target.preferenceScore + source.preferenceScore, 100),
+    target.updatedAt = SYSDATE
+    WHEN NOT MATCHED THEN
+    INSERT (id, categoryId, categoryName, categoryLevel, preferenceScore, updatedAt)
+    VALUES (source.id, source.categoryId, source.categoryName, source.categoryLevel, source.preferenceScore, SYSDATE)
+  </insert>
+
+<!--
+USING : 소스 데이터를 지정하는 부분
+dual : (토드 처음 배울때 쓰던거) 임시 테이블 생성
+WHEN MATCHED THEN : 매칭된 데이터가 있을 경우
+MERGE : ON을 조건으로 매칭했는데 참이면 (중복이면) 업데이트, 아니면 insert
+LEAST : 두 값중 더 작은값을 반환하는 함수. (점수 상한선 기능, 여기선 100점으로 정함) 반대의 경우는 GREATEST를 사용
+ -->
+
+  <!-- 특정 유저의 선호도 삭제 -->
+  <delete id="deletePreference">
+    DELETE FROM category_preference_tbl
+    WHERE id = #{id, jdbcType=VARCHAR}
+  </delete>
+
+  <!-- 전체 선호도 데이터 조회 (관리자용) -->
+  <select id="getAllPreferences" resultType="kr.co.librarylyh.domain.CategoryPreferenceDTO">
+    SELECT id, categoryId, categoryName, categoryLevel, preferenceScore, updatedAt
+    FROM category_preference_tbl
+    ORDER BY id, categoryLevel, preferenceScore DESC
+  </select>
+
+</mapper>

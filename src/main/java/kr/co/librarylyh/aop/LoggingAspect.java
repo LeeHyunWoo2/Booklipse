@@ -12,6 +12,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -39,21 +40,24 @@ public class LoggingAspect {
 
 
   // 메서드 실행 전에 로그 기록
-  @Before("execution(* kr.co.librarylyh.service.*.*(..)) || execution(* kr.co.librarylyh.controller.*.*(..)) || execution(* kr.co.librarylyh.mapper.*.*(..))")
+  @Before("execution(* kr.co.librarylyh.service.*.*(..)) || execution(* kr.co.librarylyh.controller.*.*(..))"
+      + " || execution(* kr.co.librarylyh.mapper.*.*(..)) && !execution(* kr.co.librarylyh.controller.BookListRestController.getBookList(..))")
   public void logBefore(JoinPoint joinPoint) {
-    String message = "메서드 시작: " + joinPoint.getSignature().getName() + "\n"
-        + "전달된 인자: " + Arrays.toString(joinPoint.getArgs());
+    String className = joinPoint.getSignature().getDeclaringTypeName();  // 클래스명
+    String methodName = joinPoint.getSignature().getName();  // 메서드명
+    String message = "[Log] 클래스명: " + className + "\n메서드명: " + methodName + "\n" + "전달된 인자: " + Arrays.toString(joinPoint.getArgs());
+
     processLog(message);
-    log.info(message);
   }
 
   // 메서드가 정상 종료된 후에 로그 기록
-  @AfterReturning(pointcut = "execution(* kr.co.librarylyh.service.*.*(..)) || execution(* kr.co.librarylyh.controller.*.*(..)) || execution(* kr.co.librarylyh.mapper.*.*(..))", returning = "result")
+  @AfterReturning(pointcut = "execution(* kr.co.librarylyh.service.*.*(..)) || execution(* kr.co.librarylyh.controller.*.*(..))"
+      + " || execution(* kr.co.librarylyh.mapper.*.*(..)) && !execution(* kr.co.librarylyh.controller.BookListRestController.getBookList(..))",
+      returning = "result")
   public void logAfterReturning(JoinPoint joinPoint, Object result) {
-    String message = "메서드 종료: " + joinPoint.getSignature().getName() + "\n"
+    String message = "[Log] 메서드 종료: " + joinPoint.getSignature().getName() + "\n"
         + "결과 값: " + result;
     processLog(message);
-    log.info(message);
   }
 
   // 인자 포맷팅 메서드 (배열을 문자열로 변환. 이거 안하면 주소값 같은거만 보임)
@@ -69,8 +73,8 @@ public class LoggingAspect {
     if (isDisconnected) { // 연결이 끊긴 상태(디폴트) 일땐 버퍼에 저장
       logBuffer.add(logMessage); // 로그를 버퍼에 저장
       // 돌발상황을 염두하고 데드맨 스위치처럼 디폴트를 미접속을 가정하고 버퍼에 저장
-      log.info("버퍼에 로그 저장: ");
-      clearBuffer();  // 연결이 끊긴 동안 5초 이상 지난 경우 버퍼 비우기 시도
+    /*  log.info("버퍼에 로그 저장: " + logBuffer);*/
+      clearBuffer();  // 연결이 끊긴 동안 10초 이상 지난 경우 버퍼 비우기 시도
     } else {
       sendLog(logMessage);  // 연결이 된 상태면 즉시 전송
     }
@@ -90,21 +94,26 @@ public class LoggingAspect {
   }
 
   public void clearBuffer() {
-    if (System.currentTimeMillis() - lastConnectedTime > 5000) {
-      // 현재시간 - 기록시간이 5000ms 보다 높으면 (5초가 지났으면)
+    if (System.currentTimeMillis() - lastConnectedTime > 10000) {
+      // 현재시간 - 기록시간이 10000ms 보다 높으면 (10초가 지났으면)
       logBuffer.clear();
-      log.info("버퍼가 5초 이상 연결되지 않아 비워짐");
+      log.info("버퍼가 10초 이상 연결되지 않아 비워짐");
       lastConnectedTime = System.currentTimeMillis();
-      // 버퍼를 비웠으니 5초 간격을 추가하기 위해 접속시간을 갱신시킴(실제 접속된게 아니지만, 0.001초단위로 계속 버퍼 비우면 안되니까)
+      // 버퍼를 비웠으니 10초 간격을 추가하기 위해 접속시간을 갱신시킴(실제 접속된게 아니지만, 0.001초단위로 계속 버퍼 비우면 안되니까)
     }
   }
 
+  @Async
   public void onReconnect() { // 접속 끊긴동안 쌓인 버퍼를 로그에 출력
     if (!logBuffer.isEmpty()) {
-      log.info("재연결 시 버퍼에 저장된 로그 전송 중");
-      logBuffer.forEach(this::sendLog); // 버퍼에 있는 로그 전송
-      logBuffer.clear(); // 버퍼 비움, 어차피 sendLog가 작동할테니 시간 갱신은 안함.
-      log.info("버퍼 털었다");
+      try {
+        Thread.sleep(500);
+        log.info("재연결 시 버퍼에 저장된 로그 전송 중");
+        logBuffer.forEach(this::sendLog); // 버퍼에 있는 로그 전송
+        logBuffer.clear(); // 버퍼 비움, 어차피 sendLog가 작동할테니 시간 갱신은 안함
+      } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+      }
     }
     isDisconnected = false;
   }

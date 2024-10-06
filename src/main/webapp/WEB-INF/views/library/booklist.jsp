@@ -202,14 +202,16 @@
     border: 2px solid #28a745 !important; /* 테두리 색상 */
     border-radius: 5px !important; /* 모서리 둥글게 */
     background-color: #fff !important; /* 배경색 */
-    min-width: 500px; !important;
+    min-width: 500px;
+  !important;
   }
 
   .page-mode {
     border: 2px solid #dc3545 !important; /* 점선 테두리 */
     border-radius: 5px !important; /* 모서리 더 둥글게 */
     background-color: #fff !important; /* 연한 회색 배경 */
-    min-width: 300px; !important;
+    min-width: 300px;
+  !important;
   }
 
   .toggle-search {
@@ -451,7 +453,7 @@
     max-height: 242px; /* 최대 높이 설정, 스크롤 가능 */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     overflow: auto;
-    display: none;
+    visibility: hidden;
   }
 
   .autocomplete-items div {
@@ -466,7 +468,7 @@
     margin: 0;
   }
 
-  .autocompleteli, #autocompleteList div {
+  .autocompleteli {
     color: #000;
     padding: 8px;
   }
@@ -479,6 +481,10 @@
     background-color: #c8dbff;
   }
 
+  .highlight {
+    font-weight: bold; /* 글자를 볼드체로 설정 */
+    background-color: #fff3a3;
+  }
 
 
   .rebutton {
@@ -635,198 +641,239 @@
             </svg>
         </button>
     </div>
+</div>
+<c:if test="${user.authority == 1 }">
+    <button class="btn btn-outline-secondary" id="userPreference" data-toggle="modal"
+            data-target="#modal2">선호도 확인
+    </button>
+</c:if>
 
-    <div class="position-static" style="z-index: 1030;">
-        <nav class="navbar navbar-light bg-light">
-            <button class="setting-btn" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle"
-                    aria-controls="navbarToggle" style="outline: none;" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="bar bar1"></span>
-                <span class="bar bar2"></span>
-                <span class="bar bar1"></span>
-            </button>
-            <button id="resetButton" type="button" class="rebutton" style="outline: none;
-                    margin-left: -20%;">
-                <span class="rebutton__text">초기화</span>
-                <span class="rebutton__icon"><svg class="resvg" height="48" viewBox="0 0 48 48"
-                                                  width="48" xmlns="http://www.w3.org/2000/svg"><path
-                        d="M35.3 12.7c-2.89-2.9-6.88-4.7-11.3-4.7-8.84 0-15.98 7.16-15.98 16s7.14 16 15.98 16c7.45 0 13.69-5.1 15.46-12h-4.16c-1.65 4.66-6.07 8-11.3 8-6.63 0-12-5.37-12-12s5.37-12 12-12c3.31 0 6.28 1.38 8.45 3.55l-6.45 6.45h14v-14l-4.7 4.7z"></path><path
-                        d="M0 0h48v48h-48z" fill="none"></path></svg></span>
-            </button>
-            <form class="form-inline mt-1 mb-1" onsubmit="handleFormSubmit(event)" style="display: flex; justify-content: center">
-                <button id="toggleButton" type="button"
-                        class="btn btn-outline-danger mr-2 my-sm-2 toggle-mode"
-                        onclick="toggleFunction()"
-                        data-toggle="tooltip" data-placement="top" title="검색모드로 전환합니다.">페이지 이동
-                </button>
-
-                <input id="searchInput" class="form-control search-mode mr-sm-2" type="text"
-                       placeholder="간편검색" aria-label="Search" required>
-                <div id="autocompleteList" class="autocomplete-items"></div>
-
-                <button id="toggleButton2" class="btn btn-outline-success my-2 my-sm-0 toggle-mode"
-                        type="submit"
-                        data-toggle="tooltip" data-placement="bottom"
-                        title="검색을 시작합니다.">검색
-                </button>
-
-            </form>
-            <div class="view-container">
-                <div class="tabs">
-                    <input type="radio" id="radio-1" name="tabs" value="list" checked="">
-                    <label class="tab" for="radio-1"><i class="bi bi-list-ul"></i></label>
-                    <input type="radio" id="radio-2" name="tabs">
-                    <label class="tab" for="radio-2"><i class="bi bi-grid"></i></label>
-                    <span class="glider"></span>
-                </div>
-
-                <button id="sortButton" class="btn btn-info" onclick="toggleSortOrder()"
-                        style="min-width: 90px; margin-bottom: 5%;">최신순
-                </button>
-
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" style="color: black"
+     aria-labelledby="advancedSearchLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="min-width: 600px;">
+            <div class="modal-header">
+                <h5 class="modal-title">선호도 분석</h5>
             </div>
-        </nav>
-        <div class="collapse navbar-collapse show" id="navbarToggle">
-            <div class="bg-light p-5" style="min-height: 100px">
-                <div class="btn-group" role="group">
-                    <button id="dropdownMenuButton" type="button"
-                            class="btn btn-secondary dropdown-toggle"
-                            data-toggle="dropdown" aria-expanded="false">
-                        카테고리
-                    </button>
-                    <ul id="categoryDropdownContainer" class="dropdown-menu">
-                    </ul>
-                    <div id="subMenuWrapper">
-                    </div>
-                </div>
-                <!-- 고급 검색 버튼 -->
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modal1">고급 검색
+            <div class="modal-body">
+                <label for="userIdInput">유저 ID 입력: </label>
+                <input type="text" id="userIdInput" placeholder="유저 ID 입력" value="test123">
+                <div id="preferencesOutput"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-warning" onclick="resetPreference()">
+                    초기화
                 </button>
-                <div class="btn-group">
-                    <!-- 드롭다운 버튼 -->
-                    <button type="button" class="btn btn-info dropdown-toggle"
-                            id="itemsPerPageButton" data-toggle="dropdown" aria-expanded="false">
-                    </button>
-                    <!-- 드롭다운 메뉴 -->
-                    <ul class="dropdown-menu" id="itemsPerPageMenu">
-                        <li class="dropdown-item2" style="cursor: pointer;"
-                            data-value="10"></li>
-                        <li class="dropdown-item2" style="cursor: pointer;"
-                            data-value="20"></li>
-                        <li class="dropdown-item2" style="cursor: pointer;"
-                            data-value="50"></li>
-                    </ul>
+                <button type="button" class="btn btn-secondary" onclick="resetPreference()"
+                        data-dismiss="modal">닫기
+                </button>
+                <button id="getPreferencesButton" class="btn btn-primary">검색
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="position-static" style="z-index: 1030;">
+    <nav class="navbar navbar-light bg-light">
+        <button class="setting-btn" type="button" data-toggle="collapse"
+                data-target="#navbarToggle"
+                aria-controls="navbarToggle" style="outline: none;" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="bar bar1"></span>
+            <span class="bar bar2"></span>
+            <span class="bar bar1"></span>
+        </button>
+        <button id="resetButton" type="button" class="rebutton" style="outline: none;
+                    margin-left: -20%;">
+            <span class="rebutton__text">초기화</span>
+            <span class="rebutton__icon"><svg class="resvg" height="48" viewBox="0 0 48 48"
+                                              width="48" xmlns="http://www.w3.org/2000/svg"><path
+                    d="M35.3 12.7c-2.89-2.9-6.88-4.7-11.3-4.7-8.84 0-15.98 7.16-15.98 16s7.14 16 15.98 16c7.45 0 13.69-5.1 15.46-12h-4.16c-1.65 4.66-6.07 8-11.3 8-6.63 0-12-5.37-12-12s5.37-12 12-12c3.31 0 6.28 1.38 8.45 3.55l-6.45 6.45h14v-14l-4.7 4.7z"></path><path
+                    d="M0 0h48v48h-48z" fill="none"></path></svg></span>
+        </button>
+        <form class="form-inline mt-1 mb-1" onsubmit="handleFormSubmit(event)"
+              style="display: flex; justify-content: center">
+            <button id="toggleButton" type="button"
+                    class="btn btn-outline-danger mr-2 my-sm-2 toggle-mode"
+                    onclick="toggleFunction()"
+                    data-toggle="tooltip" data-placement="top" title="검색모드로 전환합니다.">페이지 이동
+            </button>
+
+            <input id="searchInput" class="form-control search-mode mr-sm-2" type="text"
+                   placeholder="간편검색" aria-label="Search" required>
+            <div id="autocompleteList" class="autocomplete-items"></div>
+
+            <button id="toggleButton2" class="btn btn-outline-success my-2 my-sm-0 toggle-mode"
+                    type="submit"
+                    data-toggle="tooltip" data-placement="bottom"
+                    title="검색을 시작합니다.">검색
+            </button>
+
+        </form>
+        <div class="view-container">
+            <div class="tabs">
+                <input type="radio" id="radio-1" name="tabs" value="list" checked="">
+                <label class="tab" for="radio-1"><i class="bi bi-list-ul"></i></label>
+                <input type="radio" id="radio-2" name="tabs">
+                <label class="tab" for="radio-2"><i class="bi bi-grid"></i></label>
+                <span class="glider"></span>
+            </div>
+            <button id="sortButton" class="btn btn-info" onclick="toggleSortOrder()"
+                    style="min-width: 90px; margin-bottom: 5%;">최신순
+            </button>
+
+        </div>
+    </nav>
+    <div class="collapse navbar-collapse show" id="navbarToggle">
+        <div class="bg-light p-5" style="min-height: 100px">
+            <div class="btn-group" role="group">
+                <button id="dropdownMenuButton" type="button"
+                        class="btn btn-secondary dropdown-toggle"
+                        data-toggle="dropdown" aria-expanded="false">
+                    카테고리
+                </button>
+                <ul id="categoryDropdownContainer" class="dropdown-menu">
+                </ul>
+                <div id="subMenuWrapper">
+                </div>
+            </div>
+            <!-- 고급 검색 버튼 -->
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modal1">고급 검색
+            </button>
+            <div class="btn-group">
+                <!-- 드롭다운 버튼 -->
+                <button type="button" class="btn btn-info dropdown-toggle"
+                        id="itemsPerPageButton" data-toggle="dropdown" aria-expanded="false">
+                </button>
+                <!-- 드롭다운 메뉴 -->
+                <ul class="dropdown-menu" id="itemsPerPageMenu">
+                    <li class="dropdown-item2" style="cursor: pointer;"
+                        data-value="10"></li>
+                    <li class="dropdown-item2" style="cursor: pointer;"
+                        data-value="20"></li>
+                    <li class="dropdown-item2" style="cursor: pointer;"
+                        data-value="50"></li>
+                </ul>
+                <c:if test="${user.authority == 1 }">
                     <button type="button" class="btn btn-outline-success ml-1"
                             onclick="window.location.href='/library/manage?mode=add'">도서 추가
                     </button>
-                </div>
+                </c:if>
+            </div>
 
-                <!-- 모달 창 -->
-                <div class="modal fade" id="modal1" tabindex="-1" role="dialog" style="color: black"
-                     aria-labelledby="advancedSearchLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="advancedSearchLabel">고급 검색은 추후 업데이트
-                                    됩니다.</h5>
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="advancedSearchForm">
-                                    <!-- 검색어 입력 -->
-                                    <div class="form-group">
-                                        <label for="keyword">검색어</label>
-                                        <input type="text" class="form-control" id="keyword"
-                                               name="keyword">
-                                    </div>
-                                    <!-- 검색 기준 -->
-                                    <div class="form-group">
-                                        <label for="searchType">검색 기준</label>
-                                        <select class="form-control" id="searchType" name="type">
-                                            <option value="title">책 제목</option>
-                                            <option value="author">저자</option>
-                                            <option value="publisher">출판사</option>
-                                        </select>
-                                    </div>
-                                    <!-- 가격 범위 (일반 텍스트 박스) -->
+            <!-- 모달 창 -->
+            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" style="color: black"
+                 aria-labelledby="advancedSearchLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="advancedSearchLabel">고급 검색은 추후 업데이트
+                                됩니다.</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form id="advancedSearchForm">
+                                <!-- 검색어 입력 -->
+                                <div class="form-group">
+                                    <label for="keyword">검색어</label>
+                                    <input type="text" class="form-control" id="keyword"
+                                           name="keyword">
+                                </div>
+                                <!-- 검색 기준 -->
+                                <div class="form-group">
+                                    <label for="searchType">검색 기준</label>
+                                    <select class="form-control" id="searchType" name="type">
+                                        <option value="title">책 제목</option>
+                                        <option value="author">저자</option>
+                                        <option value="publisher">출판사</option>
+                                    </select>
+                                </div>
+                                <!-- 가격 범위 (일반 텍스트 박스) -->
 
-                                    <div class="form-group">
-                                        <label for="maxPrice">최대 가격(도서관이지만 기능구현을 위해 넣어봄)</label>
-                                        <input type="text" class="form-control" id="maxPrice"
-                                               name="maxPrice"
-                                               placeholder="최대 가격">
+                                <div class="form-group">
+                                    <label for="maxPrice">최대 가격</label>
+                                    <input type="text" class="form-control" id="maxPrice"
+                                           name="maxPrice"
+                                           placeholder="최대 가격">
+                                </div>
+                                <!-- 출판일 범위 -->
+                                <div class="form-group">
+                                    <label for="publicationDateRange">출판일 범위</label>
+                                    <select class="form-control" id="publicationDateRange"
+                                            name="publicationDateRange">
+                                        <option value="">전체</option>
+                                        <option value="3months">최근 3개월</option>
+                                        <option value="6months">최근 6개월</option>
+                                        <option value="1year">최근 1년</option>
+                                    </select>
+                                </div>
+                                <!-- 최소 평점 (라디오 버튼) -->
+                                <div class="form-group">
+                                    <label>최소 평균 리뷰점수</label><br>
+                                    <div class="PB-range-slider-div">
+                                        <label for="ratingRange"></label>
+                                        <input type="range" min="0" max="10" step="0.1"
+                                               value="5" class="PB-range-slider"
+                                               id="ratingRange">
+                                        <p class="PB-range-slidervalue" id="ratingValue">5.0</p>
                                     </div>
-                                    <!-- 출판일 범위 -->
-                                    <div class="form-group">
-                                        <label for="publicationDateRange">출판일 범위</label>
-                                        <select class="form-control" id="publicationDateRange"
-                                                name="publicationDateRange">
-                                            <option value="">전체</option>
-                                            <option value="3months">최근 3개월</option>
-                                            <option value="6months">최근 6개월</option>
-                                            <option value="1year">최근 1년</option>
-                                        </select>
-                                    </div>
-                                    <!-- 최소 평점 (라디오 버튼) -->
-                                    <div class="form-group">
-                                        <label>최소 평균 리뷰점수</label><br>
-                                        <div class="PB-range-slider-div">
-                                            <label for="ratingRange"></label>
-                                            <input type="range" min="0" max="10" step="0.1"
-                                                   value="5" class="PB-range-slider"
-                                                   id="ratingRange">
-                                            <p class="PB-range-slidervalue" id="ratingValue">5.0</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="rentalAvailable">대여 가능 여부</label>
-                                        <input type="checkbox" id="rentalAvailable"
-                                               name="rentalAvailable" value="Y">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">닫기
-                                </button>
-                                <button type="button" class="btn btn-primary"
-                                        id="executeAdvancedSearch">검색
-                                </button>
-                            </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rentalAvailable">대여 가능 여부</label>
+                                    <input type="checkbox" id="rentalAvailable"
+                                           name="rentalAvailable" value="Y">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">닫기
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    id="executeAdvancedSearch">검색
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="totalBook" class="col"
-         style="position: absolute; display: flex; justify-content: center; margin-top: 8px; font-size: 22px; color: #0D6EFD;">
-    </div>
-    <nav aria-label="Page navigation" class="justify-content-center">
-        <ul class="pagination justify-content-center mt-5 mb-5">
-        </ul>
-    </nav>
+</div>
+<div id="totalBook" class="col"
+     style="position: absolute; display: flex; justify-content: center; margin-top: 8px; font-size: 22px; color: #0D6EFD;">
+</div>
+<nav aria-label="Page navigation" class="justify-content-center">
+    <ul class="pagination justify-content-center mt-5 mb-5">
+    </ul>
+</nav>
 
 
-    <div id="list_wrap" class="list_wrap">
-    </div>
-    <div id="grid_wrap" class="grid_wrap">
-    </div>
+<div id="list_wrap" class="list_wrap">
+</div>
+<div id="grid_wrap" class="grid_wrap">
+</div>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center mt-5 mb-5">
-        </ul>
-    </nav>
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-5 mb-5">
+    </ul>
+</nav>
 </div>
 </body>
 <jsp:include page="../includes/footer.jsp"/>
 <script src="/resources/js/booklist_ajax.js"></script>
 <script src="/resources/js/category_ajax.js"></script>
+<script src="/resources/js/preference_ajax.js"></script>
+<script>
+  // 관리자 여부를 JavaScript 변수에 저장 (권한이 1이면 관리자)
+  const isAdmin = ${user.authority == 1 ? 'true' : 'false'};
+  document.addEventListener('mousedown', function(event) {
+    if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
+      event.preventDefault();  // 비인풋 요소가 클릭되면 기본 포커스 방지
+    }
+  });
+</script>
 <script type="text/javascript">
   $(document).ready(
       function () {
@@ -837,7 +884,6 @@
             modal.style.display = 'block';
           }
         }
-
         // 모달 닫기 함수
         function closeModal(modalId) {
           const modal = document.getElementById(modalId);
@@ -845,7 +891,6 @@
             modal.style.display = 'none';
           }
         }
-
         // 모달 열기 이벤트 설정
         document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
           const targetModalId = button.getAttribute('data-target');
@@ -853,7 +898,6 @@
             openModal(targetModalId); // 모달 열기
           });
         });
-
         // 모달 닫기 이벤트 설정
         document.querySelectorAll('.modal .close').forEach(function (closeButton) {
           const modalId = closeButton.closest('.modal').id;
@@ -879,6 +923,10 @@
 
   let isPageMode = false;
   let maxPage = 1;
+
+  function resetPreference() {
+    preferencesOutput.innerHTML = '';
+  }
 
   function totalValue() {
     document.getElementById('totalBook').textContent = (`총 ${'${totalBook}'} 권`);
@@ -953,16 +1001,6 @@
     }, 3000);
   }
 
-  /*  function titleSearchHandler(event) {
-      event.preventDefault(); // 폼 기본 제출 방지
-      const searchQuery = document.getElementById('searchInput').value.trim();
-      loadPage(1, undefined, searchQuery);
-    }*/
-
-  /*  function changeButtonText(element) {
-      document.getElementById('dropdownMenuButton').textContent = element.textContent;
-    }*/
-
   $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
   });
@@ -1028,7 +1066,7 @@
   // 부드러운 스크롤 함수 정의
   function backToTop() {
     const position = document.documentElement.scrollTop || document.body.scrollTop;
-    if (position) {
+    if (position > 1) {
       window.requestAnimationFrame(() => {
         window.scrollTo(0, position - position / 5); // 점진적으로 스크롤 이동
         backToTop(); // 재귀 호출
@@ -1042,27 +1080,31 @@
   });
 
 </script>
-
 <script>
   $(document).ready(function () {
+    let debounceTimeout; // 디바운스 딜레이를 위한 변수
     $('#searchInput').on('input', function () {
       const query = $(this).val().trim();
+      // 이전에 설정된 타이머가 있다면 취소
+      clearTimeout(debounceTimeout);
+
       if (query.length > 0) {
-        $.ajax({
-          url: '/ajax/searchTitles',  // 서버의 엔드포인트
-          type: 'GET',
-          data: {query: query},     // 검색어를 서버로 전달
-          success: function (data) {
-            // 1. `book` 컬럼만 추출하여 `matchDataList`에 저장
-            matchDataList = data.map(item => item.book);
-/*            // 2. `book`과 `author`를 조합하여 새로운 문자열로 `matchDataList`에 저장
-            matchDataList = data.map(item => `${item.book} (${item.author})`);*/
-            inputArea.onkeyup();
-          },
-          error: function (xhr, status, error) {
-            console.error('자동완성 요청 실패:', error);
-          }
-        });
+        // 디바운스 : 입력이 멈추고나서 일정 시간 대기 후 요청 실행
+        debounceTimeout = setTimeout(function () {
+          $.ajax({
+            url: '/ajax/searchTitles',
+            type: 'GET',
+            data: {query: query, categoryId: currentCategoryId}, // 검색어와 현재 카테고리 정보를 서버로 전달
+            success: function (data) {
+              // 제목을 matchDataList 에 저장
+              matchDataList = data.map(item => item.book);
+              inputArea.onkeyup(); // 자동완성 목록 갱신
+            },
+            error: function (xhr, status, error) {
+              console.error('자동완성 요청 실패:', error);
+            }
+          });
+        }, 150) // 150ms 의 딜레이 적용 (너무 짧지만 없는것보단 낫다)
       } else {
         clearAutocompleteList();  // 검색어가 없으면 자동완성 목록을 비움
       }
@@ -1073,48 +1115,55 @@
   let autocompleteList = document.getElementById('autocompleteList');
   let matchDataList = [];  // 자동완성 항목을 저장하는 배열
   let nowIndex = -1;  // 현재 선택된 항목을 추적
-  let isNavigating = false;
+  let isNavigating = false; // 키보드 입력 이슈로 인해 넣은 변수 (키가 두번눌린다던가 뭐 그런게 좀 있었음)
   let autoBoxHeight = 0;
   let lastAutoCompleteIndex, autoCompleteElements;
   let autocompleteListClicked = false;
   let originalInputValue = ''; // 사용자가 원래 입력했던 인풋내용을 저장하는 변수
 
-
   function clearAutocompleteList() {
-    // 자동완성 목록을 완전히 숨기기
-    autocompleteList.innerHTML = '';  // 기존 목록 비우기
-    autocompleteList.style.display = 'none';
+    // 기본적으로 자동완성 목록을 완전히 숨기기
+
+    autocompleteList.style.visibility = 'hidden';
   }
 
-  inputArea.onkeyup = function (){
-    if (isNavigating){
+  inputArea.onkeyup = function () {
+    if (isNavigating) {
       return;
     }
 
     let q = this.value, autoCompletes = [];
 
-    if (q.length === 0){
+    if (q.length === 0) {
       clearAutocompleteList();
       return;
     }
 
-    autocompleteList.innerHTML = "";
+    autocompleteList.innerHTML = ""; // 기존 목록 초기화
 
-    for (let i = 0; i < matchDataList.length; i++){
-      if (matchDataList[i].toLowerCase().indexOf(q.toLowerCase()) !== -1) {
-        autoCompletes.push('<li class="autocompleteli">' + matchDataList[i] + '</li>');
+    // 자동완성 목록 생성
+    for (let i = 0; i < matchDataList.length; i++) {
+      // 입력된 검색어가 자동완성 항목의 어느 부분에 위치하는지 확인
+      const index = matchDataList[i].toLowerCase().indexOf(q.toLowerCase());
+
+      if (index !== -1) {
+        // 검색어와 일치하는 부분만 <span> 태그로 감싸기
+        const highlightedText = matchDataList[i].substring(0, index) +
+            "<span class='highlight'>" +
+            matchDataList[i].substring(index, index + q.length) +
+            "</span>" +
+            matchDataList[i].substring(index + q.length);
+
+        autoCompletes.push('<li class="autocompleteli">' + highlightedText + '</li>');
       }
     }
 
-    if (autoCompletes.length === 0){
-      clearAutocompleteList();
-    } else {
-      autocompleteList.innerHTML = '<ul class="autocompleteul">' + autoCompletes.join("") + '<ul>';
-      autocompleteList.style.display = "block";
-      lastAutoCompleteIndex = autoCompletes.length -1;
-      autoCompleteElements = autocompleteList.childNodes[0].childNodes;
-      nowIndex = -1;
-    }
+    autocompleteList.innerHTML = '<ul class="autocompleteul">' + autoCompletes.join("") + '<ul>';
+    autocompleteList.style.visibility = "visible";
+    lastAutoCompleteIndex = autoCompletes.length - 1;
+    autoCompleteElements = autocompleteList.childNodes[0].childNodes;
+    nowIndex = -1;
+
     autocompleteListClicked = false;
     autoBoxHeight = autocompleteList.clientHeight;
     autocompleteList.scrollTop = 0
@@ -1123,46 +1172,52 @@
   autocompleteList.onclick = function (e) {
     // 클릭 시 해당 검색어 선택
     if (e.target.nodeName === "LI") {
-      inputArea.value = e.target.innerHTML;
+      inputArea.value = e.target.innerText; // innerHTML하곤 다르게 화면에 출력된 텍스트만 가져옴. (하이라이트 태그까지 나와버려서 이걸로 교체함)
       clearAutocompleteList();
     }
   }
 
-  autocompleteList.onmousedown = function (e){
+  autocompleteList.onmousedown = function (e) {
     autocompleteListClicked = true;
     e.preventDefault();
-    setTimeout(function (){
+    setTimeout(function () {
       autocompleteListClicked = false;
     }, 0);
   }
-  
-  inputArea.onblur = function (){
-    if (!autocompleteListClicked){
-      autocompleteList.style.display = "none";
+
+  inputArea.onblur = function () {
+    if (!autocompleteListClicked) {
+      autocompleteList.style.visibility = "hidden";
     }
   }
-
+  // 자동완성 목록의 스크롤을 현재 인덱스 위치와 동기화시키는 함수
   function synchroniseautocompleteList() {
     var sOffsetTop = autoCompleteElements[nowIndex].offsetTop,
         sHeight = autoCompleteElements[nowIndex].clientHeight;
 
     if ((sOffsetTop + sHeight - autocompleteList.scrollTop) > autoBoxHeight) {
       autocompleteList.scrollTop = sOffsetTop + sHeight - autoBoxHeight
-    }
-    else if (autocompleteList.scrollTop > sOffsetTop) {
+    } else if (autocompleteList.scrollTop > sOffsetTop) {
       autocompleteList.scrollTop = sOffsetTop
     }
   }
 
   inputArea.onkeydown = function (e) {
-    isNavigating = false;
 
-    // 자동완성 리스트가 표시되고 있을 때만 방향키의 기본 동작 막기
-    if (autocompleteList.style.display === "block") {
+    // 목록이 비활성화된 상태이고, 항목이 존재할 때만 목록을 다시 활성화
+    if (autocompleteList.style.visibility !== 'visible' && autocompleteList.classList.length > 0) {
       if (e.keyCode === 40 || e.keyCode === 38) { // Down(40) / Up(38) Arrow keys
-        e.preventDefault();  // 기본 동작(커서 이동) 막기
+        autocompleteList.style.visibility = 'visible';  // 목록을 다시 표시
+        e.preventDefault(); // 기본 동작 방지
+        return; // 위나 아래 누르자마자 목록 선택되는거 방지
       }
     }
+
+    // 목록이 비활성화된 상태라면 방향키 목록탐색을 허용하지 않음 (위의 조건을 만족하지 않을 경우)
+    if (autocompleteList.style.visibility !== 'visible') {
+      return;
+    }
+    isNavigating = false;
 
     if (e.keyCode === 40) { // 아래 방향키
       isNavigating = true;
@@ -1170,60 +1225,50 @@
         originalInputValue = inputArea.value; // 현재 인풋값을 저장
         autoCompleteElements[++nowIndex].classList.add("hl");
         inputArea.value = matchDataList[nowIndex]; // 현재 인덱스의 자동완성 항목을 안풋창에 반영
-      }
-      else if (nowIndex === lastAutoCompleteIndex) {
+      } else if (nowIndex === lastAutoCompleteIndex) {
         autoCompleteElements[nowIndex].classList.remove("hl");
         nowIndex = -1;
         inputArea.value = originalInputValue; // 마지막 항목에서 빠져나오면 원래대로 복귀
-      }
-      else {
+      } else {
         autoCompleteElements[nowIndex].classList.remove("hl");
         autoCompleteElements[++nowIndex].classList.add("hl");
         inputArea.value = matchDataList[nowIndex];
       }
       if (nowIndex !== -1) synchroniseautocompleteList();
-    }
-
-    else if (e.keyCode === 38) { // 위 방향키
+    } else if (e.keyCode === 38) { // 위 방향키
       isNavigating = true;
       if (nowIndex === -1) {
         originalInputValue = inputArea.value;
         nowIndex = lastAutoCompleteIndex;
         autoCompleteElements[nowIndex].classList.add("hl");
         inputArea.value = matchDataList[nowIndex];
-      }
-      else if (nowIndex === 0) {
+      } else if (nowIndex === 0) {
         autoCompleteElements[nowIndex].classList.remove("hl");
         nowIndex = -1;
         inputArea.value = originalInputValue; // 첫항목에서 벗어나면....
-      }
-      else {
+      } else {
         autoCompleteElements[nowIndex].classList.remove("hl");
         autoCompleteElements[--nowIndex].classList.add("hl");
         inputArea.value = matchDataList[nowIndex];
       }
       if (nowIndex !== -1) synchroniseautocompleteList();
-    }
-
-    else if (e.keyCode === 13) { // 엔터키
+    } else if (e.keyCode === 13) { // 엔터키
       isNavigating = true;
       if (nowIndex !== -1) {
         inputArea.value = matchDataList[nowIndex];
         clearAutocompleteList();
-      } else if (nowIndex === -1){
+      } else if (nowIndex === -1) {
         // 자동완성 목록에 포커싱하지 않고 엔터를 쳤을경우에도 자동완성 목록을 닫음
         clearAutocompleteList();
       }
-    }
-
-    else if (e.keyCode === 37 || e.keyCode === 39){ // 좌 우 방향키
-      if (nowIndex !== -1){ // 자동완성 목록에 포커싱중일경우 작동
+    } else if (e.keyCode === 27) { // esc
+      isNavigating = true;
+      clearAutocompleteList();
+    } else if (e.keyCode === 37 || e.keyCode === 39) { // 좌 우 방향키
+      if (nowIndex !== -1) { // 자동완성 목록에 포커싱중일경우 작동
         inputArea.value = originalInputValue; // 원래대로 되돌림
       }
     }
-
-
   }
 </script>
-
 </html>

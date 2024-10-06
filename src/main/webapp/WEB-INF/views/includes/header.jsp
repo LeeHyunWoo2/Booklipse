@@ -35,6 +35,9 @@
                     <img src="/resources/images/book_log.png">
                     <span><a href="/library/home">Booklipse</a></span>
                 </div>
+                <div style="margin-left: 20%;">
+                    <jsp:include page="../includes/developHelper.jsp"/>
+                </div>
             </div>
 
             <!-- Main Navigation -->

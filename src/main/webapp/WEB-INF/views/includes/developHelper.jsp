@@ -250,13 +250,13 @@
     }
 
   // 메시지가 메서드 로그인지 오류 로그인지 구분
-  if (message.includes("메서드 시작") || message.includes("메서드 종료")) {
+  if (message.includes("[Log]")) {
     logBox = document.getElementById("method-log");
-    logBox.innerHTML += "[Method] " + message + "<br>";  // 메서드 로그 추가
+    logBox.innerHTML += message + "<br>";  // 메서드 로그 추가
     deleteLastLine(logBox);
   } else {
     logBox = document.getElementById("error-log");
-    logBox.innerHTML += "[Error] " + message + "<br>";  // 오류 로그 추가
+    logBox.innerHTML += + message + "<br>";  // 오류 로그 추가
     deleteLastLine(logBox);
   }
 

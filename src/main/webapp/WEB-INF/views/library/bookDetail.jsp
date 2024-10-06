@@ -3,7 +3,17 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html>
 <style>
-.bookDetail *{
+  /* 전체 페이지의 캐럿을 투명하게 설정 */
+  body, * {
+    caret-color: transparent; /* 기본적으로 모든 요소에서 캐럿 숨김 */
+  }
+
+  /* 입력 영역에는 캐럿을 표시 */
+  input, textarea, [contenteditable=true] {
+    caret-color: auto; /* 인풋 요소에서는 기본 캐럿 표시 */
+  }
+
+  .bookDetail *{
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
   font-size: 1rem;

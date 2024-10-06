@@ -130,7 +130,7 @@ public class DataBaseExceptionHandlingAspect {
     log.error("해결방안 : {}", message);
 
     // 예외 메시지를 리스트에 추가
-    String alertMessage = "예외 발생: [" + exceptionName + "]<br>위치 : " + location + ".<br>인자 값: " + args +
+    String alertMessage = "[Error] 예외 발생: [" + exceptionName + "]<br>위치 : " + location + ".<br>인자 값: " + args +
         ".<br>예외 메시지: " + exceptionMessage + ".<br> " + message;
     loggingAspect.sendLog(alertMessage);
   }

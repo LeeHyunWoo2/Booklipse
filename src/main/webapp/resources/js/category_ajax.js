@@ -1,10 +1,22 @@
 $(document).ready(function () {
+    function isManagePage() {
+        return window.location.pathname.includes('/library/manage') &&
+            (window.location.search.includes('mode=add') || window.location.search.includes('mode=edit'));
+        // 원래는 한 jsp 파일에서 사용할 스크립트 파일이었는데, 쓸만한 기능이 많아서 다른 jsp파일에서도 사용하게되어서
+        // include를 하다보니 원치않는 함수까지 작동되어 버리기 때문에 페이지 링크에 따른 필터를 적용시키려고 만든 함수
+
+        // 이 부분은 모듈화를 할 생각이 없었다가 성급하게 아이디어가 추가되면서 발생한 일이기 때문에
+        // 코드 작성 시 확장성을 염두해야 한다는걸 배웠습니다.
+    }
+
 
     function saveCategoryDataToSessionStorage(categoryData) {
         // 카테고리 데이터를 세션 스토리지에 저장하는 함수
         sessionStorage.setItem('categoryData', JSON.stringify(categoryData));
     }
 
+    // 해당 함수는 타 jsp 파일에서도 공통적으로 사용되기 때문에 전역으로 선언하였습니다.
+    // 유틸리티 파일처럼 공통적으로 사용되는 로직을 모아두는 파일을 만들었어야 했는데 이 부분이 아쉬운점으로 남습니다.
     window.getCategoryDataFromSessionStorage = function () {
         // 세션 스토리지에서 카테고리 데이터를 가져오는 함수
         const data = sessionStorage.getItem('categoryData');
@@ -24,6 +36,8 @@ $(document).ready(function () {
     loadCategories();
 
     // 초기화 버튼 클릭 시 카테고리를 초기화하는 이벤트 처리
+    // 카테고리 정보를 사용하는 각 페이지마다 동일한 id를 사용하는 버튼을 만들고, 동일한 디자인 동일한 로직을 사용하게 하려고 했는데
+    // 굳이 이렇게 할 필요가 있었나 싶은점이 아쉬운점으로 남습니다.
     document.getElementById('resetButton').onclick = function () {
         resetCategories();
     };
@@ -43,7 +57,7 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (categories) {
                     saveCategoryDataToSessionStorage(categories); // 서버에서 받은 데이터를 세션에 저장
-                    buildCategoryDropdown(categories); // 카테고리 드롭다운 메뉴 구성
+                    buildCategoryDropdown(categories); // 카테고리 드롭다운 메뉴 구성 (첫 로드때 메뉴가 안보이기 때문에 여기서 따로 호출)
                     console.log('서버에서 카테고리 데이터를 가져옴');
                     console.log(categories);
                 },
@@ -53,6 +67,12 @@ $(document).ready(function () {
             });
         }
     }
+
+
+    // 현재 카테고리 ID는 1001"을 포함하여 모든 카테고리의 ID가 형성됨.
+    // 예시: 1차 카테고리 "국내도서" → ID: 1001001 , 2차 카테고리 "요리" → ID: 1001001001
+    // 즉, 1차 카테고리부터 뒤의 3자리수가 늘어나면 그 하위 카테고리 라는것을 의미합니다. (실제 Yes24의 카테고리 구조를 참고하였습니다.)
+    // 따라서, parentId와 categoryId의 일치 여부를 비교할 때, 이 ID 구조를 고려하여 필터링합니다.
 
     function buildCategoryDropdown(categories) {
         // 카테고리 드롭다운 메뉴를 구성하는 함수
@@ -71,7 +91,10 @@ $(document).ready(function () {
             }
         });
 
-        const topCategories = categories.filter(category => category.categoryName === '국내도서'); // '국내도서' 카테고리 필터링
+        const topCategories = categories.filter(category => category.categoryId === '1');
+        // 카테고리 ID1 은 현재 DB상으로만 존재하는 최상위 카테고리이며, 원래 이름은 국내도서 입니다.
+        // 해외도서 데이터도 사용할걸 감안하고 설계했으나 시간 관계상 취소되어 이렇게 되었습니다.
+        // 원래는 parentId = null 이런식으로 가져오도록 설계했습니다.
 
         if (topCategories.length > 0) {
             const domesticCategory = topCategories[0];
@@ -97,6 +120,8 @@ $(document).ready(function () {
         link.setAttribute('data-category-id', category.categoryId);
 
         link.onclick = function () {
+            updatePreferenceOnCategoryClick(category.categoryId, category.categoryName, level+1, 1.0);
+            // 클릭시 해당하는 카테고리의 선호도 점수 추가
             clearSubCategoryMenus(level + 1); // 하위 카테고리 초기화
             createSubCategoryMenu(category, level + 1); // 하위 카테고리 메뉴 생성
             updateCategoryInURL(category.categoryId); // URL에 카테고리 반영
@@ -164,37 +189,27 @@ $(document).ready(function () {
         resetBookFilters(); // 도서 필터 초기화
     }
 
-// 경로에 따라 URL 업데이트 및 책 로드 함수 차단
     function updateCategoryInURL(categoryId) {
-        // /library/manage?mode=add 또는 /library/manage?mode=edit 경로일 때만 차단
-        const isManagePage = window.location.pathname.includes('/library/manage') &&
-            (window.location.search.includes('mode=add') || window.location.search.includes('mode=edit'));
+        isManagePage();
 
-        if (isManagePage) {
-            return; // 관리 페이지에서 차단
-        }
-
-        // 메인 페이지에서는 정상적으로 동작
         const currentUrlParams = new URLSearchParams(window.location.search);
         const currentCategory = currentUrlParams.get('category');
 
         if (currentCategory !== categoryId) {
             updateURLParam('category', categoryId, false);
+            // 다른 카테고리인게 확인될 경우 히스토리를 교체하지 않고 추가하는 방식으로 URL에 반영
+        } else {
+            updateURLParam('category', categoryId, true);
+            // 같은 카테고리 내에서 탐색할 경우 뒤로가기를 엄청 눌러야 하기 때문에 히스토리를 replace함
+            // 정확한 히스토리 스택은 알 수 없으나, 예를 들어 같은 카테고리 탭에서
+            // 페이지를 10곳을 드나들경우 뒤로가기를 10번 눌러야 할 수도 있기 때문에 사용자 경험에서 매우 중요함
         }
-        updateURLParam('category', categoryId);
     }
 
 
     function loadBooksByCategory(categoryId) {
-        // /library/manage?mode=add 또는 /library/manage?mode=edit 경로일 때만 차단
-        const isManagePage = window.location.pathname.includes('/library/manage') &&
-            (window.location.search.includes('mode=add') || window.location.search.includes('mode=edit'));
+        isManagePage();
 
-        if (isManagePage) {
-            return; // 관리 페이지에서 차단
-        }
-
-        // 메인 페이지에서는 정상적으로 동작
         loadPage(1, undefined, '', categoryId);
     }
 

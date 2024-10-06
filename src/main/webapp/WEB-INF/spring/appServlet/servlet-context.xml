@@ -26,9 +26,9 @@
 	</beans:bean>
 		
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>
-	
-	<context:component-scan base-package="kr.co.librarylyh.controller"/>
 
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<context:component-scan base-package="kr.co.librarylyh.controller"/>
 
 </beans:beans>

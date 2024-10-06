@@ -144,7 +144,7 @@ public class ExceptionHandlingAspect {
     log.info("해결방안 : {}\n", solution);
 
     // 예외 메시지를 리스트에 추가
-    String alertMessage = "예외 발생: [" + exceptionName + "]<br>위치 : " + location + ".<br>인자 값: " + args + ".<br>예외 메시지: " + exceptionMessage + "<br>";
+    String alertMessage = "[Error] 예외 발생: [" + exceptionName + "]<br>위치 : " + location + ".<br>인자 값: " + args + ".<br>예외 메시지: " + exceptionMessage + "<br>";
     loggingAspect.sendLog(alertMessage);
   }
 }
