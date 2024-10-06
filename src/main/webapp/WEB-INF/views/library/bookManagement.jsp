@@ -1427,9 +1427,11 @@
       // 0.2초 딜레이 후 중복 검사
       clearTimeout(timeout);
       timeout = setTimeout(function () {
-        fetch(`/ajax/checkIsbn?isbn13=${isbnInput.value}`) // 적힌걸 url로
-        .then(response => response.text())
+        fetch(`/ajax/checkIsbn?isbn13=\${Number(isbnInput.value)}`) // 적힌걸 url로
+        // 하지만 fetch 요청은 문자열로 처리되어버리기 때문에 별도의 처리를 함
+        .then(response => response.json())
         .then(data => {
+          console.log(data)
           if (data.isDuplicate) {
             isbnWarning.textContent = '이미 존재하는 ISBN입니다.';
             isbnWarning.style.display = 'block';
