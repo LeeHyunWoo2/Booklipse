@@ -604,7 +604,7 @@
     </div>
 </div>
 <main class="supercon" style="color:#000;">
-    <button type="button" class="btn btn-primary" onclick='backtolist()'>
+    <button type="button" class="btn btn-primary" onclick='window.location.href="/library/booklist"'>
         뒤로가기
     </button>
     <button type="button" id="deleteBookButton"
@@ -1292,12 +1292,6 @@
   // 초기 로딩 시 유효성 검사 수행
   updateCategoryValidation();
 
-</script>
-<script>
-  // 뒤로 가기 버튼 함수
-  function backtolist() {
-    history.back();
-  }
 </script>
 <script>
   function showInvalidFeedback(elementId) {
