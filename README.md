@@ -4,12 +4,25 @@
 
 
 
+
+
+
+
 급하게나마 링크라도 남깁니다
 
 
 
 
-js파일은 아래 링크를 통해 확인하시는게 더 빠릅니다.
+
+
+
+아래는 1.0.8 버전 브랜치 기준 핵심파일, 폴더 링크입니다.
+
+
+
+
+
+js파일
 
 https://github.com/LeeHyunWoo2/Library/blob/1.0.8/src/main/webapp/resources/js/booklist_ajax.js
 
@@ -19,14 +32,23 @@ https://github.com/LeeHyunWoo2/Library/blob/1.0.8/src/main/webapp/resources/js/p
 
 
 
+
+
+
 view 폴더 링크
 
 https://github.com/LeeHyunWoo2/Library/tree/1.0.8/src/main/webapp/WEB-INF/views/library
 
 
+
+
+
 mapper 쿼리 폴더 링크
 
 https://github.com/LeeHyunWoo2/Library/tree/1.0.8/src/main/resources/kr/co/librarylyh/mapper
+
+
+
 
 
 JAVA 폴더 링크
