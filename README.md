@@ -1,11 +1,9 @@
-백업용으로 추출한 Library 팀 프로젝트 참여 파트
+## "RDBMS 와 JAVA 및 Spring 에 이 정도 경험이 있다"<br> 라는 의도의 인증샷 리포지토리입니다.
+
+시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
 
 
-## "RDBMS 와 JAVA 및 Spring 에 이 정도 경험이 있다" 라는 의도의 인증샷 리포지토리입니다.
-
-저는 시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
-
-
+<br>
 
 mapper 쿼리 폴더 링크
 
