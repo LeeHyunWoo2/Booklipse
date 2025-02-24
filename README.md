@@ -1,17 +1,23 @@
 ## "RDBMS 와 JAVA 및 Spring 에 이 정도 경험이 있다"<br> 라는 의도의 인증샷 리포지토리입니다.
 
-시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
+<br>
 
+시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
 
 <br>
 
-mapper 쿼리 폴더 링크
+---
+
+<br>
+<br>
+
+mapper 쿼리 폴더
 
 https://github.com/LeeHyunWoo2/Library/tree/1.0.8/src/main/resources/kr/co/librarylyh/mapper
 
 --
 
-JAVA 폴더 링크
+JAVA 폴더
 
 https://github.com/LeeHyunWoo2/Library/tree/1.0.8/src/main/java/kr/co/librarylyh
 
