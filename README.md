@@ -1,8 +1,15 @@
-## "RDBMS 와 JAVA 및 Spring 에 이 정도 경험이 있다"<br> 라는 의도의 인증샷 리포지토리입니다.
+### Spring MVC, OracleDB, MyBatis 기반 프로젝트입니다.
+
+
+#### 특징 : 약 8만 3천 권의 책과 약 17만 개의 책 해시태그를 관리하는 프로젝트입니다.
 
 <br>
 
-시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
+이 리포지토리에 올라온 스크린샷은 프로젝트 당시 만든 PPT중 제 파트를 캡쳐한것입니다.
+
+<br>
+
+문서화는 시간 관계상 [이 프로젝트에](https://github.com/LeeHyunWoo2/KIN-Web) 최대한 집중하였습니다.
 
 <br>
 
