@@ -38,7 +38,6 @@ https://github.com/LeeHyunWoo2/Library/tree/1.0.8/src/main/java/kr/co/librarylyh
 ![슬라이드70](https://github.com/user-attachments/assets/92f89642-568e-4420-af35-0ff40836dc1a)
 ![슬라이드71](https://github.com/user-attachments/assets/8bffde12-448c-419e-89cf-656e859fed0a)
 ![슬라이드81](https://github.com/user-attachments/assets/cfafe70b-e114-4391-adf2-55df39bd0508)
-![슬라이드82](https://github.com/user-attachments/assets/c8265431-075a-442e-b3d2-1125e113bd0c)
 ![슬라이드83](https://github.com/user-attachments/assets/aa4a2bc1-be31-4b75-8b07-e4ba7eff8258)
 ![슬라이드84](https://github.com/user-attachments/assets/f5e6a24b-2f26-4e9c-8729-ad4faca08c52)
 ![슬라이드86](https://github.com/user-attachments/assets/62dc91cc-56c0-4f49-a57d-a7136c5ea642)
